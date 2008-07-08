@@ -1,4 +1,5 @@
 #summary abstract plug-in model.
+#labels Phase-Design
 
 = Introduction =
 
@@ -7,6 +8,6 @@ As a _kernel_ of our system we use _abstract plug-in model_. At current stage it
 
 = Details =
 
-Main entity is *Plugin*. Each plug-in define it's own *BindingPoints* for other plug-ins and binds through *Bindings* to existing plugs. As a store for this system we will use database
+Main entity is plug-in([http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.Plug *Plug*]). Each plug-in define it's own [http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint *BindingPoint*s] for other plug-ins and binds through [http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint *Binding*s] to existing plugs. As a store for this system we will use database
 
-On registering by *PluginInstaller* plug files (*PlugFiles*) are copied to requested locations(*PlugLocation*), its own interfaces and implementations (*ClassDefinition*) are installed and links ( defining own pluggable points(*BindingPoints*) or binding to existing(*Binding*)) are created. 
+On registering by *PluginInstaller* plug files (*PlugFiles*) are copied to requested locations(*PlugLocation*), its own interfaces and implementations (*ClassDefinition*) are installed and links ( defining own pluggable points(*BindingPoints*) or binding to existing(*Binding*)) are created.
