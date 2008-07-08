@@ -8,6 +8,12 @@ As a _kernel_ of our system we use _abstract plug-in model_. At current stage it
 
 = Details =
 
-Main entity is plug-in(*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.Plug Plug]*). Each plug-in define it's own [http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint *BindingPoint*s] for other plug-ins and binds through [http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint *Binding*s] to existing plugs. As a store for this system we will use database
+Main entity is plug-in(*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.Plug Plug]*). Each plug-in define it's own interfaces(*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint BindingPoints]*) for other plug-ins to connect and binds(*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint Bindings]*) its implementation through foreign interfaces to existing plugs. As a store for this system we will use database.
 
-On registering by *PluginInstaller* plug files (*PlugFiles*) are copied to requested locations(*PlugLocation*), its own interfaces and implementations (*ClassDefinition*) are installed and links ( defining own pluggable points(*BindingPoints*) or binding to existing(*Binding*)) are created.
+On registering by *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.PluginInstaller PluginInstaller]* plug files (*http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.PluginInstaller PlugFiles]*) are copied to requested locations(*http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.PlugLocation PlugLocation]*), its own interfaces and implementations (**http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.ClassDefinition ClassDefinition]*) are installed and links ( defining own pluggable points(*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint BindingPoints]*) or bindings to existing(*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.BindingPoint Bindings]*) are created. Custom actions can be executed using *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IRegisterAction IRegisterAction]*.
+
+On Update of existing plug information on links is updated and custom actions (*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IUpdateAction IUpdateAction]*) are executed.
+
+On Unregistering existing plug all plug data and it's relation are removed and custom actions (*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IUnregisterAction IUnregisterAction]*)
+
+See also: [http://code.google.com/p/ilsdev/wiki/ActionModel Action Model]
