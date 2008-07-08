@@ -1,0 +1,12 @@
+#summary abstract plug-in model.
+
+= Introduction =
+
+As a _kernel_ of our system we use _abstract plug-in model_. At current stage it is only starting - so any comments with be *highly* appreciated.
+
+
+= Details =
+
+Main entity is *Plugin*. Each plug-in define it's own *BindingPoints* for other plug-ins and binds through *Bindings* to existing plugs. As a store for this system we will use database
+
+On registering by *PluginInstaller* plug files (*PlugFiles*) are copied to requested locations(*PlugLocation*), its own interfaces and implementations (*ClassDefinition*) are installed and links ( defining own pluggable points(*BindingPoints*) or binding to existing(*Binding*)) are created. 
