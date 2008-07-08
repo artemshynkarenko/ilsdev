@@ -16,4 +16,4 @@ On Update of existing plug information on links is updated and custom actions (*
 
 On Unregistering existing plug all plug data and it's relation are removed and custom actions (*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IUnregisterAction IUnregisterAction]*)
 
-See also: [http://code.google.com/p/ilsdev/wiki/ActionModel Action Model]
+See also: [http://code.google.com/p/ilsdev/wiki/ActionModel Action Model], [http://code.google.com/p/ilsdev/wiki/AbstractUIModel Abstract UI model]
