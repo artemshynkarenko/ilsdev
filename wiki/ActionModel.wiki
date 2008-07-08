@@ -1,0 +1,17 @@
+#summary Describe action model that is used in our system.
+#labels Phase-Design
+
+= Introduction =
+
+All actions in our system is done using *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IAction IAction]* interface.
+
+
+= Details =
+
+For now we have ( from Artem Shynkarenko point of view) folowing sets of actions
+  * *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.FileActions.IFileAction IFileAction]* are used for local file system operations
+  * *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlAction ISqlAction]* are used for operations with Database
+  * *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.AbstractUI.UIActions.IUIAction IUIAction]* are used for operations with [http://code.google.com/p/ilsdev/wiki/AbstractUIModel Abstract UI]
+  * Set of custom actions for installation/updating/uninstalling of plugs (*[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IRegisterAction IRegisterAction]*, *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IUpdateAction IUpdateAction]*, *[http://code.google.com/p/ilsdev/wiki/Interlogic.Trainings.Plugs.Kernel.IUnregisterAction IUnregisterAction]*)
+
+See also: [http://code.google.com/p/ilsdev/wiki/AbstractUIModel Abstract UI model], [http://code.google.com/p/ilsdev/wiki/PlugInModel Plug-in model]
