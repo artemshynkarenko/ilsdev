@@ -1,4 +1,4 @@
-#summary abstract plug-in model.
+#summary Describes abstract plug-in model that is used in our system.
 #labels Phase-Design
 
 = Introduction =
