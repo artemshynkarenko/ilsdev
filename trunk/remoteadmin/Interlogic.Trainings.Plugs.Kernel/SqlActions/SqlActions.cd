@@ -19,21 +19,14 @@
     <Position X="0.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>SqlActions\RawSqlDeleteByPrimaryKeyAction.cs</FileName>
-      <HashCode>AIAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlInsertAction">
-    <Position X="3" Y="6.75" Width="1.5" />
-    <TypeIdentifier>
-      <FileName>SqlActions\RawSqlInsertAction.cs</FileName>
-      <HashCode>AIAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlUpdateAction">
     <Position X="5.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>SqlActions\RawSqlUpdateAction.cs</FileName>
-      <HashCode>AIAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlAction">
@@ -84,7 +77,15 @@
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlInsertAction">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\RawSqlInsertAction.cs</FileName>
+      <NewMemberFileName>SqlActions\RawSqlExecuteNonQueryAction.cs</NewMemberFileName>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
   </Class>
   <Interface Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlAction" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
