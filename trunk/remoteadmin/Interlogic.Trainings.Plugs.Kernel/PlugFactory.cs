@@ -20,7 +20,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			if (this.Context == null)
 				throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 			
-			RawSqlSetAndGoAction createTableAction = new RawSqlSetAndGoAction();
+			RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
 			createTableAction.CommandText =
 @"CREATE TABLE [PlugIn](
 	[PlugId] [int] IDENTITY(1,1) NOT NULL,
@@ -82,7 +82,7 @@ VALUES
 
 		public void Update(Plug plug)
 		{
-			RawSqlSetAndGoAction updateAction = new RawSqlSetAndGoAction();
+			RawSqlExecuteNonQueryAction updateAction = new RawSqlExecuteNonQueryAction();
 			updateAction.CommandText = string.Format(CultureInfo.InvariantCulture,
 @"UPDATE [PlugIn]
 SET [PlugName] = '{0}'
@@ -97,7 +97,7 @@ WHERE [PlugId] = {5}", plug.PlugName, plug.PlugFriendlyName,plug.PlugDescription
 
 		public void Delete(Plug plug)
 		{
-			RawSqlSetAndGoAction deleteAction = new RawSqlSetAndGoAction();
+			RawSqlExecuteNonQueryAction deleteAction = new RawSqlExecuteNonQueryAction();
 			deleteAction.CommandText = string.Format(CultureInfo.InvariantCulture,
 @"DELETE [PlugIn]
 WHERE [PlugId] = {0}", plug.PlugId);

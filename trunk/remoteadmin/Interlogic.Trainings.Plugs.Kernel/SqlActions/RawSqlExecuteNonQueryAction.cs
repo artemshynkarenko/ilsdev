@@ -4,9 +4,22 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 {
-	public abstract class RawSqlExecuteNonQueryAction:RawSqlAction
+	public class RawSqlExecuteNonQueryAction:RawSqlAction
 	{
-		protected override void ExecuteCommand(System.Data.IDbCommand command)
+        protected string _commandText;
+
+        public string CommandText
+        {
+            get { return _commandText; }
+            set { _commandText = value; }
+        }
+
+        protected override string GetExecutionSql()
+        {
+            return this.CommandText;
+        }
+        
+        protected override void ExecuteCommand(System.Data.IDbCommand command)
 		{
 			string[] separateActions = null;
 			if (command.CommandText.Contains("GO"))

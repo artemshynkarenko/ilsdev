@@ -31,28 +31,28 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 
 		#region ITrasanctionContext Members
 
-		public virtual bool ExecutingInTranaction
+		public virtual bool ExecutingInTransaction
 		{
 			get { return this.CurrentTransaction != null; }
 		}
 
 		public virtual void BeginTransaction()
 		{
-			if (this.ExecutingInTranaction)
+			if (this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should finish previous transaction before creating new");
 			this.Transaction = this.Connection.BeginTransaction();
 		}
 
 		public void Commit()
 		{
-			if (!this.ExecutingInTranaction)
+			if (!this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should start transaction before comminitng it");
 			this.Transaction.Commit();
 		}
 
 		public void RollBack()
 		{
-			if (!this.ExecutingInTranaction)
+			if (!this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should start transaction before comminitng it");
 			this.Transaction.Rollback();
 		}

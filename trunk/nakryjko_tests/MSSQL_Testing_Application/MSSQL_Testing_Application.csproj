@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{29A1E4BA-DC11-4919-B4A0-A27D4C37C9F1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interlogic.Trainings.Plugs.AbstractUI</RootNamespace>
-    <AssemblyName>Interlogic.Trainings.Plugs.AbstractUI</AssemblyName>
+    <RootNamespace>MSSQL_Testing_Application</RootNamespace>
+    <AssemblyName>MSSQL_Testing_Application</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

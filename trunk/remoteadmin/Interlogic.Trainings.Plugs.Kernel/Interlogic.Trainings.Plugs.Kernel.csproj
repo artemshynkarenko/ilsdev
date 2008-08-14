@@ -48,7 +48,7 @@
     <Compile Include="PlugFactory.cs" />
     <Compile Include="SqlActions\ISqlAction.cs" />
     <Compile Include="ITransactionAction.cs" />
-    <Compile Include="ITrasanctionContext.cs" />
+    <Compile Include="ITransactionContext.cs" />
     <Compile Include="Install\IUnregisterPlugAction.cs" />
     <Compile Include="Install\IUpdatePlugAction.cs" />
     <Compile Include="Plug.cs" />
@@ -62,7 +62,6 @@
     <Compile Include="SqlActions\RawSqlExecuteNonQueryAction.cs" />
     <Compile Include="SqlActions\RawSqlGenerator.cs" />
     <Compile Include="SqlActions\RawSqlInsertAction.cs" />
-    <Compile Include="SqlActions\RawSqlSetAndGoAction.cs" />
     <Compile Include="SqlActions\RawSqlUpdateAction.cs" />
     <Compile Include="SqlActions\SqlAction.cs" />
     <Compile Include="SqlActions\SqlClassField.cs" />
