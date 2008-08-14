@@ -62,6 +62,7 @@
     <Compile Include="SqlActions\RawSqlExecuteNonQueryAction.cs" />
     <Compile Include="SqlActions\RawSqlGenerator.cs" />
     <Compile Include="SqlActions\RawSqlInsertAction.cs" />
+    <Compile Include="SqlActions\RawSqlExecuteReaderAction.cs" />
     <Compile Include="SqlActions\RawSqlUpdateAction.cs" />
     <Compile Include="SqlActions\SqlAction.cs" />
     <Compile Include="SqlActions\SqlClassField.cs" />

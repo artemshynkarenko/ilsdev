@@ -10,7 +10,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 		protected override string GetExecutionSql()
 		{
 			string insert = this.CommandText;
-			insert += Environment.NewLine + "GO" + Environment.NewLine;
+			insert += _commandDelimiter;
 			insert += "SELECT @InsertedIdentity = @@Identity";
 			return insert;
 		}
