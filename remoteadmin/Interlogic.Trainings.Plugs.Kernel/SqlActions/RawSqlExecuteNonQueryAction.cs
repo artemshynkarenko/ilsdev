@@ -22,9 +22,9 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
         protected override void ExecuteCommand(System.Data.IDbCommand command)
 		{
 			string[] separateActions = null;
-			if (command.CommandText.Contains("GO"))
+			if (command.CommandText.Contains(_commandDelimiter))
 			{
-				separateActions = command.CommandText.Split(new string[] { "GO" }, StringSplitOptions.RemoveEmptyEntries);
+				separateActions = command.CommandText.Split(new string[] { _commandDelimiter }, StringSplitOptions.RemoveEmptyEntries);
 			}
 			else
 				separateActions = new string[] { command.CommandText };
