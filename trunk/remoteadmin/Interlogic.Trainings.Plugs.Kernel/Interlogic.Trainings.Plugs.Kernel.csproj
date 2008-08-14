@@ -58,7 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlActions\ISqlTransactionContext.cs" />
     <Compile Include="SqlActions\RawSqlAction.cs" />
-    <Compile Include="SqlActions\RawSqlDeleteByPrimaryKeyAction.cs" />
     <Compile Include="SqlActions\RawSqlExecuteNonQueryAction.cs" />
     <Compile Include="SqlActions\RawSqlGenerator.cs" />
     <Compile Include="SqlActions\RawSqlInsertAction.cs" />

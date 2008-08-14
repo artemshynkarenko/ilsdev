@@ -21,6 +21,15 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
             plug.Active             = int.Parse(ss[4]) != 0;
             return plug;
         }
+        static void PrintPlug(Plug plug)
+        {
+            System.Console.WriteLine("Id\t\t = {0}", plug.PlugId);
+            System.Console.WriteLine("Name\t\t = {0}", plug.PlugName);
+            System.Console.WriteLine("FriendlyName\t = {0}", plug.PlugFriendlyName);
+            System.Console.WriteLine("Description\t = {0}", plug.PlugDescription);
+            System.Console.WriteLine("Version\t\t = {0}", plug.PlugVersion);
+            System.Console.WriteLine("Active\t\t = {0}", plug.Active);
+        }
 		static void Main(string[] args)
 		{
             PlugFactory factory = factory = new PlugFactory();
@@ -34,6 +43,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
             bool done = false;
             while (!done)
             {
+                System.Console.Write("#");
                 string cmd = System.Console.ReadLine();
                 switch (cmd)
                 {
@@ -49,6 +59,13 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
                     case "delete":
                     case "update":
                     case "loadall":
+                        List<Plug> lst = factory.LoadAll();
+                        foreach(Plug pl in lst)
+                        {
+                            PrintPlug(pl);
+                            System.Console.WriteLine();
+                        }
+                        break;
                     case "loadbyid":
                     case "loadbyname":
                         break;

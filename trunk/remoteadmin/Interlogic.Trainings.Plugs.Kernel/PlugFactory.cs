@@ -51,6 +51,7 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 		private RawSqlInsertAction _insertAction = null;
 		private Plug _currentPlug;
         
+
         string _insertCommandText = 
             @"INSERT INTO [PlugIn] ([PlugName],[PlugFriendlyName],[PlugDescription],[PlugVersion],[Active])
             VALUES (@PlugName,@PlugFriendlyName,@PlugDescription,@PlugVersion,@Active)";
@@ -69,12 +70,14 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
             this.Insert(_insertAction);
 		}
 
+
 		void PlugFactory_Inserted(object sender, EventArgs e)
 		{
 			if (_insertAction == null)
 				return;
 			_currentPlug.PlugId = _insertAction.InsertedIdentity;
 		}
+
 
         string _updateCommandText =
             @"UPDATE [PlugIn] 
@@ -84,6 +87,7 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
                 [PlugVersion] = @PlugVersion,
                 [Active] = @Active 
             WHERE [PlugId] = @PlugId";
+
 		public void Update(Plug plug)
 		{
 			RawSqlExecuteNonQueryAction updateAction = new RawSqlExecuteNonQueryAction();
@@ -99,7 +103,9 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 			this.Update(updateAction);
 		}
 
+
         string _deleteCommandText = @"DELETE [PlugIn] WHERE [PlugId] = @PlugId";
+
 		public void Delete(Plug plug)
 		{
 			RawSqlExecuteNonQueryAction deleteAction = new RawSqlExecuteNonQueryAction();
@@ -110,12 +116,14 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 			this.Delete(deleteAction);
 		}
 
+
         string _loadAllCommandText = @"SELECT * FROM [PlugIn]";
+        
         public List<Plug> LoadAll()
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadAllCommandText;
-            this.LoadAll();
+            this.LoadAll(readerAction);
 
             List<Plug> plugList = new List<Plug>();
             while (readerAction.DataReader.Read())
@@ -124,8 +132,42 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
             }
             return plugList;
         }
-        string _loadByPrimaryKeyCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugId] = @PlugId";
+
+
+        string _loadByIdCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugId] = @PlugId";
+        
+        public Plug LoadByPrimaryKey(int plugId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByIdCommandText;
+
+            readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
+            
+            this.LoadByPrimaryKey(readerAction);
+            return ExtractPlug(readerAction.DataReader);
+        }
+
+
         string _loadByNameCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugName] = @PlugName";
+        
+        public Plug LoadByName(string plugName)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByNameCommandText;
+
+            readerAction.AddParameter("@PlugName", plugName, DbType.String);
+
+            this.ExecuteCommand(readerAction);
+            Plug plug = ExtractPlug(readerAction.DataReader);
+
+            if (this.LoadedByName != null)
+                LoadedByName(this, EventArgs.Empty);
+
+            return plug;
+        }
+
+        public event EventHandler LoadedByName;
+        
 
         protected Plug ExtractPlug(IDataReader dataReader)
         {
@@ -135,7 +177,7 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
             plug.PlugFriendlyName   = (string)dataReader["PlugFriendlyName"];
             plug.PlugDescription    = (string)dataReader["PlugDescription"];
             plug.PlugVersion        = (string)dataReader["PlugVersion"];
-            plug.Active             = (int)dataReader["Active"] != 0;
+            plug.Active             = (bool)dataReader["Active"];
             return plug;
         }
     }
