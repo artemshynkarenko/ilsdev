@@ -7,14 +7,6 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 {
 	public class RawSqlInsertAction : RawSqlExecuteNonQueryAction
 	{
-		private string _commandText;
-
-		public string CommandText
-		{
-			get { return _commandText; }
-			set { _commandText = value; }
-		}
-
 		protected override string GetExecutionSql()
 		{
 			string insert = this.CommandText;

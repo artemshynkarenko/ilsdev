@@ -24,7 +24,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 			using (PlugFactory factory = new PlugFactory())
 			{
 				SqlTransactionContext context = new SqlTransactionContext();
-				context.Connection = new SqlConnection("server=stranger;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
+				context.Connection = new SqlConnection("server=localhost;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
 				//Should be somewhere in SqlAction.
 				context.Connection.Open();
 				factory.Context = context;

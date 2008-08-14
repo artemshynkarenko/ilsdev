@@ -18,7 +18,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 		protected virtual IDbCommand PrepareCommand()
 		{
 			IDbCommand command = this.TransactionContext.Connection.CreateCommand();
-			if (this.TransactionContext.ExecutingInTranaction)
+			if (this.TransactionContext.ExecutingInTransaction)
 			{
 				command.Transaction = this.TransactionContext.CurrentTransaction;
 			}
@@ -37,7 +37,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 
 		#region ITransactionAction Members
 
-		ITrasanctionContext ITransactionAction.TransactionContext
+		ITransactionContext ITransactionAction.TransactionContext
 		{
 			get
 			{

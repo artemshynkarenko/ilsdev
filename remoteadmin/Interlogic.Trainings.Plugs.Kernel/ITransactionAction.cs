@@ -6,6 +6,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 {
 	public interface ITransactionAction:IAction
 	{
-		ITrasanctionContext TransactionContext { get;set;}
+		ITransactionContext TransactionContext { get;set;}
 	}
 }
