@@ -35,46 +35,56 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
             PlugFactory factory = factory = new PlugFactory();
 			SqlTransactionContext context = new SqlTransactionContext();
 			context.Connection = new SqlConnection("server=localhost;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
-			//Should be somewhere in SqlAction.
-			context.Connection.Open();
-			factory.Context = context;
+			try
+			{
+				//Should be somewhere in SqlAction.
+				context.Connection.Open();
+				factory.Context = context;
 
-            System.Console.WriteLine("Possible commands:\n\tadd\n\tdelete\n\tupdate\n\tloadall\n\tloadbyid\n\tloadbyname\n\tquit\n");
-            bool done = false;
-            while (!done)
-            {
-                System.Console.Write("#");
-                string cmd = System.Console.ReadLine();
-                switch (cmd)
-                {
-                    case "add":
-                        System.Console.WriteLine("Input <PlugName> <PlugFriendlyName> <PlugDescription> <PlugVersion> <Active(0|1)>");
-                        string tmp = System.Console.ReadLine();
-                        Plug plug = ParsePlug(tmp);
-                        factory.Insert(plug);
-                        break;
-                    case "quit":
-                        done = true;
-                        break;
-                    case "delete":
-                    case "update":
-                    case "loadall":
-                        List<Plug> lst = factory.LoadAll();
-                        foreach(Plug pl in lst)
-                        {
-                            PrintPlug(pl);
-                            System.Console.WriteLine();
-                        }
-                        break;
-                    case "loadbyid":
-                    case "loadbyname":
-                        break;
-                    default:
-                        System.Console.WriteLine("Possible commands:\n\tadd\tdelete\tupdate\tloadall\tloadbyid\tloadbyname\n");
-                        break;
-                }
-                System.Console.WriteLine("<OK>");
-            }
+				System.Console.WriteLine("Possible commands:\n\tadd\n\tdelete\n\tupdate\n\tloadall\n\tloadbyid\n\tloadbyname\n\tquit\n");
+				bool done = false;
+				while (!done)
+				{
+					System.Console.Write("#");
+					string cmd = System.Console.ReadLine();
+					switch (cmd)
+					{
+						case "add":
+							System.Console.WriteLine("Input <PlugName> <PlugFriendlyName> <PlugDescription> <PlugVersion> <Active(0|1)>");
+							string tmp = System.Console.ReadLine();
+							Plug plug = ParsePlug(tmp);
+							factory.Insert(plug);
+							break;
+						case "quit":
+							done = true;
+							break;
+						case "delete":
+						case "update":
+						case "loadall":
+							List<Plug> lst = factory.LoadAll();
+							foreach (Plug pl in lst)
+							{
+								PrintPlug(pl);
+								System.Console.WriteLine();
+							}
+							break;
+						case "loadbyid":
+						case "loadbyname":
+							break;
+						default:
+							System.Console.WriteLine("Possible commands:\n\tadd\tdelete\tupdate\tloadall\tloadbyid\tloadbyname\n");
+							break;
+					}
+					System.Console.WriteLine("<OK>");
+				}
+				
+			}
+			catch
+			{
+				//this is very very important
+				context.Connection.Close();
+				throw;
+			}
 		}
 	}
 }
