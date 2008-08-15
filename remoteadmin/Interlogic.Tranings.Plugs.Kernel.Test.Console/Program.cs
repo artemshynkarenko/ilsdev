@@ -32,15 +32,11 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
         }
 		static void Main(string[] args)
 		{
-            PlugFactory factory = factory = new PlugFactory();
-			SqlTransactionContext context = new SqlTransactionContext();
-			context.Connection = new SqlConnection("server=localhost;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
+            SqlTransactionContext context = new SqlTransactionContext();
+			context.Connection = new SqlConnection("server=stranger;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
+			PlugController mamager = new PlugController(context);
 			try
 			{
-				//Should be somewhere in SqlAction.
-				context.Connection.Open();
-				factory.Context = context;
-
 				System.Console.WriteLine("Possible commands:\n\tadd\n\tdelete\n\tupdate\n\tloadall\n\tloadbyid\n\tloadbyname\n\tquit\n");
 				bool done = false;
 				while (!done)
@@ -53,7 +49,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 							System.Console.WriteLine("Input <PlugName> <PlugFriendlyName> <PlugDescription> <PlugVersion> <Active(0|1)>");
 							string tmp = System.Console.ReadLine();
 							Plug plug = ParsePlug(tmp);
-							factory.Insert(plug);
+							mamager.Insert(plug);
 							break;
 						case "quit":
 							done = true;
@@ -61,7 +57,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 						case "delete":
 						case "update":
 						case "loadall":
-							List<Plug> lst = factory.LoadAll();
+							List<Plug> lst = mamager.LoadAll();
 							foreach (Plug pl in lst)
 							{
 								PrintPlug(pl);

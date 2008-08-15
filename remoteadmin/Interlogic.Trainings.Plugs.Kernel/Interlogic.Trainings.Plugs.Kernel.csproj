@@ -39,13 +39,16 @@
     <Compile Include="ClassDefinition.cs" />
     <Compile Include="DomainModel\DomainController.cs" />
     <Compile Include="DomainModel\DomainFactory.cs" />
+    <Compile Include="DomainModel\DomainFactoryEventArgs.cs" />
     <Compile Include="DomainModel\DomainObject.cs" />
+    <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="FileActions\IFileAction.cs" />
     <Compile Include="Install\IRegisterPlugAction.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="PlugController.cs" />
     <Compile Include="PlugFactory.cs" />
+    <Compile Include="PlugLocationFactory.cs" />
     <Compile Include="SqlActions\ISqlAction.cs" />
     <Compile Include="ITransactionAction.cs" />
     <Compile Include="ITransactionContext.cs" />

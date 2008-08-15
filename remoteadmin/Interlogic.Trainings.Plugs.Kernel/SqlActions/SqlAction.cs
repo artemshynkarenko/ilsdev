@@ -32,6 +32,11 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 		{
 			if (this.TransactionContext == null)
 				throw new InvalidOperationException("You should set TransactionContext before executing sql");
+
+			if (this.TransactionContext.Connection.State != ConnectionState.Open)
+			{
+				this.TransactionContext.Connection.Open();
+			}
 			IDbCommand command = PrepareCommand();
 			this.ExecuteCommand(command);
 		}

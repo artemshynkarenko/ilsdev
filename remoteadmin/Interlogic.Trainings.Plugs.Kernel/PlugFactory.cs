@@ -8,18 +8,26 @@ using System.Globalization;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public class PlugFactory:DomainFactory
+	public class PlugFactory : DomainFactory
 	{
-		public PlugFactory()
+		static internal PlugFactory GetInstance()
 		{
-			this.Inserted += new EventHandler(PlugFactory_Inserted);
+			return new PlugFactory();
 		}
+
+		protected PlugFactory()
+		{
+			this.Inserted += new EventHandler<DomainFactoryEventArgs>(PlugFactory_Inserted);
+		}
+
 		
+
+		#region Instalation related
 		public override void InstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
 		{
 			if (this.Context == null)
 				throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
-			
+
 			RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
 			createTableAction.CommandText =
 @"CREATE TABLE [PlugIn](
@@ -48,39 +56,44 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
-		private RawSqlInsertAction _insertAction = null;
-		private Plug _currentPlug;
-        
+		#endregion
 
-        string _insertCommandText = 
-            @"INSERT INTO [PlugIn] ([PlugName],[PlugFriendlyName],[PlugDescription],[PlugVersion],[Active])
+		#region Insert
+
+		string _insertCommandText =
+			@"INSERT INTO [PlugIn] ([PlugName],[PlugFriendlyName],[PlugDescription],[PlugVersion],[Active])
             VALUES (@PlugName,@PlugFriendlyName,@PlugDescription,@PlugVersion,@Active)";
-        public void Insert(Plug plug)
+
+		internal void InternalInsert(Plug plug)
 		{
-			_currentPlug = plug;
-			_insertAction = new RawSqlInsertAction();
-            _insertAction.CommandText = _insertCommandText;
-
-            _insertAction.AddParameter("@PlugName", plug.PlugName, DbType.String);
-            _insertAction.AddParameter("@PlugFriendlyName", plug.PlugFriendlyName, DbType.String);
-            _insertAction.AddParameter("@PlugDescription", plug.PlugDescription, DbType.String);
-            _insertAction.AddParameter("@PlugVersion", plug.PlugVersion, DbType.String);
-            _insertAction.AddParameter("@Active", plug.Active ? 1 : 0, DbType.Int32);
-
-            this.Insert(_insertAction);
+			Insert(plug);
 		}
 
+		
 
-		void PlugFactory_Inserted(object sender, EventArgs e)
+		protected void Insert(Plug plug)
 		{
-			if (_insertAction == null)
-				return;
-			_currentPlug.PlugId = _insertAction.InsertedIdentity;
+			RawSqlInsertAction insertAction = new RawSqlInsertAction();
+			insertAction.CommandText = _insertCommandText;
+
+			insertAction.AddParameter("@PlugName", plug.PlugName, DbType.String);
+			insertAction.AddParameter("@PlugFriendlyName", plug.PlugFriendlyName, DbType.String);
+			insertAction.AddParameter("@PlugDescription", plug.PlugDescription, DbType.String);
+			insertAction.AddParameter("@PlugVersion", plug.PlugVersion, DbType.String);
+			insertAction.AddParameter("@Active", plug.Active, DbType.Boolean);
+			base.Insert(insertAction, plug);
 		}
 
+		void PlugFactory_Inserted(object sender, DomainFactoryEventArgs e)
+		{
+			((Plug)e.Object).PlugId = ((RawSqlInsertAction)e.Action).InsertedIdentity;
+		}
 
-        string _updateCommandText =
-            @"UPDATE [PlugIn] 
+		#endregion
+
+		#region Update
+		string _updateCommandText =
+			@"UPDATE [PlugIn] 
             SET [PlugName] = @PlugName,
                 [PlugFriendlyName] = @PlugFriendlyName,
                 [PlugDescription] = @PlugDescription,
@@ -88,97 +101,145 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
                 [Active] = @Active 
             WHERE [PlugId] = @PlugId";
 
-		public void Update(Plug plug)
+		internal void InternalUpdate(Plug plug)
+		{
+			this.Update(plug);
+		}
+
+		protected void Update(Plug plug)
 		{
 			RawSqlExecuteNonQueryAction updateAction = new RawSqlExecuteNonQueryAction();
-            updateAction.CommandText = _updateCommandText;
+			updateAction.CommandText = _updateCommandText;
 
-            updateAction.AddParameter("@PlugName", plug.PlugName, DbType.String);
-            updateAction.AddParameter("@PlugFriendlyName", plug.PlugFriendlyName, DbType.String);
-            updateAction.AddParameter("@PlugDescription", plug.PlugDescription, DbType.String);
-            updateAction.AddParameter("@PlugVersion", plug.PlugVersion, DbType.String);
-            updateAction.AddParameter("@Active", plug.Active ? 1 : 0, DbType.Int32);
-            updateAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
+			updateAction.AddParameter("@PlugName", plug.PlugName, DbType.String);
+			updateAction.AddParameter("@PlugFriendlyName", plug.PlugFriendlyName, DbType.String);
+			updateAction.AddParameter("@PlugDescription", plug.PlugDescription, DbType.String);
+			updateAction.AddParameter("@PlugVersion", plug.PlugVersion, DbType.String);
+			updateAction.AddParameter("@Active", plug.Active ? 1 : 0, DbType.Int32);
+			updateAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
 
-			this.Update(updateAction);
+			base.Update(updateAction, plug);
+		}
+		#endregion
+
+		#region Delete
+		string _deleteCommandText = @"DELETE [PlugIn] WHERE [PlugId] = @PlugId";
+
+		internal void InternalDelete(Plug plug)
+		{
+			this.Delete(plug);
 		}
 
-
-        string _deleteCommandText = @"DELETE [PlugIn] WHERE [PlugId] = @PlugId";
-
-		public void Delete(Plug plug)
+		protected void Delete(Plug plug)
 		{
 			RawSqlExecuteNonQueryAction deleteAction = new RawSqlExecuteNonQueryAction();
-            deleteAction.CommandText = _deleteCommandText;
+			deleteAction.CommandText = _deleteCommandText;
 
-            deleteAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
+			deleteAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
 
-			this.Delete(deleteAction);
+			base.Delete(deleteAction, plug);
+		}
+		#endregion
+
+		#region Loads
+
+		string _loadAllCommandText = @"SELECT * FROM [PlugIn]";
+
+		internal List<Plug> InternalLoadAll()
+		{
+			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+			readerAction.CommandText = _loadAllCommandText;
+			this.LoadAll(readerAction);
+
+			List<Plug> plugList = new List<Plug>();
+			IDataReader dataReader = readerAction.DataReader;
+			bool getOrdinals = true;
+			int[] ordinals = null;
+			while (dataReader.Read())
+			{
+				if (getOrdinals)
+				{
+					ordinals = GetPlugFieldOrdinals(dataReader);
+					getOrdinals = false;
+				}
+				Plug p = new Plug();
+				TranslateToPlug(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+				plugList.Add(p);
+			}
+			return plugList;
 		}
 
 
-        string _loadAllCommandText = @"SELECT * FROM [PlugIn]";
-        
-        public List<Plug> LoadAll()
-        {
-            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-            readerAction.CommandText = _loadAllCommandText;
-            this.LoadAll(readerAction);
+		string _loadByIdCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugId] = @PlugId";
 
-            List<Plug> plugList = new List<Plug>();
-            while (readerAction.DataReader.Read())
-            {
-                plugList.Add(ExtractPlug(readerAction.DataReader));
-            }
-            return plugList;
-        }
+		internal Plug InternalLoadByPrimaryKey(int plugId)
+		{
+			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+			readerAction.CommandText = _loadByIdCommandText;
+
+			readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
+
+			this.LoadByPrimaryKey(readerAction);
+			return TranslateToPlug(readerAction.DataReader);
+		}
 
 
-        string _loadByIdCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugId] = @PlugId";
-        
-        public Plug LoadByPrimaryKey(int plugId)
-        {
-            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-            readerAction.CommandText = _loadByIdCommandText;
+		string _loadByNameCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugName] = @PlugName";
 
-            readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
-            
-            this.LoadByPrimaryKey(readerAction);
-            return ExtractPlug(readerAction.DataReader);
-        }
+		internal Plug InternalLoadByName(string plugName)
+		{
+			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+			readerAction.CommandText = _loadByNameCommandText;
 
+			readerAction.AddParameter("@PlugName", plugName, DbType.String);
 
-        string _loadByNameCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugName] = @PlugName";
-        
-        public Plug LoadByName(string plugName)
-        {
-            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-            readerAction.CommandText = _loadByNameCommandText;
+			this.ExecuteCommand(readerAction);
+			Plug plug = TranslateToPlug(readerAction.DataReader);
 
-            readerAction.AddParameter("@PlugName", plugName, DbType.String);
+			if (this.LoadedByName != null)
+				LoadedByName(this, EventArgs.Empty);
 
-            this.ExecuteCommand(readerAction);
-            Plug plug = ExtractPlug(readerAction.DataReader);
+			return plug;
+		}
 
-            if (this.LoadedByName != null)
-                LoadedByName(this, EventArgs.Empty);
+		public event EventHandler LoadedByName;
 
-            return plug;
-        }
+		
+		protected int[] GetPlugFieldOrdinals(IDataReader dataReader)
+		{
+			int[] indexes = new int[6];
+			indexes[0] = dataReader.GetOrdinal("PlugId");
+			indexes[1] = dataReader.GetOrdinal("PlugName");
+			indexes[2] = dataReader.GetOrdinal("PlugFriendlyName");
+			indexes[3] = dataReader.GetOrdinal("PlugDescription");
+			indexes[4] = dataReader.GetOrdinal("PlugVersion");
+			indexes[5] = dataReader.GetOrdinal("Active");
+			return indexes;
+		}
 
-        public event EventHandler LoadedByName;
-        
+		private Plug TranslateToPlug(IDataReader dataReader)
+		{
+			Plug plug = new Plug();
+			TranslateToPlug(dataReader,plug);
+			return plug;
+		}
+		protected void TranslateToPlug(IDataReader dataReader, Plug plug)
+		{
+			int[] indexes = GetPlugFieldOrdinals(dataReader);
+			TranslateToPlug(dataReader, plug, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5]);
+		}
 
-        protected Plug ExtractPlug(IDataReader dataReader)
-        {
-            Plug plug = new Plug();
-            plug.PlugId             = (int)dataReader["PlugId"];
-            plug.PlugName           = (string)dataReader["PlugName"];
-            plug.PlugFriendlyName   = (string)dataReader["PlugFriendlyName"];
-            plug.PlugDescription    = (string)dataReader["PlugDescription"];
-            plug.PlugVersion        = (string)dataReader["PlugVersion"];
-            plug.Active             = (bool)dataReader["Active"];
-            return plug;
-        }
-    }
+		protected void TranslateToPlug(IDataReader dataReader, Plug plug, int idIndex, int nameIndex, int friendlyNameIndex, int descriptionIndex, int versionIndex, int activeIndex)
+		{
+			plug.PlugId = dataReader.GetInt32(idIndex);
+			plug.PlugName = dataReader.GetString(nameIndex);
+			plug.PlugFriendlyName = dataReader.GetString(friendlyNameIndex);
+			if (!dataReader.IsDBNull(descriptionIndex))
+				plug.PlugDescription = dataReader.GetString(descriptionIndex);
+			plug.PlugVersion = dataReader.GetString(versionIndex);
+			plug.Active = dataReader.GetBoolean(activeIndex);
+		}
+		#endregion
+
+	}
 }

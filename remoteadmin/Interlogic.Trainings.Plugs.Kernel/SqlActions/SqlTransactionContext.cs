@@ -9,10 +9,14 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 	{
 		#region ISqlTransactionContext Members
 		private IDbConnection _connection = null;
+		private bool _connectionWasOpened = false;
 		public virtual IDbConnection Connection
 		{
 			get { return _connection; }
-			set { _connection = value; }
+			set { 
+				_connection = value;
+				_connectionWasOpened = _connection.State == ConnectionState.Open;
+			}
 		}
 		private IDbTransaction _transaction = null;
 
@@ -40,6 +44,8 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 		{
 			if (this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should finish previous transaction before creating new");
+			if (this.Connection.State != ConnectionState.Open)
+				this.Connection.Open();
 			this.Transaction = this.Connection.BeginTransaction();
 		}
 
@@ -48,6 +54,8 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 			if (!this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should start transaction before comminitng it");
 			this.Transaction.Commit();
+			if (!this._connectionWasOpened)
+				this.Connection.Close();
 		}
 
 		public void RollBack()
@@ -55,6 +63,8 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 			if (!this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should start transaction before comminitng it");
 			this.Transaction.Rollback();
+			if (!this._connectionWasOpened)
+				this.Connection.Close();
 		}
 
 		#endregion
