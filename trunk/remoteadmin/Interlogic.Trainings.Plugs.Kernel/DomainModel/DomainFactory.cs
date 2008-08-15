@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Interlogic.Trainings.Plugs.Kernel.SqlActions;
+using System.Data;
 
 namespace Interlogic.Trainings.Plugs.Kernel.DomainModel
 {
@@ -11,44 +12,48 @@ namespace Interlogic.Trainings.Plugs.Kernel.DomainModel
 		public abstract void UpdateRequiredEnvironment(ISqlTransactionContext context);
 		public abstract void UninstallRequiredEnvironment(ISqlTransactionContext context);
 
+		
 		private ISqlTransactionContext _context;
-
+		private bool _contextWasOpened = false;
 		public ISqlTransactionContext Context
 		{
 			get { return _context;}
-			set { _context = value;}
+			set { 
+				_context = value;
+				_contextWasOpened = _context.Connection.State == ConnectionState.Open;
+				}
 		}
 
-		protected virtual void Insert(ISqlAction action)
+		protected virtual void Insert(ISqlAction action, DomainObject domainObject)
 		{
 			ExecuteCommand(action);
 			if (Inserted != null)
-				Inserted( this, EventArgs.Empty);
+				Inserted( this, new DomainFactoryEventArgs(domainObject, action));
 		}
 
-		public event EventHandler Inserted;
+		public event EventHandler<DomainFactoryEventArgs> Inserted;
 
-		protected virtual void Update(ISqlAction action)
+		protected virtual void Update(ISqlAction action, DomainObject domainObject)
 		{
 			if (this.Updating != null)
-				Updating(this, EventArgs.Empty);
+				Updating(this, new DomainFactoryEventArgs(domainObject, action));
 			ExecuteCommand(action);
 			if (this.Updated != null)
-				Updated(this, EventArgs.Empty);
+				Updated(this, new DomainFactoryEventArgs(domainObject, action));
 		}
 
-		public event EventHandler Updating;
-		public event EventHandler Updated;
+		public event EventHandler<DomainFactoryEventArgs> Updating;
+		public event EventHandler<DomainFactoryEventArgs> Updated;
 
 
-		protected virtual void Delete(ISqlAction action)
+		protected virtual void Delete(ISqlAction action, DomainObject domainObject)
 		{
 			if (this.Deleting != null)
-				Deleting(this, EventArgs.Empty);
+				Deleting(this, new DomainFactoryEventArgs(domainObject, action));
 			ExecuteCommand(action);
 		}
 
-		public event EventHandler Deleting;
+		public event EventHandler<DomainFactoryEventArgs> Deleting;
 
 
 		protected virtual void LoadAll(ISqlAction action)
@@ -83,7 +88,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.DomainModel
 
 		public void Dispose()
 		{
-			if (this.Context != null)
+			if (this.Context != null && this._contextWasOpened)
 			{
 				this.Context.Connection.Close();
 			}
