@@ -61,7 +61,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			{
 				factory.Context = this.FactoryContext;
 				ValidateInstance(plug);
-				factory.InternalInsert(plug);
+				factory.InternalUpdate(plug);
 			}
 		}
 
@@ -81,7 +81,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		public List<Plug> LoadAll()
 		{
-
 			using (PlugFactory factory = PlugFactory.GetInstance())
 			{
 				factory.Context = this.FactoryContext;

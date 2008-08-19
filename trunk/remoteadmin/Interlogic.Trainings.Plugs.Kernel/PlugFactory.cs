@@ -20,30 +20,35 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			this.Inserted += new EventHandler<DomainFactoryEventArgs>(PlugFactory_Inserted);
 		}
 
-		
+
 
 		#region Instalation related
+
+        string _createTableCommandText =
+            @"CREATE TABLE [PlugIn]
+            (
+	            [PlugId] [int] IDENTITY(1,1) NOT NULL,
+	            [PlugName] [dbo].[systemName] NOT NULL,
+	            [PlugFriendlyName] [dbo].[name] NOT NULL,
+	            [PlugDescription] [dbo].[description] NULL,
+	            [PlugVersion] [dbo].[systemName] NULL,
+	            [Active] [dbo].[active] NOT NULL,
+                CONSTRAINT [PK_PlugIn] PRIMARY KEY CLUSTERED 
+                (
+	                [PlugId] ASC
+                )
+                WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+            ) ON [PRIMARY]" 
+            + Environment.NewLine + "GO" + Environment.NewLine +
+            @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Active]' , @futureonly='futureonly'";
+
 		public override void InstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
 		{
 			if (this.Context == null)
 				throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
 			RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-			createTableAction.CommandText =
-@"CREATE TABLE [PlugIn](
-	[PlugId] [int] IDENTITY(1,1) NOT NULL,
-	[PlugName] [dbo].[systemName] NOT NULL,
-	[PlugFriendlyName] [dbo].[name] NOT NULL,
-	[PlugDescription] [dbo].[description] NULL,
-	[PlugVersion] [dbo].[systemName] NULL,
-	[Active] [dbo].[active] NOT NULL,
- CONSTRAINT [PK_PlugIn] PRIMARY KEY CLUSTERED 
-(
-	[PlugId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Active]' , @futureonly='futureonly'";
+			createTableAction.CommandText = _createTableCommandText;
 			this.ExecuteCommand(createTableAction);
 		}
 
@@ -59,7 +64,6 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 		#endregion
 
 		#region Insert
-
 		string _insertCommandText =
 			@"INSERT INTO [PlugIn] ([PlugName],[PlugFriendlyName],[PlugDescription],[PlugVersion],[Active])
             VALUES (@PlugName,@PlugFriendlyName,@PlugDescription,@PlugVersion,@Active)";
@@ -68,8 +72,6 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 		{
 			Insert(plug);
 		}
-
-		
 
 		protected void Insert(Plug plug)
 		{
@@ -166,6 +168,7 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 				TranslateToPlug(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
 				plugList.Add(p);
 			}
+            dataReader.Close();
 			return plugList;
 		}
 
@@ -180,7 +183,9 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 			readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
 
 			this.LoadByPrimaryKey(readerAction);
-			return TranslateToPlug(readerAction.DataReader);
+			Plug plug = TranslateToPlug(readerAction.DataReader);
+            readerAction.DataReader.Close();
+            return plug;
 		}
 
 
@@ -195,6 +200,7 @@ EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Acti
 
 			this.ExecuteCommand(readerAction);
 			Plug plug = TranslateToPlug(readerAction.DataReader);
+            readerAction.DataReader.Close();
 
 			if (this.LoadedByName != null)
 				LoadedByName(this, EventArgs.Empty);

@@ -33,8 +33,9 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 		static void Main(string[] args)
 		{
             SqlTransactionContext context = new SqlTransactionContext();
-			context.Connection = new SqlConnection("server=stranger;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
-			PlugController mamager = new PlugController(context);
+            //context.Connection = new SqlConnection("server=stranger;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
+            context.Connection = new SqlConnection("server=localhost;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
+            PlugController manager = new PlugController(context);
 			try
 			{
 				System.Console.WriteLine("Possible commands:\n\tadd\n\tdelete\n\tupdate\n\tloadall\n\tloadbyid\n\tloadbyname\n\tquit\n");
@@ -43,30 +44,51 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 				{
 					System.Console.Write("#");
 					string cmd = System.Console.ReadLine();
+                    Plug plug = new Plug();
 					switch (cmd)
 					{
 						case "add":
 							System.Console.WriteLine("Input <PlugName> <PlugFriendlyName> <PlugDescription> <PlugVersion> <Active(0|1)>");
 							string tmp = System.Console.ReadLine();
-							Plug plug = ParsePlug(tmp);
-							mamager.Insert(plug);
+							plug = ParsePlug(tmp);
+							manager.Insert(plug);
 							break;
+
 						case "quit":
 							done = true;
 							break;
+
 						case "delete":
-						case "update":
+                            System.Console.Write("Input PlugId: ");
+                            plug.PlugId = int.Parse(System.Console.ReadLine());
+                            //manager.Delete(plug);
+                            break;
+
+                        case "update":
+                            System.Console.WriteLine("Not implemented yet");
+                            break;
+
 						case "loadall":
-							List<Plug> lst = mamager.LoadAll();
+							List<Plug> lst = manager.LoadAll();
 							foreach (Plug pl in lst)
 							{
 								PrintPlug(pl);
 								System.Console.WriteLine();
 							}
 							break;
+
 						case "loadbyid":
+                            System.Console.Write("Input PlugId: ");
+                            //plug = manager.LoadByPrimaryKey(int.Parse(System.Console.ReadLine()));
+                            PrintPlug(plug);
+                            break;
+
 						case "loadbyname":
-							break;
+                            System.Console.Write("Input PlugName: ");
+                            //plug = manager.LoadByName(System.Console.ReadLine());
+                            PrintPlug(plug);
+                            break;
+
 						default:
 							System.Console.WriteLine("Possible commands:\n\tadd\tdelete\tupdate\tloadall\tloadbyid\tloadbyname\n");
 							break;
@@ -75,11 +97,10 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 				}
 				
 			}
-			catch
+			finally
 			{
 				//this is very very important
 				context.Connection.Close();
-				throw;
 			}
 		}
 	}
