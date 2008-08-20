@@ -22,10 +22,15 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		internal void InternalInsert(PlugLocation location)
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
+        internal void InternalInsert(PlugLocation location)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        internal void InternalUpdate(PlugLocation location)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
 
 		internal static PlugLocationFactory GetInstance()
 		{

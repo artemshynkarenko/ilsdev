@@ -88,7 +88,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.DomainModel
 
 		public void Dispose()
 		{
-			if (this.Context != null && this._contextWasOpened)
+			if (this.Context != null && !this._contextWasOpened)
 			{
 				this.Context.Connection.Close();
 			}
