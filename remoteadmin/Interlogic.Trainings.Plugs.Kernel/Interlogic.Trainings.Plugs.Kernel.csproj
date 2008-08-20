@@ -41,7 +41,14 @@
     <Compile Include="DomainModel\DomainFactory.cs" />
     <Compile Include="DomainModel\DomainFactoryEventArgs.cs" />
     <Compile Include="DomainModel\DomainObject.cs" />
+    <Compile Include="Exceptions\AccessDeniedException.cs" />
+    <Compile Include="Exceptions\FileAlreadyExistException.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="FileActions\CopyFileAction.cs" />
+    <Compile Include="FileActions\CreateDirectoryAction.cs" />
+    <Compile Include="FileActions\MoveFileAction.cs" />
+    <Compile Include="FileActions\RenameFileAction.cs" />
+    <Compile Include="FileTransaction.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="FileActions\IFileAction.cs" />
     <Compile Include="Install\IRegisterPlugAction.cs" />
@@ -76,6 +83,7 @@
     <Compile Include="SqlActions\SqlTableFieldAttribute.cs" />
     <Compile Include="SqlActions\SqlTransactionContext.cs" />
     <Compile Include="SqlActions\UniqueConstraintFieldAttribute.cs" />
+    <Compile Include="UserFileAccessRightsChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Kernel.cd" />

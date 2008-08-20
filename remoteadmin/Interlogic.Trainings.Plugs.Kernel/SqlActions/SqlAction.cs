@@ -56,5 +56,29 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 		}
 
 		#endregion
-	}
+
+        #region ITransactionContext Members
+
+        public bool ExecutingInTransaction
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public void BeginTransaction()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void Commit()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void RollBack()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
+    }
 }
