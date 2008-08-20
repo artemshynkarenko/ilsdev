@@ -21,7 +21,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		}
 
 
-
 		#region Instalation related
 
         string _createTableCommandText =

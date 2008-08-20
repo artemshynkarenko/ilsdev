@@ -35,16 +35,49 @@ namespace Interlogic.Trainings.Plugs.Kernel
 					factory.Inserted += new EventHandler<DomainFactoryEventArgs>(PlugFactory_FixChildren);
 					factory.InternalInsert(plug);
 				}
-				using (PlugLocationFactory locationFactory = PlugLocationFactory.GetInstance())
-				{
-					locationFactory.Context = this.FactoryContext;
-					foreach (PlugLocation location in plug.Locations)
-					{
-						
-						locationFactory.InternalInsert(location);
-					}
-				}
-				//TODO: Continue
+                using (PlugLocationFactory locationFactory = PlugLocationFactory.GetInstance())
+                {
+                    locationFactory.Context = this.FactoryContext;
+                    foreach (PlugLocation location in plug.Locations)
+                    {
+                        locationFactory.InternalInsert(location);
+                    }
+                }
+                //TODO: Uncomment this when classes will be implemented
+                //using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
+                //{
+                //    fileFactory.Context = this.FactoryContext;
+                //    foreach (PlugFile file in plug.Files)
+                //    {
+                //        fileFactory.InternalInsert(file);
+                //    }
+                //}
+                //using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+                //{
+                //    bindingFactory.Context = this.FactoryContext;
+                //    foreach (Binding binding in plug.Bindings)
+                //    {
+                //        bindingFactory.InternalInsert(binding);
+                //    }
+                //}
+                //using (BindingPointFactory bindingPointFactory = BindingPointFactory.GetInstance())
+                //{
+                //    bindingPointFactory.Context = this.FactoryContext;
+                //    foreach (BindingPoint bindingPoint in plug.BindablePoints)
+                //    {
+
+                //        bindingPointFactory.InternalInsert(bindingPoint);
+                //    }
+                //}
+                //using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
+                //{
+                //    classDefinitionFactory.Context = this.FactoryContext;
+                //    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
+                //    {
+                //        classDefinitionFactory.InternalInsert(classDefinition);
+                //    }
+                //}
+                // TODO: something else?..
 				this.FactoryContext.Commit();
 			}
 			catch
@@ -52,7 +85,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 				this.FactoryContext.RollBack();
 				throw;
 			}
-
 		}
 
 		public void Update(Plug plug)
@@ -67,8 +99,66 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		public void UpdateAll(Plug plug)
 		{
-			//TODO: same as on insert
-		}
+            try
+            {
+                this.FactoryContext.BeginTransaction();
+                ValidateInstance(plug);
+                using (PlugFactory factory = PlugFactory.GetInstance())
+                {
+                    factory.Context = this.FactoryContext;
+                    factory.InternalUpdate(plug);
+                }
+                using (PlugLocationFactory locationFactory = PlugLocationFactory.GetInstance())
+                {
+                    locationFactory.Context = this.FactoryContext;
+                    foreach (PlugLocation location in plug.Locations)
+                    {
+                        locationFactory.InternalUpdate(location);
+                    }
+                }
+                //TODO: Uncomment this when classes will be implemented
+                //using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
+                //{
+                //    fileFactory.Context = this.FactoryContext;
+                //    foreach (PlugFile file in plug.Files)
+                //    {
+                //        fileFactory.InternalUpdate(file);
+                //    }
+                //}
+                //using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+                //{
+                //    bindingFactory.Context = this.FactoryContext;
+                //    foreach (Binding binding in plug.Bindings)
+                //    {
+                //        bindingFactory.InternalUpdate(binding);
+                //    }
+                //}
+                //using (BindingPointFactory bindingPointFactory = BindingPointFactory.GetInstance())
+                //{
+                //    bindingPointFactory.Context = this.FactoryContext;
+                //    foreach (BindingPoint bindingPoint in plug.BindablePoints)
+                //    {
+
+                //        bindingPointFactory.InternalUpdate(bindingPoint);
+                //    }
+                //}
+                //using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
+                //{
+                //    classDefinitionFactory.Context = this.FactoryContext;
+                //    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
+                //    {
+                //        classDefinitionFactory.InternalUpdate(classDefinition);
+                //    }
+                //}
+                // TODO: something else?..
+                this.FactoryContext.Commit();
+            }
+            catch
+            {
+                this.FactoryContext.RollBack();
+                throw;
+            }
+        }
 
 		public virtual void ValidateInstance(Plug plug)
 		{

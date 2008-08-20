@@ -8,7 +8,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 	public class Plug : DomainObject
 	{
 		private int _plugId;
-
 		public int PlugId
 		{
 			get { return _plugId; }
@@ -16,22 +15,20 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		}
 
 		private string _plugName;
-
 		public string PlugName
 		{
 			get { return _plugName; }
 			set { _plugName = value; }
 		}
 
-		private string _plugFriendlyName;
-
+    	private string _plugFriendlyName;
 		public string PlugFriendlyName
 		{
 			get { return _plugFriendlyName; }
 			set { _plugFriendlyName = value; }
 		}
-		private string _plugDescription;
 
+		private string _plugDescription;
 		public string PlugDescription
 		{
 			get { return _plugDescription; }
@@ -39,7 +36,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		}
 
 		private string _plugVersion;
-
 		public string PlugVersion
 		{
 			get { return _plugVersion; }
@@ -47,7 +43,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		}
 
 		private bool _active;
-
 		public bool Active
 		{
 			get { return _active; }
