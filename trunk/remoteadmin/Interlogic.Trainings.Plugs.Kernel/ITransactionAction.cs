@@ -4,8 +4,11 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public interface ITransactionAction:IAction
+	public interface ITransactionAction:IAction, ITransactionContext 
 	{
-		ITransactionContext TransactionContext { get;set;}
+		ITransactionContext TransactionContext { get;set;} 
+     
+
 	}
+
 }
