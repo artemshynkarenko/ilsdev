@@ -7,7 +7,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 {
 	public abstract class SqlAction : ISqlAction
 	{
-        protected string _commandDelimiter = Environment.NewLine + "GO" + Environment.NewLine;
+        public static readonly string CommandDelimiter = Environment.NewLine + "GO" + Environment.NewLine;
 		private ISqlTransactionContext _transactionContext = null;
 
 		public virtual ISqlTransactionContext TransactionContext
