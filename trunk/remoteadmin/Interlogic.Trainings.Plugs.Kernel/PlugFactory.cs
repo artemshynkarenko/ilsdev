@@ -38,7 +38,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 )
                 WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
             ) ON [PRIMARY]" 
-            + Environment.NewLine + "GO" + Environment.NewLine +
+            + SqlAction.CommandDelimiter +
             @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Active]' , @futureonly='futureonly'";
 
 		public override void InstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
