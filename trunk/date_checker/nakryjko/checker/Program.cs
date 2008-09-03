@@ -9,22 +9,22 @@ namespace Checker
         private long minMask=0, hourMask=0, dayMask=0, monMask=0, weekMask=0;
         private int[] monthsDayCnt = new int[] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-        private long getRange(int l, int r)
+        private long getRange(int L, int R)
         {
-            return ((1L << (r - l + 1)) - 1) << l;
+            return ((1L << (R - L + 1)) - 1) << L;
         }
-        private bool checkRange(ref long mask, int l, int r)
+        private bool checkRange(ref long mask, int L, int R)
         {
             if (mask == -1)
             {
-                mask = getRange(l,r);
+                mask = getRange(L,R);
                 return true;
             }
             return mask==0                                      // empty range
-                || ((1L << l) <= mask && mask <= (1L << r));    // [l..r]
+                || ((1L << L) <= mask && mask <= (1L << R));    // [L..R]
         }
 
-        private long parseMask(string s)
+        private long parseMask(string s, int L, int R)
         {
             if (s == "*") return -1;
             if (s.Contains("*"))
@@ -39,19 +39,22 @@ namespace Checker
                 {
                     // single value (must be ;)
                     int tmp = int.Parse(range);
+                    if (tmp < L || tmp > R)
+                        throw new ArgumentOutOfRangeException(string.Format("Mask not in range [{0}..{1}]", L, R));
                     res |= (1L << tmp);
                 }
                 else
                 {
                     if (ind==0 || range.LastIndexOf('-') != ind)
                         throw new ArgumentException("Invalid range specificator");
-                    int l = int.Parse(range.Substring(0, ind));
-                    int r = int.Parse(range.Substring(ind+1));
-                    if (l > r)
+                    int left = int.Parse(range.Substring(0, ind));
+                    int right = int.Parse(range.Substring(ind+1));
+                    if (left > right)
                         throw new ArgumentException("Wrong range: first number must be less or equal of right");
-                    if (r >= 60)
-                        throw new ArgumentException("Range value is too large");
-                    res |= getRange(l, r);
+
+                    if (left < L || right > R)
+                        throw new ArgumentOutOfRangeException(string.Format("Mask not in range [{0}..{1}]", L, R));
+                    res |= getRange(left, right);
                 }
             }
             return res;
@@ -59,30 +62,11 @@ namespace Checker
 
         public DateChecker(string minutesMask, string hoursMask, string dayOfMonthMask, string monthMask, string dayOfWeekMask)
         {
-            long msk = parseMask(minutesMask);
-            if (!checkRange(ref msk, 0, 59))
-                throw new ArgumentOutOfRangeException("Minutes mask not in range [0..59]");
-            minMask = msk;
-
-            msk = parseMask(hoursMask);
-            if (!checkRange(ref msk, 0, 23))
-                throw new ArgumentOutOfRangeException("Hours mask not in range [0..23]");
-            hourMask = msk;
-
-            msk = parseMask(dayOfMonthMask);
-            if (!checkRange(ref msk, 0, 30))
-                throw new ArgumentOutOfRangeException("Days of month mask not in range [0..30]");
-            dayMask = msk;
-
-            msk = parseMask(monthMask);
-            if (!checkRange(ref msk, 0, 11))
-                throw new ArgumentOutOfRangeException("Months mask not in range [0..11]");
-            monMask = msk;
-
-            msk = parseMask(dayOfWeekMask);
-            if (!checkRange(ref msk, 0, 6))
-                throw new ArgumentOutOfRangeException("Days of week mask not in range [0..6]");
-            weekMask = msk;
+            minMask     = parseMask(minutesMask, 0, 59);
+            hourMask    = parseMask(hoursMask, 0, 23);
+            dayMask     = parseMask(dayOfMonthMask, 0, 30);
+            monMask     = parseMask(monthMask, 0, 11);
+            weekMask    = parseMask(dayOfWeekMask, 0, 6);
         }
         private int dow(DayOfWeek d)
         {
@@ -95,10 +79,11 @@ namespace Checker
                 case DayOfWeek.Friday:      return 4;
                 case DayOfWeek.Saturday:    return 5;
                 case DayOfWeek.Sunday:      return 6;
+                default:
+                    throw new ArgumentOutOfRangeException("Invalid DayOfWeek");
             }
-            throw new ArgumentOutOfRangeException("Invalid DayOfWeek");
         }
-        public bool IsGoodTime(DateTime dt)
+        public bool IsAppropriateDate(DateTime dt)
         {
             return ((minMask    & (1L << dt.Minute))        != 0)  // minutes in range
                 && ((hourMask   & (1L << dt.Hour))          != 0)  // hours in range
@@ -180,7 +165,7 @@ namespace Checker
             {
 //                DateTime dt = ch.GetNextDate(new DateTime(2003, 2, 27, 0, 0, 0));
                 DateTime dt = ch.GetNextDate(new DateTime(2003, 3, 1, 0, 0, 0));
-                if (!ch.IsGoodTime(dt))
+                if (!ch.IsAppropriateDate(dt))
                     throw new Exception("Wrong answer!");
                 Console.WriteLine(dt);
             }
