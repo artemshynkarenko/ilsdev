@@ -18,63 +18,12 @@ namespace Interlogic.Trainings.Plugs.Kernel.DomainModel
 		public ISqlTransactionContext Context
 		{
 			get { return _context;}
-			set { 
+			set 
+            { 
 				_context = value;
 				_contextWasOpened = _context.Connection.State == ConnectionState.Open;
-				}
+			}
 		}
-
-		protected virtual void Insert(ISqlAction action, DomainObject domainObject)
-		{
-			ExecuteCommand(action);
-			if (Inserted != null)
-				Inserted( this, new DomainFactoryEventArgs(domainObject, action));
-		}
-
-		public event EventHandler<DomainFactoryEventArgs> Inserted;
-
-		protected virtual void Update(ISqlAction action, DomainObject domainObject)
-		{
-			if (this.Updating != null)
-				Updating(this, new DomainFactoryEventArgs(domainObject, action));
-			ExecuteCommand(action);
-			if (this.Updated != null)
-				Updated(this, new DomainFactoryEventArgs(domainObject, action));
-		}
-
-		public event EventHandler<DomainFactoryEventArgs> Updating;
-		public event EventHandler<DomainFactoryEventArgs> Updated;
-
-
-		protected virtual void Delete(ISqlAction action, DomainObject domainObject)
-		{
-			if (this.Deleting != null)
-				Deleting(this, new DomainFactoryEventArgs(domainObject, action));
-			ExecuteCommand(action);
-		}
-
-		public event EventHandler<DomainFactoryEventArgs> Deleting;
-
-
-		protected virtual void LoadAll(ISqlAction action)
-		{
-			ExecuteCommand(action);
-			if (this.LoadedAll != null)
-				LoadedAll(this, EventArgs.Empty);
-		}
-
-		public event EventHandler LoadedAll;
-
-
-		protected virtual void LoadByPrimaryKey(ISqlAction action)
-		{
-			ExecuteCommand(action);
-			if (this.LoadedByPrimaryKey != null)
-				LoadedByPrimaryKey(this, EventArgs.Empty);
-		}
-
-		public event EventHandler LoadedByPrimaryKey;
-
 
 		protected virtual void ExecuteCommand(ISqlAction action)
 		{

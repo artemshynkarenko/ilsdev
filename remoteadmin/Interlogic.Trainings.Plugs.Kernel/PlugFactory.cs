@@ -17,11 +17,10 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		protected PlugFactory()
 		{
-			this.Inserted += new EventHandler<DomainFactoryEventArgs>(PlugFactory_Inserted);
 		}
 
 
-		#region Instalation related
+		#region Installation related
 
         string _createTableCommandText =
             @"CREATE TABLE [PlugIn]
@@ -53,7 +52,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		public override void UpdateRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
 		{
-			throw new Exception("The method or operation is not implemented.");
 		}
 
 		public override void UninstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
@@ -82,13 +80,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			insertAction.AddParameter("@PlugDescription", plug.PlugDescription, DbType.String);
 			insertAction.AddParameter("@PlugVersion", plug.PlugVersion, DbType.String);
 			insertAction.AddParameter("@Active", plug.Active, DbType.Boolean);
-			base.Insert(insertAction, plug);
-		}
-
-		void PlugFactory_Inserted(object sender, DomainFactoryEventArgs e)
-		{
-			((Plug)e.Object).PlugId = ((RawSqlInsertAction)e.Action).InsertedIdentity;
-		}
+            this.ExecuteCommand(insertAction);
+            plug.PlugId = insertAction.InsertedIdentity;
+        }
 
 		#endregion
 
@@ -119,8 +113,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			updateAction.AddParameter("@Active", plug.Active ? 1 : 0, DbType.Int32);
 			updateAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
 
-			base.Update(updateAction, plug);
-		}
+            this.ExecuteCommand(updateAction);
+        }
 		#endregion
 
 		#region Delete
@@ -138,8 +132,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 			deleteAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
 
-			base.Delete(deleteAction, plug);
-		}
+            this.ExecuteCommand(deleteAction);
+        }
 		#endregion
 
 		#region Loads
@@ -150,24 +144,31 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		{
 			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
 			readerAction.CommandText = _loadAllCommandText;
-			this.LoadAll(readerAction);
-
-			List<Plug> plugList = new List<Plug>();
+            this.ExecuteCommand(readerAction);
+            
+            List<Plug> plugList = new List<Plug>();
 			IDataReader dataReader = readerAction.DataReader;
-			bool getOrdinals = true;
-			int[] ordinals = null;
-			while (dataReader.Read())
-			{
-				if (getOrdinals)
-				{
-					ordinals = GetPlugFieldOrdinals(dataReader);
-					getOrdinals = false;
-				}
-				Plug p = new Plug();
-				TranslateToPlug(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
-				plugList.Add(p);
-			}
-            dataReader.Close();
+            try
+            {
+                bool getOrdinals = true;
+                int[] ordinals = null;
+                while (dataReader.Read())
+                {
+                    if (getOrdinals)
+                    {
+                        ordinals = GetPlugFieldOrdinals(dataReader);
+                        getOrdinals = false;
+                    }
+                    Plug p = new Plug();
+                    TranslateToPlug(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+                    plugList.Add(p);
+                }
+            }
+            finally
+            {
+                dataReader.Close();
+            }
+
 			return plugList;
 		}
 
@@ -181,9 +182,16 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 			readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
 
-			this.LoadByPrimaryKey(readerAction);
-			Plug plug = TranslateToPlug(readerAction.DataReader);
-            readerAction.DataReader.Close();
+            Plug plug = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                plug = TranslateToPlug(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
             return plug;
 		}
 
@@ -197,17 +205,19 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 			readerAction.AddParameter("@PlugName", plugName, DbType.String);
 
+            Plug plug = null;
 			this.ExecuteCommand(readerAction);
-			Plug plug = TranslateToPlug(readerAction.DataReader);
-            readerAction.DataReader.Close();
-
-			if (this.LoadedByName != null)
-				LoadedByName(this, EventArgs.Empty);
+            try
+            {
+                plug = TranslateToPlug(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
 
 			return plug;
 		}
-
-		public event EventHandler LoadedByName;
 
 		
 		protected int[] GetPlugFieldOrdinals(IDataReader dataReader)
@@ -233,7 +243,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			int[] indexes = GetPlugFieldOrdinals(dataReader);
 			TranslateToPlug(dataReader, plug, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5]);
 		}
-
 		protected void TranslateToPlug(IDataReader dataReader, Plug plug, int idIndex, int nameIndex, int friendlyNameIndex, int descriptionIndex, int versionIndex, int activeIndex)
 		{
 			plug.PlugId = dataReader.GetInt32(idIndex);

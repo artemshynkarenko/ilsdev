@@ -32,7 +32,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
 				using (PlugFactory factory = PlugFactory.GetInstance())
 				{
 					factory.Context = this.FactoryContext;
-					factory.Inserted += new EventHandler<DomainFactoryEventArgs>(PlugFactory_FixChildren);
 					factory.InternalInsert(plug);
 				}
                 using (PlugLocationFactory locationFactory = PlugLocationFactory.GetInstance())
