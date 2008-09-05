@@ -33,10 +33,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindablePointController.cs" />
     <Compile Include="Binding.cs" />
-    <Compile Include="BindingPoint.cs" />
+    <Compile Include="BindablePoint.cs" />
+    <Compile Include="BindablePointDefinition.cs" />
     <Compile Include="Caching\Cache.cs" />
     <Compile Include="ClassDefinition.cs" />
+    <Compile Include="ClassDefinitionController.cs" />
+    <Compile Include="ClassDefinitionFactory.cs" />
     <Compile Include="DomainModel\DomainController.cs" />
     <Compile Include="DomainModel\DomainFactory.cs" />
     <Compile Include="DomainModel\DomainFactoryEventArgs.cs" />
