@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Tranings.Plugs.Kernel.Test.Console", "Interlogic.Tranings.Plugs.Kernel.Test.Console\Interlogic.Tranings.Plugs.Kernel.Test.Console.csproj", "{0D9EDFEB-C52B-483A-ADD2-035510D1A608}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.AbstractUI.Panel", "Interlogic.Trainings.Plugs.AbstractUI.Panel\Interlogic.Trainings.Plugs.AbstractUI.Panel.csproj", "{882A6D05-CB4B-452A-B018-E7760A9317F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{0D9EDFEB-C52B-483A-ADD2-035510D1A608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D9EDFEB-C52B-483A-ADD2-035510D1A608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D9EDFEB-C52B-483A-ADD2-035510D1A608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

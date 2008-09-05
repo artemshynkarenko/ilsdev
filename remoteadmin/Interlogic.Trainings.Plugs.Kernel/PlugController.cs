@@ -205,7 +205,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 				//binding.PlugId = plugId;
 			}
 
-			foreach (BindingPoint point in plug.BindablePoints)
+			foreach (BindablePoint point in plug.BindablePoints)
 			{
 				//TODO: Uncomment this when class will be implemented
 				//point.PlugId = plugId;

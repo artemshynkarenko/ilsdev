@@ -49,8 +49,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			set { _active = value; }
 		}
 
-		private List<BindingPoint> _bindablePoints = new List<BindingPoint>();
-		public List<BindingPoint> BindablePoints { get { return _bindablePoints; } }
+		private List<BindablePoint> _bindablePoints = new List<BindablePoint>();
+		public List<BindablePoint> BindablePoints { get { return _bindablePoints; } }
 
 		private List<PlugFile> _files = new List<PlugFile>();
 		public List<PlugFile> Files { get { return _files; } }
