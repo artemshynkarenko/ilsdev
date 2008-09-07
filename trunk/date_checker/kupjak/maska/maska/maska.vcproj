@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="maska"
-	ProjectGUID="{F1B27C08-74D1-47A9-AC17-2682576EEDD5}"
+	ProjectGUID="{A65305DE-CB10-43E2-9767-7325EB51D091}"
 	RootNamespace="maska"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -171,6 +171,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\date.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\maska.cpp"
 				>
 			</File>
@@ -180,6 +184,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\date.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
