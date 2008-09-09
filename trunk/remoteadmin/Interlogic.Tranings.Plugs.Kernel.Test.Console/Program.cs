@@ -10,10 +10,10 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 {
 	class Program
 	{
-        static Plug ParsePlug(string s)
+        static PlugIn ParsePlug(string s)
         {
             string[] ss = s.Split(new string[] {" ", "\t", "\n", "\r"}, StringSplitOptions.RemoveEmptyEntries);
-            Plug plug = new Plug();
+            PlugIn plug = new PlugIn();
             plug.PlugName           = ss[0];
             plug.PlugFriendlyName   = ss[1];
             plug.PlugDescription    = ss[2];
@@ -21,7 +21,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
             plug.Active             = int.Parse(ss[4]) != 0;
             return plug;
         }
-        static void PrintPlug(Plug plug)
+        static void PrintPlug(PlugIn plug)
         {
             System.Console.WriteLine("Id\t\t = {0}", plug.PlugId);
             System.Console.WriteLine("Name\t\t = {0}", plug.PlugName);
@@ -35,7 +35,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
             SqlTransactionContext context = new SqlTransactionContext();
             //context.Connection = new SqlConnection("server=stranger;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
             context.Connection = new SqlConnection("server=localhost;database=ASH_Trainings_RemoteAdmin;uid=sa;pwd=1");
-            PlugController manager = new PlugController(context);
+            PlugInController manager = new PlugInController(context);
 			try
 			{
 				System.Console.WriteLine("Possible commands:\n\tadd\n\tdelete\n\tupdate\n\tloadall\n\tloadbyid\n\tloadbyname\n\tquit\n");
@@ -44,7 +44,7 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
 				{
 					System.Console.Write("#");
 					string cmd = System.Console.ReadLine();
-                    Plug plug = new Plug();
+                    PlugIn plug = new PlugIn();
 					switch (cmd)
 					{
 						case "add":
@@ -69,8 +69,8 @@ namespace Interlogic.Tranings.Plugs.Kernel.Test.Console
                             break;
 
 						case "loadall":
-							List<Plug> lst = manager.LoadAll();
-							foreach (Plug pl in lst)
+							List<PlugIn> lst = manager.LoadAll();
+							foreach (PlugIn pl in lst)
 							{
 								PrintPlug(pl);
 								System.Console.WriteLine();

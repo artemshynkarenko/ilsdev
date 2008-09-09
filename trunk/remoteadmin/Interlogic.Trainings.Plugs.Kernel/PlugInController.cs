@@ -6,16 +6,16 @@ using Interlogic.Trainings.Plugs.Kernel.Exceptions;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public class PlugController : DomainController
+	public class PlugInController : DomainController
 	{
-		public PlugController(ITransactionContext context)
+		public PlugInController(ITransactionContext context)
 			: base(context)
 		{
 		}
 
-		public void Insert(Plug plug)
+		public void Insert(PlugIn plug)
 		{
-			using (PlugFactory factory = PlugFactory.GetInstance())
+			using (PlugInFactory factory = PlugInFactory.GetInstance())
 			{
 				factory.Context = this.FactoryContext;
 				ValidateInstance(plug);
@@ -23,13 +23,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			}
 		}
 
-		public void InsertAll(Plug plug)
+		public void InsertAll(PlugIn plug)
 		{
 			try
 			{
 				this.FactoryContext.BeginTransaction();
 				ValidateInstance(plug);
-				using (PlugFactory factory = PlugFactory.GetInstance())
+				using (PlugInFactory factory = PlugInFactory.GetInstance())
 				{
 					factory.Context = this.FactoryContext;
 					factory.InternalInsert(plug);
@@ -86,9 +86,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			}
 		}
 
-		public void Update(Plug plug)
+		public void Update(PlugIn plug)
 		{
-			using (PlugFactory factory = PlugFactory.GetInstance())
+			using (PlugInFactory factory = PlugInFactory.GetInstance())
 			{
 				factory.Context = this.FactoryContext;
 				ValidateInstance(plug);
@@ -96,13 +96,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			}
 		}
 
-		public void UpdateAll(Plug plug)
+		public void UpdateAll(PlugIn plug)
 		{
             try
             {
                 this.FactoryContext.BeginTransaction();
                 ValidateInstance(plug);
-                using (PlugFactory factory = PlugFactory.GetInstance())
+                using (PlugInFactory factory = PlugInFactory.GetInstance())
                 {
                     factory.Context = this.FactoryContext;
                     factory.InternalUpdate(plug);
@@ -159,7 +159,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             }
         }
 
-		public virtual void ValidateInstance(Plug plug)
+		public virtual void ValidateInstance(PlugIn plug)
 		{
 			if (string.IsNullOrEmpty(plug.PlugFriendlyName))
 			{
@@ -168,9 +168,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			//TODO: continue validation;
 		}
 
-		public List<Plug> LoadAll()
+		public List<PlugIn> LoadAll()
 		{
-			using (PlugFactory factory = PlugFactory.GetInstance())
+			using (PlugInFactory factory = PlugInFactory.GetInstance())
 			{
 				factory.Context = this.FactoryContext;
 				return factory.InternalLoadAll();
@@ -179,7 +179,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		void PlugFactory_FixChildren(object sender, DomainFactoryEventArgs e)
 		{
-			Plug plug = (Plug)e.Object;
+			PlugIn plug = (PlugIn)e.Object;
 			int plugId = plug.PlugId;
 			foreach (PlugLocation location in plug.Locations)
 			{
