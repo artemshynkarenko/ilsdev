@@ -5,7 +5,7 @@ using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public class Plug : DomainObject
+	public class PlugIn : DomainObject
 	{
 		private int _plugId;
 		public int PlugId

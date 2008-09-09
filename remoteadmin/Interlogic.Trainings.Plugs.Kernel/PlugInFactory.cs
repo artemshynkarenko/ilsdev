@@ -8,14 +8,14 @@ using System.Globalization;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public class PlugFactory : DomainFactory
+	public class PlugInFactory : DomainFactory
 	{
-		static internal PlugFactory GetInstance()
+		static internal PlugInFactory GetInstance()
 		{
-			return new PlugFactory();
+			return new PlugInFactory();
 		}
 
-		protected PlugFactory()
+		protected PlugInFactory()
 		{
 		}
 
@@ -65,12 +65,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			@"INSERT INTO [PlugIn] ([PlugName],[PlugFriendlyName],[PlugDescription],[PlugVersion],[Active])
             VALUES (@PlugName,@PlugFriendlyName,@PlugDescription,@PlugVersion,@Active)";
 
-		internal void InternalInsert(Plug plug)
+		internal void InternalInsert(PlugIn plug)
 		{
 			Insert(plug);
 		}
 
-		protected void Insert(Plug plug)
+		protected void Insert(PlugIn plug)
 		{
 			RawSqlInsertAction insertAction = new RawSqlInsertAction();
 			insertAction.CommandText = _insertCommandText;
@@ -96,12 +96,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 [Active] = @Active 
             WHERE [PlugId] = @PlugId";
 
-		internal void InternalUpdate(Plug plug)
+		internal void InternalUpdate(PlugIn plug)
 		{
 			this.Update(plug);
 		}
 
-		protected void Update(Plug plug)
+		protected void Update(PlugIn plug)
 		{
 			RawSqlExecuteNonQueryAction updateAction = new RawSqlExecuteNonQueryAction();
 			updateAction.CommandText = _updateCommandText;
@@ -120,12 +120,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		#region Delete
 		string _deleteCommandText = @"DELETE [PlugIn] WHERE [PlugId] = @PlugId";
 
-		internal void InternalDelete(Plug plug)
+		internal void InternalDelete(PlugIn plug)
 		{
 			this.Delete(plug);
 		}
 
-		protected void Delete(Plug plug)
+		protected void Delete(PlugIn plug)
 		{
 			RawSqlExecuteNonQueryAction deleteAction = new RawSqlExecuteNonQueryAction();
 			deleteAction.CommandText = _deleteCommandText;
@@ -140,13 +140,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		string _loadAllCommandText = @"SELECT * FROM [PlugIn]";
 
-		internal List<Plug> InternalLoadAll()
+		internal List<PlugIn> InternalLoadAll()
 		{
 			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
 			readerAction.CommandText = _loadAllCommandText;
             this.ExecuteCommand(readerAction);
             
-            List<Plug> plugList = new List<Plug>();
+            List<PlugIn> plugList = new List<PlugIn>();
 			IDataReader dataReader = readerAction.DataReader;
             try
             {
@@ -159,7 +159,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                         ordinals = GetPlugFieldOrdinals(dataReader);
                         getOrdinals = false;
                     }
-                    Plug p = new Plug();
+                    PlugIn p = new PlugIn();
                     TranslateToPlug(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     plugList.Add(p);
                 }
@@ -175,14 +175,14 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		string _loadByIdCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugId] = @PlugId";
 
-		internal Plug InternalLoadByPrimaryKey(int plugId)
+		internal PlugIn InternalLoadByPrimaryKey(int plugId)
 		{
 			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
 			readerAction.CommandText = _loadByIdCommandText;
 
 			readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
 
-            Plug plug = null;
+            PlugIn plug = null;
             this.ExecuteCommand(readerAction);
             try
             {
@@ -198,14 +198,14 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		string _loadByNameCommandText = @"SELECT * FROM [PlugIn] WHERE [PlugName] = @PlugName";
 
-		internal Plug InternalLoadByName(string plugName)
+		internal PlugIn InternalLoadByName(string plugName)
 		{
 			RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
 			readerAction.CommandText = _loadByNameCommandText;
 
 			readerAction.AddParameter("@PlugName", plugName, DbType.String);
 
-            Plug plug = null;
+            PlugIn plug = null;
 			this.ExecuteCommand(readerAction);
             try
             {
@@ -232,18 +232,18 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			return indexes;
 		}
 
-		private Plug TranslateToPlug(IDataReader dataReader)
+		private PlugIn TranslateToPlug(IDataReader dataReader)
 		{
-			Plug plug = new Plug();
+			PlugIn plug = new PlugIn();
 			TranslateToPlug(dataReader,plug);
 			return plug;
 		}
-		protected void TranslateToPlug(IDataReader dataReader, Plug plug)
+		protected void TranslateToPlug(IDataReader dataReader, PlugIn plug)
 		{
 			int[] indexes = GetPlugFieldOrdinals(dataReader);
 			TranslateToPlug(dataReader, plug, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5]);
 		}
-		protected void TranslateToPlug(IDataReader dataReader, Plug plug, int idIndex, int nameIndex, int friendlyNameIndex, int descriptionIndex, int versionIndex, int activeIndex)
+		protected void TranslateToPlug(IDataReader dataReader, PlugIn plug, int idIndex, int nameIndex, int friendlyNameIndex, int descriptionIndex, int versionIndex, int activeIndex)
 		{
 			plug.PlugId = dataReader.GetInt32(idIndex);
 			plug.PlugName = dataReader.GetString(nameIndex);
