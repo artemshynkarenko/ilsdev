@@ -110,7 +110,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			updateAction.AddParameter("@PlugFriendlyName", plug.PlugFriendlyName, DbType.String);
 			updateAction.AddParameter("@PlugDescription", plug.PlugDescription, DbType.String);
 			updateAction.AddParameter("@PlugVersion", plug.PlugVersion, DbType.String);
-			updateAction.AddParameter("@Active", plug.Active ? 1 : 0, DbType.Int32);
+			updateAction.AddParameter("@Active", plug.Active, DbType.Boolean);
 			updateAction.AddParameter("@PlugId", plug.PlugId, DbType.Int32);
 
             this.ExecuteCommand(updateAction);
@@ -150,15 +150,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			IDataReader dataReader = readerAction.DataReader;
             try
             {
-                bool getOrdinals = true;
-                int[] ordinals = null;
+                int[] ordinals = GetPlugFieldOrdinals(dataReader);
                 while (dataReader.Read())
                 {
-                    if (getOrdinals)
-                    {
-                        ordinals = GetPlugFieldOrdinals(dataReader);
-                        getOrdinals = false;
-                    }
                     PlugIn p = new PlugIn();
                     TranslateToPlug(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     plugList.Add(p);
