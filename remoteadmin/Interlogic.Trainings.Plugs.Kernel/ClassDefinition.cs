@@ -14,8 +14,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
             set { _classDefinitionId = value; }
         }
 
-        private int _parentClassDefinitionId;
-        public int ParentClassDefinitionId
+        private int? _parentClassDefinitionId;
+        public int? ParentClassDefinitionId
         {
             get { return _parentClassDefinitionId; }
             set { _parentClassDefinitionId = value; }

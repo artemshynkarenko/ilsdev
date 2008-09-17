@@ -187,7 +187,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         protected int[] GetBindablePointDefinitionFieldOrdinals(IDataReader dataReader)
         {
-            int[] indexes = new int[5];
+            int[] indexes = new int[6];
             indexes[0] = dataReader.GetOrdinal("BindablePointDefinitionId");
             indexes[1] = dataReader.GetOrdinal("ClassDefinitionId");
             indexes[2] = dataReader.GetOrdinal("BindablePointName");
