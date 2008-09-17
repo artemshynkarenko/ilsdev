@@ -42,40 +42,39 @@ namespace Interlogic.Trainings.Plugs.Kernel
                         locationFactory.InternalInsert(location);
                     }
                 }
-                //TODO: Uncomment this when classes will be implemented
-                //using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
-                //{
-                //    fileFactory.Context = this.FactoryContext;
-                //    foreach (PlugFile file in plug.Files)
-                //    {
-                //        fileFactory.InternalInsert(file);
-                //    }
-                //}
-                //using (BindingFactory bindingFactory = BindingFactory.GetInstance())
-                //{
-                //    bindingFactory.Context = this.FactoryContext;
-                //    foreach (Binding binding in plug.Bindings)
-                //    {
-                //        bindingFactory.InternalInsert(binding);
-                //    }
-                //}
-                //using (BindingPointFactory bindingPointFactory = BindingPointFactory.GetInstance())
-                //{
-                //    bindingPointFactory.Context = this.FactoryContext;
-                //    foreach (BindingPoint bindingPoint in plug.BindablePoints)
-                //    {
+                using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
+                {
+                    fileFactory.Context = this.FactoryContext;
+                    foreach (PlugFile file in plug.Files)
+                    {
+                        fileFactory.InternalInsert(file);
+                    }
+                }
+                using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+                {
+                    bindingFactory.Context = this.FactoryContext;
+                    foreach (Binding binding in plug.Bindings)
+                    {
+                        bindingFactory.InternalInsert(binding);
+                    }
+                }
+                using (BindablePointFactory bindablePointFactory = BindablePointFactory.GetInstance())
+                {
+                    bindablePointFactory.Context = this.FactoryContext;
+                    foreach (BindablePoint bindablePoint in plug.BindablePoints)
+                    {
 
-                //        bindingPointFactory.InternalInsert(bindingPoint);
-                //    }
-                //}
-                //using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
-                //{
-                //    classDefinitionFactory.Context = this.FactoryContext;
-                //    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
-                //    {
-                //        classDefinitionFactory.InternalInsert(classDefinition);
-                //    }
-                //}
+                        bindablePointFactory.InternalInsert(bindablePoint);
+                    }
+                }
+                using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
+                {
+                    classDefinitionFactory.Context = this.FactoryContext;
+                    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
+                    {
+                        classDefinitionFactory.InternalInsert(classDefinition);
+                    }
+                }
                 // TODO: something else?..
 				this.FactoryContext.Commit();
 			}
@@ -115,40 +114,39 @@ namespace Interlogic.Trainings.Plugs.Kernel
                         locationFactory.InternalUpdate(location);
                     }
                 }
-                //TODO: Uncomment this when classes will be implemented
-                //using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
-                //{
-                //    fileFactory.Context = this.FactoryContext;
-                //    foreach (PlugFile file in plug.Files)
-                //    {
-                //        fileFactory.InternalUpdate(file);
-                //    }
-                //}
-                //using (BindingFactory bindingFactory = BindingFactory.GetInstance())
-                //{
-                //    bindingFactory.Context = this.FactoryContext;
-                //    foreach (Binding binding in plug.Bindings)
-                //    {
-                //        bindingFactory.InternalUpdate(binding);
-                //    }
-                //}
-                //using (BindingPointFactory bindingPointFactory = BindingPointFactory.GetInstance())
-                //{
-                //    bindingPointFactory.Context = this.FactoryContext;
-                //    foreach (BindingPoint bindingPoint in plug.BindablePoints)
-                //    {
+                using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
+                {
+                    fileFactory.Context = this.FactoryContext;
+                    foreach (PlugFile file in plug.Files)
+                    {
+                        fileFactory.InternalUpdate(file);
+                    }
+                }
+                using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+                {
+                    bindingFactory.Context = this.FactoryContext;
+                    foreach (Binding binding in plug.Bindings)
+                    {
+                        bindingFactory.InternalUpdate(binding);
+                    }
+                }
+                using (BindablePointFactory bindablePointFactory = BindablePointFactory.GetInstance())
+                {
+                    bindablePointFactory.Context = this.FactoryContext;
+                    foreach (BindablePoint bindablePoint in plug.BindablePoints)
+                    {
 
-                //        bindingPointFactory.InternalUpdate(bindingPoint);
-                //    }
-                //}
-                //using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
-                //{
-                //    classDefinitionFactory.Context = this.FactoryContext;
-                //    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
-                //    {
-                //        classDefinitionFactory.InternalUpdate(classDefinition);
-                //    }
-                //}
+                        bindablePointFactory.InternalUpdate(bindablePoint);
+                    }
+                }
+                using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
+                {
+                    classDefinitionFactory.Context = this.FactoryContext;
+                    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
+                    {
+                        classDefinitionFactory.InternalUpdate(classDefinition);
+                    }
+                }
                 // TODO: something else?..
                 this.FactoryContext.Commit();
             }
@@ -183,33 +181,28 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			int plugId = plug.PlugId;
 			foreach (PlugLocation location in plug.Locations)
 			{
-				//TODO: Uncomment this when class will be implemented
-				//location.PlugId = plugId;
+				location.PlugId = plugId;
 			}
 
 			foreach (ClassDefinition definition in plug.ClassDefinitions)
 			{
-				//TODO: Uncomment this when class will be implemented
-				//definition.PlugId = plugId;
+				definition.PlugId = plugId;
 			}
 
 			foreach (PlugFile file in plug.Files)
 			{
-				//TODO: Uncomment this when class will be implemented
-				//file.PlugId = plugId;
+				file.PlugId = plugId;
 			}
 
-			foreach (Binding binding in plug.Bindings)
-			{
-				//TODO: Uncomment this when class will be implemented
-				//binding.PlugId = plugId;
-			}
+            //foreach (Binding binding in plug.Bindings)
+            //{
+            //    binding.PlugId = plugId;
+            //}
 
-			foreach (BindablePoint point in plug.BindablePoints)
-			{
-				//TODO: Uncomment this when class will be implemented
-				//point.PlugId = plugId;
-			}
+            //foreach (BindablePoint point in plug.BindablePoints)
+            //{
+            //    point.PlugId = plugId;
+            //}
 		}
 	}
 }

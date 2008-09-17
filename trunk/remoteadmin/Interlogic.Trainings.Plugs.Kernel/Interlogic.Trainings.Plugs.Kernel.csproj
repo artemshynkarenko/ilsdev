@@ -60,6 +60,7 @@
     <Compile Include="FileActions\IFileAction.cs" />
     <Compile Include="Install\IRegisterPlugAction.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="PlugFileFactory.cs" />
     <Compile Include="PlugInController.cs" />
     <Compile Include="PlugInFactory.cs" />
     <Compile Include="PlugLocationFactory.cs" />
