@@ -5,7 +5,7 @@ using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public class ClassDefinition:DomainObject
+	public class ClassDefinition : DomainObject
 	{
         private int _classDefinitionId;
         public int ClassDefinitionId

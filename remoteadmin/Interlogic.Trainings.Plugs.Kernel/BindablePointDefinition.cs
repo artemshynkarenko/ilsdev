@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public class BindablePointDefinition
+	public class BindablePointDefinition: DomainObject
 	{
         private int _bindablePointDefinitionId;
         public int BindablePointDefinitionId
@@ -41,8 +42,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
             set { _bindablePointDescription = value; }
         }
 
-        private int _interfaceId;
-        public int InterfaceId
+        private int? _interfaceId;
+        public int? InterfaceId
         {
             get { return _interfaceId; }
             set { _interfaceId = value; }

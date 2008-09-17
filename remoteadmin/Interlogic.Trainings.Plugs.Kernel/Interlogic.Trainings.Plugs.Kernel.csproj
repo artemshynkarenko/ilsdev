@@ -34,9 +34,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindablePointController.cs" />
+    <Compile Include="BindablePointDefinitionFactory.cs" />
+    <Compile Include="BindablePointFactory.cs" />
     <Compile Include="Binding.cs" />
     <Compile Include="BindablePoint.cs" />
     <Compile Include="BindablePointDefinition.cs" />
+    <Compile Include="BindingFactory.cs" />
     <Compile Include="Caching\Cache.cs" />
     <Compile Include="ClassDefinition.cs" />
     <Compile Include="ClassDefinitionController.cs" />
