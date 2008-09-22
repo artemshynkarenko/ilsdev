@@ -1,0 +1,8 @@
+D:\Bob Documents\C#\FileManager\FileManager\bin\Debug\FileManager.exe
+D:\Bob Documents\C#\FileManager\FileManager\bin\Debug\FileManager.pdb
+D:\Bob Documents\C#\FileManager\FileManager\obj\Debug\ResolveAssemblyReference.cache
+D:\Bob Documents\C#\FileManager\FileManager\obj\Debug\FileManager.FormFileManager.resources
+D:\Bob Documents\C#\FileManager\FileManager\obj\Debug\FileManager.Properties.Resources.resources
+D:\Bob Documents\C#\FileManager\FileManager\obj\Debug\FileManager.csproj.GenerateResource.Cache
+D:\Bob Documents\C#\FileManager\FileManager\obj\Debug\FileManager.exe
+D:\Bob Documents\C#\FileManager\FileManager\obj\Debug\FileManager.pdb

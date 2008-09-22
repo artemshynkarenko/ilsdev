@@ -1,0 +1,5 @@
+D:\Bob Documents\C#\Bob\Bob\bin\Debug\Bob.exe
+D:\Bob Documents\C#\Bob\Bob\bin\Debug\Bob.pdb
+D:\Bob Documents\C#\Bob\Bob\obj\Debug\ResolveAssemblyReference.cache
+D:\Bob Documents\C#\Bob\Bob\obj\Debug\Bob.exe
+D:\Bob Documents\C#\Bob\Bob\obj\Debug\Bob.pdb
