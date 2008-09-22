@@ -1,8 +1,0 @@
-D:\Bob Documents\C#\Form-Bob\Form-Bob\bin\Debug\Form-Bob.exe
-D:\Bob Documents\C#\Form-Bob\Form-Bob\bin\Debug\Form-Bob.pdb
-D:\Bob Documents\C#\Form-Bob\Form-Bob\obj\Debug\ResolveAssemblyReference.cache
-D:\Bob Documents\C#\Form-Bob\Form-Bob\obj\Debug\Form_Bob.Properties.Resources.resources
-D:\Bob Documents\C#\Form-Bob\Form-Bob\obj\Debug\Form-Bob.csproj.GenerateResource.Cache
-D:\Bob Documents\C#\Form-Bob\Form-Bob\obj\Debug\Form-Bob.exe
-D:\Bob Documents\C#\Form-Bob\Form-Bob\obj\Debug\Form-Bob.pdb
-D:\Bob Documents\C#\Form-Bob\Form-Bob\obj\Debug\Form_Bob.Form1.resources
