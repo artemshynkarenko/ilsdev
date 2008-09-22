@@ -1,8 +1,0 @@
-D:\Bob Documents\C#\Calendar\Calendar\bin\Debug\Calendar.exe
-D:\Bob Documents\C#\Calendar\Calendar\bin\Debug\Calendar.pdb
-D:\Bob Documents\C#\Calendar\Calendar\obj\Debug\ResolveAssemblyReference.cache
-D:\Bob Documents\C#\Calendar\Calendar\obj\Debug\Calendar.Properties.Resources.resources
-D:\Bob Documents\C#\Calendar\Calendar\obj\Debug\Calendar.csproj.GenerateResource.Cache
-D:\Bob Documents\C#\Calendar\Calendar\obj\Debug\Calendar.exe
-D:\Bob Documents\C#\Calendar\Calendar\obj\Debug\Calendar.pdb
-D:\Bob Documents\C#\Calendar\Calendar\obj\Debug\Calendar.frmCalendar.resources
