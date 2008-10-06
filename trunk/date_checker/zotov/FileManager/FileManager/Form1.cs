@@ -26,10 +26,17 @@ namespace FileManager
         DirectoryInfo directory = new DirectoryInfo(node.FullPath + "\\");        
         foreach (DirectoryInfo subDirectory in directory.GetDirectories())
         {
-          if (subDirectory.Name != " " && subDirectory.Exists && !((subDirectory.Attributes & FileAttributes.System) == FileAttributes.System))
+          try
           {
-            node.Nodes.Add(subDirectory.Name);                        
-            ShowDirectory(node.Nodes[node.Nodes.Count - 1], status + 1);
+            //if (subDirectory.Name != " " && subDirectory.Exists && !((subDirectory.Attributes & FileAttributes.System) == FileAttributes.System))
+            {
+              node.Nodes.Add(subDirectory.Name);
+              ShowDirectory(node.Nodes[node.Nodes.Count - 1], status + 1);
+            }
+          }
+          catch
+          {
+            //хєрова директорія-тому не відкривається
           }
         }
       }
@@ -70,24 +77,33 @@ namespace FileManager
       if (directory.Exists)
       {
         ListViewFiles.Items.Clear();
-        ListViewFiles.SmallImageList.Images.Clear();        
-       
-        foreach (FileInfo file in directory.GetFiles())
+        ListViewFiles.SmallImageList.Images.Clear();
+
+        try
         {
-          if(file.Name != " " && file.Exists)
+          foreach (FileInfo file in directory.GetFiles())
           {
-            SHFILEINFO file_info = new SHFILEINFO();
-            IntPtr sys_image_list;            
 
-            sys_image_list = Win32.SHGetFileInfo(file.FullName, 0, ref file_info, (uint)Marshal.SizeOf(file_info), Win32.SHGFI_ICON | Win32.SHGFI_SMALLICON);
-            Icon myIcon = Icon.FromHandle(file_info.hIcon);
-            ListViewFiles.SmallImageList.Images.Add(myIcon);
+            if (file.Name != " " && file.Exists)
+            {
+              SHFILEINFO file_info = new SHFILEINFO();
+              IntPtr sys_image_list;
 
-            ListViewItem item = new ListViewItem(file.Name, ListViewFiles.SmallImageList.Images.Count - 1);
-            item.SubItems.Add(file.Extension.ToString());
-            item.SubItems.Add(file.Length.ToString());
-            ListViewFiles.Items.Add(item);
+              sys_image_list = Win32.SHGetFileInfo(file.FullName, 0, ref file_info, (uint)Marshal.SizeOf(file_info), Win32.SHGFI_ICON | Win32.SHGFI_SMALLICON);
+              Icon myIcon = Icon.FromHandle(file_info.hIcon);
+              ListViewFiles.SmallImageList.Images.Add(myIcon);
+
+              ListViewItem item = new ListViewItem(file.Name, ListViewFiles.SmallImageList.Images.Count - 1);
+              item.SubItems.Add(file.Extension.ToString());
+              item.SubItems.Add(file.Length.ToString());
+              ListViewFiles.Items.Add(item);
+            }
           }
+        }
+        catch
+        {
+          //хєрова папка-не відкривати!
+          MessageBox.Show("Папку не можна відкрити!", "File Mananger");
         }
       }
       else
