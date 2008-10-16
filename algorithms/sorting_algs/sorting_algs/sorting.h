@@ -57,11 +57,11 @@ void merge_sort(T a[], int n){
 
 
 template<class T>
-int partition(T a[], int l, int r){ // after working, all elements on the left of a[p] is less then a[p], and elements of the right if a[p] if great then a[p]
-	                         // and p - is the result of function (a[0] in begin of function is a[p] in end of function)
+int partition(T a[], int l, int r){ // after working, all elements on the left of a[p] is less then a[p], and elements of the right of a[p] is great then a[p]
+	                         // and p - is the result of function (a[r] in begin of function is a[p] in end of function)
 	int pivot=a[r];  // pivot element alvays is in position r, in end of function pivot element is replace in good order
 	int i=l-1;       // i - bound:  a[0],...,a[i] <=pivot ; a[i+1],...,a[j-1] > pivot  
-	for (int j=l; j<=r-1; ++j)  // all element is replase on a bound in valid place (<=pivot or >pivot)
+	for (int j=l; j<=r-1; ++j)  // a[j] - new element
 		if (a[j]<=pivot){
 			++i;
 			swap(a[i], a[j]);
