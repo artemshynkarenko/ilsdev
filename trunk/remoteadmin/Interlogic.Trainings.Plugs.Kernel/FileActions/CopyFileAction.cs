@@ -7,86 +7,63 @@ using Interlogic.Trainings.Plugs.Kernel.Exceptions;
 
 namespace Interlogic.Trainings.Plugs.Kernel.FileActions
 {
-    public class CopyFileAction : IFileAction
+    public class CopyFileAction : FileAction
     {
-        private ITransactionContext _transactionContext;
-        private string _sourceFile = "";
-        private string _destinationFile = "";
         private bool _overwrite;
 
-        public CopyFileAction(string sourceFile, string destinationFile, bool overwrite)
+        public CopyFileAction(string sourceFilePath, string destFilePath, bool overwrite)
         {
-            _sourceFile = sourceFile;
-            _destinationFile = destinationFile;
+            _fileActionInfo = new SourceDestFileInfo(sourceFilePath, destFilePath);
             _overwrite = overwrite;
         }
-
-        #region ITransactionAction Members
-
-        ITransactionContext ITransactionAction.TransactionContext
+        protected override void ExecuteAction(IFileActionInfo fileActionInfo)
         {
-            get { return _transactionContext; }
-            set { _transactionContext = value; }
-        }
-
-        #endregion
-
-        #region IAction Members
-
-        void IAction.Execute()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        #endregion
-
-        #region ITransactionContext Members
-
-        public bool ExecutingInTransaction
-        {
-            get { return true; }
-        }
-
-        public void BeginTransaction()
-        {
-            // TODO: write normal checking 
-            if (!File.Exists(_sourceFile)) 
-                throw new FileNotFoundException(_sourceFile);
-            UserFileAccessRightsChecker sourceChecker = new UserFileAccessRightsChecker(_sourceFile);
-            if (!sourceChecker.canRead())
-                throw new AccessDeniedException(_sourceFile );
-            UserFileAccessRightsChecker destChecker =
-                new UserFileAccessRightsChecker(Path.GetDirectoryName(_destinationFile));
-            if (!destChecker.canCreateFiles())
-                throw new AccessDeniedException(_destinationFile); 
+            SourceDestFileInfo info = (SourceDestFileInfo)fileActionInfo;
+            Check(info, _overwrite);
+            File.Copy(info.SourceFileName, info.DestinationFileName, _overwrite);
             
-                if (File.Exists(_destinationFile))
+        }
+        protected override void RollbackAction(IFileActionInfo fileActionInfo)
+        {
+            SourceDestFileInfo info = (SourceDestFileInfo)fileActionInfo;
+            if (File.Exists(info.DestinationFileName))
+                File.Delete(info.DestinationFileName);
+        }
+        private void Check(SourceDestFileInfo info, bool overwrite)
+        {
+            if (Locker.IsLocked(info.DestinationFileName))
+                throw new FileIsLockedException(info.DestinationFileName);
+
+            // TODO: write normal checking 
+            if (!File.Exists(info.SourceFileName))
+                throw new FileNotFoundException(info.SourceFileName);
+            UserFileAccessRightsChecker sourceChecker = new UserFileAccessRightsChecker(info.SourceFileName);
+            if (!sourceChecker.CanRead())
+                throw new AccessDeniedException(info.SourceFileName);
+            UserFileAccessRightsChecker destChecker =
+                new UserFileAccessRightsChecker(Path.GetDirectoryName(info.DestinationFileName));
+            if (!destChecker.CanCreateFiles())
+                throw new AccessDeniedException(info.DestinationFileName);
+
+            if (File.Exists(info.DestinationFileName))
+            {
+                if (overwrite)
                 {
-                    if (_overwrite)
-                    {
-                        UserFileAccessRightsChecker destFileChecker = new UserFileAccessRightsChecker(_destinationFile);
-                        if (!destFileChecker.canModify())
-                            throw new AccessDeniedException(_destinationFile);
-                    }
-                    else
-                    {
-                        throw new FileAlreadyExistException(_destinationFile);
-                    }
-
+                    UserFileAccessRightsChecker destFileChecker = new UserFileAccessRightsChecker(info.DestinationFileName);
+                    if (!destFileChecker.CanModify())
+                        throw new AccessDeniedException(info.DestinationFileName);
                 }
+                else
+                {
+                    throw new FileAlreadyExistException(info.DestinationFileName);
+                }
+
+            }
         }
 
-        public void Commit()
+        public override void BeginTransaction()
         {
-            // copy files
-            File.Copy(_sourceFile, _destinationFile, _overwrite);
+            
         }
-
-        public void RollBack()
-        {
-            // do nothing because BeginTransaction just check permissions
-        }
-
-        #endregion
     }
 }

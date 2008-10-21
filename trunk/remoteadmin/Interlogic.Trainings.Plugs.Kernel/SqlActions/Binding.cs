@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-	public interface ITransactionAction:IAction 
-    {
-		ITransactionContext TransactionContext { get;set;} 
-     
-
+	public class Binding:DomainObject
+	{
 	}
-
 }

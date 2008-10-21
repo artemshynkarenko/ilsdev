@@ -1,50 +1,42 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Interlogic.Trainings.Plugs.Kernel.FileActions;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-    public class FileTransaction : ITransactionContext, IDisposable
+    public class FileTransaction : IFileTransactionContext, IDisposable
     {
-        private List<IFileAction> _actions= new List<IFileAction>();
-        private bool isTransaction;
+
+        private List<FileAction> _actions = new List<FileAction>();
+        private bool _isTransaction;
+        private FileLocker _locker = new FileLocker();
+
 
         public FileTransaction()
         {
 
         }
-        public void Add(FileActions.IFileAction action)
-        {
-            if (action != null)
-            {
-                action.TransactionContext = this;
-                action.BeginTransaction();
-                _actions.Add(action);
-                
-            }
-            else 
-                throw new NullReferenceException();
 
-        }
 
         #region ITransactionContext Members
 
         bool ITransactionContext.ExecutingInTransaction
         {
-            get { return isTransaction; }
+            get { return _isTransaction; }
         }
 
         public void BeginTransaction()
         {
-         isTransaction = true;
-         
+            _isTransaction = true;
+
         }
 
         public void Commit()
         {
-            isTransaction = false;
-            foreach (IFileAction action in _actions)
+            _isTransaction = false;
+            foreach (FileAction action in _actions)
             {
                 action.Commit();
                 action.TransactionContext = null;
@@ -53,8 +45,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         public void RollBack()
         {
-            isTransaction = false;
-            foreach (IFileAction action in _actions)
+            _isTransaction = false;
+            foreach (FileAction action in _actions)
             {
                 action.RollBack();
                 action.TransactionContext = null;
@@ -65,7 +57,47 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         public void Dispose()
         {
-            if(isTransaction) RollBack();
+            if (_isTransaction)
+                RollBack();
         }
+
+
+
+
+        #region IFileTransactionContext Members
+
+        public void AddAction(FileAction action)
+        {
+            if (action != null)
+            {
+                action.TransactionContext = this;
+                action.BeginTransaction();
+                _actions.Add(action);
+
+            }
+            else
+                throw new NullReferenceException();
+        }
+
+        public void Execute()
+        {
+            foreach (FileAction action in _actions)
+            {
+                action.Execute();
+            }
+        }
+
+        public FileLocker Locker
+        {
+            get
+            {
+                return _locker;
+            }
+
+        }
+
+        #endregion
+
+
     }
 }
