@@ -7,78 +7,50 @@ using Interlogic.Trainings.Plugs.Kernel.Exceptions;
 
 namespace Interlogic.Trainings.Plugs.Kernel.FileActions
 {
-    public class CreateDirectoryAction : IFileAction
+    public class CreateDirectoryAction : FileAction
     {
-        private ITransactionContext _transactionContext;
-        private string _directoryPath = "";
         
-        public CreateDirectoryAction(string directoryName)
+
+        public CreateDirectoryAction(string directoryPath)
         {
-            _directoryPath = directoryName;
-            
+            _fileActionInfo = new SourceFileInfo(directoryPath);
         }
-        #region ITransactionAction Members
-        ITransactionContext ITransactionAction.TransactionContext
+        protected override void ExecuteAction(IFileActionInfo fileActionInfo)
         {
-            get
-            {
-                return _transactionContext;
-            }
-            set
-            {
-                _transactionContext = value;
-            }
+            SourceFileInfo info = (SourceFileInfo)fileActionInfo;
+            Check(info);
+            Directory.CreateDirectory(info.SourceFileName);
         }
-
-        #endregion
-
-        #region IAction Members
-
-        void IAction.Execute()
+        protected override void RollbackAction(IFileActionInfo fileActionInfo)
         {
-            throw new Exception("The method or operation is not implemented.");
+            SourceFileInfo info = (SourceFileInfo)fileActionInfo;
+            if(Directory.Exists(info.SourceFileName ))
+                Directory.Delete(info.SourceFileName,true );
+
         }
-
-        #endregion
-
-        #region ITransactionContext Members
-
-        public bool ExecutingInTransaction
-        {
-            get { return true; }
-        }
-
-        public void BeginTransaction()
+        private static void Check(SourceFileInfo info)
         {
             // TODO: write normal checking 
-            if (File.Exists(_directoryPath) || Directory.Exists(_directoryPath))
-                throw new FileAlreadyExistException(_directoryPath);
+            if (File.Exists(info.SourceFileName) || Directory.Exists(info.SourceFileName))
+                throw new FileAlreadyExistException(info.SourceFileName);
 
             string rootDirectoryPath="";
-            if( _directoryPath.Contains(Path.DirectorySeparatorChar.ToString()))
+            if( info.SourceFileName.Contains(Path.DirectorySeparatorChar.ToString()))
             {
-                rootDirectoryPath = _directoryPath.Substring(0, _directoryPath.LastIndexOf(Path.DirectorySeparatorChar));
+                rootDirectoryPath = info.SourceFileName.Substring(0, info.SourceFileName.LastIndexOf(Path.DirectorySeparatorChar));
             }
             
             UserFileAccessRightsChecker directoryChecker = new UserFileAccessRightsChecker(rootDirectoryPath );
 
-            if (!directoryChecker.canCreateDirectories() )
-                throw new AccessDeniedException(_directoryPath);
+            if (!directoryChecker.CanCreateDirectories() )
+                throw new AccessDeniedException(info.SourceFileName);
         }
+  
+        
 
-        public void Commit()
+        public override void BeginTransaction()
         {
-            // copy files
-
-            Directory.CreateDirectory(_directoryPath);
 
         }
-
-        public void RollBack()
-        {
-            // do nothing because BeginTransaction just check permissions
-        }
-
-        #endregion
     }
 }

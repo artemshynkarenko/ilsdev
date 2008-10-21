@@ -7,97 +7,71 @@ using Interlogic.Trainings.Plugs.Kernel.Exceptions;
 
 namespace Interlogic.Trainings.Plugs.Kernel.FileActions
 {
-    public class MoveFileAction : IFileAction
+    public class MoveFileAction : FileAction
     {
-        private ITransactionContext _transactionContext;
-        private string _sourceFile = "";
-        private string _destinationFile = "";
-        private bool _overwrite;
-        public MoveFileAction(string sourceFile, string destinationFile, bool overwrite)
+        
+
+        public MoveFileAction(string sourceFilePath, string destFilePath)
         {
-            _sourceFile = sourceFile;
-            _destinationFile = destinationFile;
-            _overwrite = overwrite;
+            _fileActionInfo = new SourceDestFileInfo(sourceFilePath, destFilePath);
+            //_overwrite = overwrite;
         }
-        #region ITransactionAction Members
-        ITransactionContext ITransactionAction.TransactionContext
+        protected override void ExecuteAction(IFileActionInfo fileActionInfo)
         {
-            get
-            {
-                return _transactionContext;
-            }
-            set
-            {
-                _transactionContext = value;
-            }
+            SourceDestFileInfo info = (SourceDestFileInfo)fileActionInfo;
+            Check(info);
+            File.Move(info.SourceFileName, info.DestinationFileName);
         }
-
-        #endregion
-
-        #region IAction Members
-
-        void IAction.Execute()
+        protected override void RollbackAction(IFileActionInfo fileActionInfo)
         {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        #endregion
-
-        #region ITransactionContext Members
-
-        public bool ExecutingInTransaction
-        {
-            get { return true; }
-        }
-
-        public void BeginTransaction()
-        {
-           // TODO: write normal checking 
-            if (!File.Exists(_sourceFile))
-                throw new FileNotFoundException(_sourceFile);
-
-            UserFileAccessRightsChecker sourceChecker = new UserFileAccessRightsChecker(_sourceFile );
-            if(!sourceChecker.canRead()) 
-                throw new AccessDeniedException(_sourceFile);
-            if(!sourceChecker.canDelete())
-                throw new AccessDeniedException(_sourceFile);
+            SourceDestFileInfo info = (SourceDestFileInfo)fileActionInfo;
             
-            UserFileAccessRightsChecker destDirChecker = new UserFileAccessRightsChecker(Path.GetDirectoryName(_destinationFile));
-            if (!destDirChecker.canCreateFiles())
-                throw new AccessDeniedException(_destinationFile);
+            if (File.Exists(info.DestinationFileName))
+                File.Move( info.DestinationFileName,info.SourceFileName);
+            
+            //Warning: Hm, what we will do if destenation file already exists
+
+        }
+        private void Check(SourceDestFileInfo info)
+        {
+            if (Locker.IsLocked(info.DestinationFileName))
+                throw new FileIsLockedException(info.DestinationFileName);
+         
+            
+ // TODO: write normal checking 
+            if (!File.Exists(info.SourceFileName)) 
+                throw new FileNotFoundException(info.SourceFileName);
+
+            UserFileAccessRightsChecker sourceChecker = new UserFileAccessRightsChecker(info.SourceFileName );
+            if(!sourceChecker.CanRead()) 
+                throw new AccessDeniedException(info.SourceFileName);
+            if(!sourceChecker.CanDelete())
+                throw new AccessDeniedException(info.SourceFileName);
+            
+            UserFileAccessRightsChecker destDirChecker = new UserFileAccessRightsChecker(Path.GetDirectoryName(info.DestinationFileName ));
+            if (!destDirChecker.CanCreateFiles())
+                throw new AccessDeniedException(info.DestinationFileName );
             
                 
-               if(File.Exists(_destinationFile))
+               if(File.Exists(info.DestinationFileName ))
                {
-                   if (_overwrite)
+                   /*if (_overwrite)
                    {
-                   UserFileAccessRightsChecker destFileChecker =  new UserFileAccessRightsChecker(_destinationFile);
-                   if (!destFileChecker.canDelete())
-                       throw new AccessDeniedException(_destinationFile);
+                   UserFileAccessRightsChecker destFileChecker =  new UserFileAccessRightsChecker(info.DestinationFileName );
+                   if (!destFileChecker.CanDelete())
+                       throw new AccessDeniedException(info.DestinationFileName );
                     }
                    else
-                   {
-                       throw new FileAlreadyExistException(_destinationFile);
-                   }
+                   {*/
+                       throw new FileAlreadyExistException(info.DestinationFileName );
+                   //}
                }
                 
+            }
+
+        public override void BeginTransaction()
+        {
             
         }
-
-        public void Commit()
-        {
-            // copy files
-            if (File.Exists(_destinationFile))
-                File.Delete(_destinationFile);
-            File.Move(_sourceFile, _destinationFile);
-
-        }
-
-        public void RollBack()
-        {
-            // do nothing because BeginTransaction just check permissions
-        }
-
-        #endregion
     }
 }
