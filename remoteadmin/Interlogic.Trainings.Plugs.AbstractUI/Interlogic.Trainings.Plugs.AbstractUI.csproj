@@ -33,12 +33,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractUiComponentController.cs" />
-    <Compile Include="ComponentBinding.cs" />
-    <Compile Include="ComponentFactory.cs" />
-    <Compile Include="Component.cs" />
+    <Compile Include="AbstractComponentController.cs" />
+    <Compile Include="AbstractComponent.cs" />
+    <Compile Include="AbstractComponentFactory.cs" />
+    <Compile Include="AbstractContainer.cs" />
+    <Compile Include="AbstractContainerController.cs" />
+    <Compile Include="AbstractContainerFactory.cs" />
+    <Compile Include="AbstractContext.cs" />
+    <Compile Include="AbstractContextController.cs" />
+    <Compile Include="AbstractContextFactory.cs" />
+    <Compile Include="AbstractUiContstants.cs" />
     <Compile Include="IAbstractUiComponent.cs" />
-    <Compile Include="IAbstractuiContainer.cs" />
+    <Compile Include="IAbstractUiContainer.cs" />
     <Compile Include="IAbstractUiContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
