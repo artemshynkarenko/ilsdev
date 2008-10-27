@@ -50,21 +50,14 @@ namespace Interlogic.Trainings.Plugs.Kernel
                         fileFactory.InternalInsert(file);
                     }
                 }
-                using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+
+				using (BindablePointDefinitionFactory bindablePointDefinitionFactory = BindablePointDefinitionFactory.GetInstance())
                 {
-                    bindingFactory.Context = this.FactoryContext;
-                    foreach (Binding binding in plug.Bindings)
-                    {
-                        bindingFactory.InternalInsert(binding);
-                    }
-                }
-                using (BindablePointFactory bindablePointFactory = BindablePointFactory.GetInstance())
-                {
-                    bindablePointFactory.Context = this.FactoryContext;
-                    foreach (BindablePoint bindablePoint in plug.BindablePoints)
+					bindablePointDefinitionFactory.Context = this.FactoryContext;
+					foreach (BindablePointDefinition bindablePointDefinition in plug.BindablePointDefinitions)
                     {
 
-                        bindablePointFactory.InternalInsert(bindablePoint);
+						bindablePointDefinitionFactory.InternalInsert(bindablePointDefinition);
                     }
                 }
                 using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
@@ -122,21 +115,14 @@ namespace Interlogic.Trainings.Plugs.Kernel
                         fileFactory.InternalUpdate(file);
                     }
                 }
-                using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+
+				using (BindablePointDefinitionFactory bindablePointDefinitionFactory = BindablePointDefinitionFactory.GetInstance())
                 {
-                    bindingFactory.Context = this.FactoryContext;
-                    foreach (Binding binding in plug.Bindings)
-                    {
-                        bindingFactory.InternalUpdate(binding);
-                    }
-                }
-                using (BindablePointFactory bindablePointFactory = BindablePointFactory.GetInstance())
-                {
-                    bindablePointFactory.Context = this.FactoryContext;
-                    foreach (BindablePoint bindablePoint in plug.BindablePoints)
+					bindablePointDefinitionFactory.Context = this.FactoryContext;
+					foreach (BindablePointDefinition bindablePointDefinition in plug.BindablePointDefinitions)
                     {
 
-                        bindablePointFactory.InternalUpdate(bindablePoint);
+						bindablePointDefinitionFactory.InternalUpdate(bindablePointDefinition);
                     }
                 }
                 using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())

@@ -34,5 +34,14 @@ namespace Interlogic.Trainings.Plugs.Kernel
             get { return _active; }
             set { _active = value; }
         }
+
+		private string _systemName;
+
+		public string SystemName
+		{
+			get { return _systemName; }
+			set { _systemName = value; }
+		}
+
 	}
 }

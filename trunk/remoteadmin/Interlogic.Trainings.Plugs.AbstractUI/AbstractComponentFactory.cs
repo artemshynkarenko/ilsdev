@@ -5,8 +5,7 @@ using Interlogic.Trainings.Plugs.Kernel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public interface IAbstractUiContext:IAbstractUiContainer
+	public abstract class AbstractComponentFactory:InstanceFactory
 	{
-		ITransactionContext TransactionContext { get;}
 	}
 }

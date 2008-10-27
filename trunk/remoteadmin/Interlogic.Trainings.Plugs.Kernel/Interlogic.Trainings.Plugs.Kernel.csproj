@@ -28,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -39,6 +40,7 @@
     <Compile Include="Binding.cs" />
     <Compile Include="BindablePoint.cs" />
     <Compile Include="BindablePointDefinition.cs" />
+    <Compile Include="BindingController.cs" />
     <Compile Include="BindingFactory.cs" />
     <Compile Include="Caching\Cache.cs" />
     <Compile Include="ClassDefinition.cs" />
@@ -50,20 +52,35 @@
     <Compile Include="DomainModel\DomainObject.cs" />
     <Compile Include="Exceptions\AccessDeniedException.cs" />
     <Compile Include="Exceptions\FileAlreadyExistException.cs" />
+    <Compile Include="Exceptions\FileIsLockedException.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="FileActions\CompressFilesActin.cs" />
     <Compile Include="FileActions\CopyFileAction.cs" />
     <Compile Include="FileActions\CreateDirectoryAction.cs" />
+    <Compile Include="FileActions\ExtractFilesAction.cs" />
+    <Compile Include="FileActions\FileAction.cs" />
+    <Compile Include="FileActions\FileLocker.cs" />
+    <Compile Include="FileActions\IFileActionInfo.cs" />
+    <Compile Include="FileActions\IFileTransactionContext.cs" />
     <Compile Include="FileActions\MoveFileAction.cs" />
     <Compile Include="FileActions\RenameFileAction.cs" />
+    <Compile Include="FileActions\SourceDestFileInfo.cs" />
+    <Compile Include="FileActions\SourceDestTargetFileInfo.cs" />
+    <Compile Include="FileActions\SourceFileInfo.cs" />
     <Compile Include="FileTransaction.cs" />
     <Compile Include="IAction.cs" />
     <Compile Include="FileActions\IFileAction.cs" />
+    <Compile Include="IInstantiatable.cs" />
     <Compile Include="Install\IRegisterPlugAction.cs" />
+    <Compile Include="Instance.cs" />
+    <Compile Include="InstanceController.cs" />
+    <Compile Include="InstanceFactory.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="PlugFileFactory.cs" />
     <Compile Include="PlugInController.cs" />
     <Compile Include="PlugInFactory.cs" />
     <Compile Include="PlugLocationFactory.cs" />
+    <Compile Include="SelfDescription\ReflectionFactory.cs" />
     <Compile Include="SqlActions\ISqlAction.cs" />
     <Compile Include="ITransactionAction.cs" />
     <Compile Include="ITransactionContext.cs" />
@@ -96,6 +113,9 @@
   <ItemGroup>
     <None Include="Kernel.cd" />
     <None Include="SqlActions\SqlActions.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FileActions\net-20\ICSharpCode.SharpZipLib.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

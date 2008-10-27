@@ -129,7 +129,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Loads
 
-        string _loadAllCommandText = @"SELECT * FROM [BindablePoint]";
+		string _loadAllCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId";
 
         internal List<BindablePoint> InternalLoadAll()
         {
@@ -145,7 +145,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     BindablePoint res = new BindablePoint();
-                    TranslateToBindablePoint(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
+					TranslateToBindablePoint(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
                     bindPointList.Add(res);
                 }
             }
@@ -158,7 +158,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
 
-        string _loadByIdCommandText = @"SELECT * FROM [BindablePoint] WHERE [BindablePointId] = @BindablePointId";
+		string _loadByIdCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId WHERE p.[BindablePointId] = @BindablePointId";
 
         internal BindablePoint InternalLoadByPrimaryKey(int bindPointId)
         {
@@ -182,11 +182,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         protected int[] GetBindablePointFieldOrdinals(IDataReader dataReader)
         {
-            int[] indexes = new int[4];
+            int[] indexes = new int[5];
             indexes[0] = dataReader.GetOrdinal("BindablePointId");
             indexes[1] = dataReader.GetOrdinal("BindablePointDefinitionId");
             indexes[2] = dataReader.GetOrdinal("InstanceId");
             indexes[3] = dataReader.GetOrdinal("Active");
+			indexes[4] = dataReader.GetOrdinal("BindablePointName");
             return indexes;
         }
 
@@ -199,14 +200,15 @@ namespace Interlogic.Trainings.Plugs.Kernel
         protected void TranslateToBindablePoint(IDataReader dataReader, BindablePoint bindPoint)
         {
             int[] indexes = GetBindablePointFieldOrdinals(dataReader);
-            TranslateToBindablePoint(dataReader, bindPoint, indexes[0], indexes[1], indexes[2], indexes[3]);
+            TranslateToBindablePoint(dataReader, bindPoint, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4]);
         }
-        protected void TranslateToBindablePoint(IDataReader dataReader, BindablePoint bindPoint, int idIndex, int defIdIndex, int instIdIndex, int activeIndex)
+        protected void TranslateToBindablePoint(IDataReader dataReader, BindablePoint bindPoint, int idIndex, int defIdIndex, int instIdIndex, int activeIndex, int systemNameIndex)
         {
             bindPoint.BindablePointId = dataReader.GetInt32(idIndex);
             bindPoint.BindablePointDefinitionId = dataReader.GetInt32(defIdIndex);
             bindPoint.InstanceId = dataReader.GetInt32(instIdIndex);
             bindPoint.Active = dataReader.GetBoolean(activeIndex);
+			bindPoint.SystemName = dataReader.GetString(systemNameIndex);
         }
         #endregion
     }

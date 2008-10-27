@@ -10,7 +10,5 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 	public interface IAbstractUiContainer:IAbstractUiComponent
 	{
 		List<IAbstractUiComponent> Controls { get;}
-		int ChildControl_BindablePointId { get;set;}
-		int ChildControl_BindablePointDefitionId { get;set;}
 	}
 }
