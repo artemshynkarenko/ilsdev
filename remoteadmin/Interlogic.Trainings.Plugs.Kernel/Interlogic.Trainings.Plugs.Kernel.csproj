@@ -80,7 +80,6 @@
     <Compile Include="PlugInController.cs" />
     <Compile Include="PlugInFactory.cs" />
     <Compile Include="PlugLocationFactory.cs" />
-    <Compile Include="SelfDescription\ReflectionFactory.cs" />
     <Compile Include="SqlActions\ISqlAction.cs" />
     <Compile Include="ITransactionAction.cs" />
     <Compile Include="ITransactionContext.cs" />
