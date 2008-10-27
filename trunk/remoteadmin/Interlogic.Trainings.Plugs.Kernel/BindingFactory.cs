@@ -150,7 +150,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return bindingList;
         }
 
-
         string _loadByIdCommandText = @"SELECT * FROM [Binding] WHERE [BindingId] = @BindingId";
 
         internal Binding InternalLoadByPrimaryKey(int bindingId)
@@ -171,6 +170,34 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 readerAction.DataReader.Close();
             }
             return binding;
+        }
+
+        string _loadByBindablePointIdCommandText = @"SELECT * FROM [Binding] WHERE [BindingId] = @BindingId";
+
+        public List<Binding> LoadByBindablePointId(int bindablePointId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByBindablePointIdCommandText;
+            this.ExecuteCommand(readerAction);
+
+            List<Binding> bindingList = new List<Binding>();
+            IDataReader dataReader = readerAction.DataReader;
+            try
+            {
+                int[] ordinals = GetBindingFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    Binding res = new Binding();
+                    TranslateToBinding(dataReader, res, ordinals[0], ordinals[1], ordinals[2]);
+                    bindingList.Add(res);
+                }
+            }
+            finally
+            {
+                dataReader.Close();
+            }
+
+            return bindingList;
         }
 
         protected int[] GetBindingFieldOrdinals(IDataReader dataReader)

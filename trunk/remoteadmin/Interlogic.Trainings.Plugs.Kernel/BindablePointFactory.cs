@@ -180,6 +180,28 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return bindPoint;
         }
 
+        string _loadByNameCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId WHERE def.[BindablePointName] = @BindablePointName";
+
+        internal BindablePoint InternalLoadByName(string bindPointName)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByNameCommandText;
+
+            readerAction.AddParameter("@BindablePointName", bindPointName, DbType.String);
+
+            BindablePoint bindPoint = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                bindPoint = TranslateToBindablePoint(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return bindPoint;
+        }
+
         protected int[] GetBindablePointFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[5];
