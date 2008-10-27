@@ -19,13 +19,16 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		{
 			using (InstanceFactory factory = InstanceFactory.GetInstance())
 			{
-				throw new NotImplementedException();
+				return factory.InternalLoadByName(systemName);
 			}
 		}
 		public DomainObject GetObjectByInstanceId(int instanceId)
 		{
-			throw new NotImplementedException();
-		}
+            using (InstanceFactory factory = InstanceFactory.GetInstance())
+            {
+                return factory.InternalLoadByPrimaryKey(systemName);
+            }
+        }
 
 		public DomainObject GetObjectByInstanceName(string instanceName)
 		{

@@ -181,6 +181,28 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return plugLoc;
         }
 
+        string _loadByNameCommandText = @"SELECT * FROM [PlugLocation] WHERE [PlugLocationName] = @PlugLocationName";
+
+        internal PlugLocation InternalLoadByPrimaryKey(string plugLocName)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByNameCommandText;
+
+            readerAction.AddParameter("@PlugLocationName", plugLocName, DbType.String);
+
+            PlugLocation plugLoc = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                plugLoc = TranslateToPlugLocation(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return plugLoc;
+        }
+
         protected int[] GetPlugLocationFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[5];

@@ -190,6 +190,28 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return classDef;
         }
 
+        string _loadByNameCommandText = @"SELECT * FROM [ClassDefinition] WHERE [ClassName] = @ClassName";
+
+        internal ClassDefinition InternalLoadByClassName(string className)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByNameCommandText;
+
+            readerAction.AddParameter("@ClassName", className, DbType.String);
+
+            ClassDefinition classDef = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                classDef = TranslateToClassDefinition(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return classDef;
+        }
+
         protected int[] GetClassDefinitionFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[7];
