@@ -202,6 +202,50 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return bindPoint;
         }
 
+        string _loadByPointDefIdCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId WHERE def.[BindablePoinDefinitionId] = @BindablePointDefinitionId";
+
+        internal BindablePoint InternalLoadByPointDefinitionId(int bindPointDefId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByPointDefIdCommandText;
+
+            readerAction.AddParameter("@BindableDefinitionId", bindPointDefId, DbType.Int32);
+
+            BindablePoint bindPoint = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                bindPoint = TranslateToBindablePoint(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return bindPoint;
+        }
+
+        string _loadByInstanceIdCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId WHERE def.[InstanceId] = @InstanceId";
+
+        internal BindablePoint InternalLoadByInstanceId(int instanceId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByInstanceIdCommandText;
+
+            readerAction.AddParameter("@InstanceId", instanceId, DbType.Int32);
+
+            BindablePoint bindPoint = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                bindPoint = TranslateToBindablePoint(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return bindPoint;
+        }
+
         protected int[] GetBindablePointFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[5];

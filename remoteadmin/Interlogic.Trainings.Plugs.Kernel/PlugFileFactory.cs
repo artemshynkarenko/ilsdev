@@ -185,6 +185,52 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return plugFile;
         }
 
+
+        string _loadByPlugIdCommandText = @"SELECT * FROM [PlugFile] WHERE [PlugId] = @PlugId";
+
+        internal PlugFile InternalLoadByPlugId(int plugId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByPlugIdCommandText;
+
+            readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
+
+            PlugFile plugFile = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                plugFile = TranslateToPlugFile(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return plugFile;
+        }
+
+
+        string _loadByDestLocIdCommandText = @"SELECT * FROM [PlugFile] WHERE [DestinationLocationId] = @DestinationLocationId";
+
+        internal PlugFile InternalLoadByDestinationLocationId(int destLocId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByDestLocIdCommandText;
+
+            readerAction.AddParameter("@DestinationLocationId", destLocId, DbType.Int32);
+
+            PlugFile plugFile = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                plugFile = TranslateToPlugFile(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return plugFile;
+        }
+
         protected int[] GetPlugFileFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[6];

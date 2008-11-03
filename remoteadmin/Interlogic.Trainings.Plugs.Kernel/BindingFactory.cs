@@ -200,6 +200,34 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return bindingList;
         }
 
+        string _loadByImplementationIdCommandText = @"SELECT * FROM [Binding] WHERE [ImplementationId] = @ImplementationId";
+
+        public List<Binding> LoadByImplementationId(int implementationId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByImplementationIdCommandText;
+            this.ExecuteCommand(readerAction);
+
+            List<Binding> bindingList = new List<Binding>();
+            IDataReader dataReader = readerAction.DataReader;
+            try
+            {
+                int[] ordinals = GetBindingFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    Binding res = new Binding();
+                    TranslateToBinding(dataReader, res, ordinals[0], ordinals[1], ordinals[2]);
+                    bindingList.Add(res);
+                }
+            }
+            finally
+            {
+                dataReader.Close();
+            }
+
+            return bindingList;
+        }
+
         protected int[] GetBindingFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[5];

@@ -19,5 +19,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 return bindingFactory.LoadByBindablePointId(bindablePointId);
             }
         }
+
+        public List<Binding> GetByImplementationId(int implementationId)
+        {
+            using (BindingFactory bindingFactory = BindingFactory.GetInstance())
+            {
+                return bindingFactory.LoadByImplementationId(implementationId);
+            }
+        }
     }
 }

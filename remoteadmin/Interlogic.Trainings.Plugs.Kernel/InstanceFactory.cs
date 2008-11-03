@@ -199,6 +199,29 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
 
+        string _loadByClassDefinitionIdCommandText = @"SELECT * FROM [Instance] WHERE [ClassDefinitionId] = @ClassDefinitionId";
+
+        internal Instance InternalLoadByClassDefinitionId(int classDefId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByClassDefinitionIdCommandText;
+
+            readerAction.AddParameter("@ClassDefintiionId", classDefId, DbType.Int32);
+
+            Instance instance = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                instance = TranslateToInstance(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+
+            return instance;
+        }
+
         protected int[] GetInstanceFieldOrdinals(IDataReader dataReader)
         {
             int[] indexes = new int[3];
