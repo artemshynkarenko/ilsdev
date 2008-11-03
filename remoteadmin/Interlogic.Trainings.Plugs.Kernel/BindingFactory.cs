@@ -172,12 +172,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return binding;
         }
 
-        string _loadByBindablePointIdCommandText = @"SELECT * FROM [Binding] WHERE [BindingId] = @BindingId";
+        string _loadByBindablePointIdCommandText = @"SELECT * FROM [Binding] WHERE [BindablePointId] = @BindablePointId";
 
         public List<Binding> LoadByBindablePointId(int bindablePointId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByBindablePointIdCommandText;
+            readerAction.AddParameter("@BindablePointId", bindablePointId, DbType.Int32);
             this.ExecuteCommand(readerAction);
 
             List<Binding> bindingList = new List<Binding>();
@@ -206,6 +207,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByImplementationIdCommandText;
+            readerAction.AddParameter("@ImplementationId", implementationId, DbType.Int32);
             this.ExecuteCommand(readerAction);
 
             List<Binding> bindingList = new List<Binding>();

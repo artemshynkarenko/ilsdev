@@ -204,46 +204,60 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         string _loadByPointDefIdCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId WHERE def.[BindablePoinDefinitionId] = @BindablePointDefinitionId";
 
-        internal BindablePoint InternalLoadByPointDefinitionId(int bindPointDefId)
+        internal List<BindablePoint> InternalLoadByPointDefinitionId(int bindPointDefId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByPointDefIdCommandText;
-
-            readerAction.AddParameter("@BindableDefinitionId", bindPointDefId, DbType.Int32);
-
-            BindablePoint bindPoint = null;
+            readerAction.AddParameter("@BindablePointDefinitionId", bindPointDefId, DbType.Int32);
             this.ExecuteCommand(readerAction);
+
+            List<BindablePoint> bindPointList = new List<BindablePoint>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                bindPoint = TranslateToBindablePoint(readerAction.DataReader);
+                int[] ordinals = GetBindablePointFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    BindablePoint res = new BindablePoint();
+                    TranslateToBindablePoint(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
+                    bindPointList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return bindPoint;
+
+            return bindPointList;
         }
 
         string _loadByInstanceIdCommandText = @"SELECT p.*, def.BindablePointName FROM [BindablePoint] p JOIN [BindablePointDefinition] def ON def.BindablePointDefinitionId = p.BindablePointDefinitionId WHERE def.[InstanceId] = @InstanceId";
 
-        internal BindablePoint InternalLoadByInstanceId(int instanceId)
+        internal List<BindablePoint> InternalLoadByInstanceId(int instanceId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-            readerAction.CommandText = _loadByInstanceIdCommandText;
-
+            readerAction.CommandText = _loadByPointDefIdCommandText;
             readerAction.AddParameter("@InstanceId", instanceId, DbType.Int32);
-
-            BindablePoint bindPoint = null;
             this.ExecuteCommand(readerAction);
+
+            List<BindablePoint> bindPointList = new List<BindablePoint>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                bindPoint = TranslateToBindablePoint(readerAction.DataReader);
+                int[] ordinals = GetBindablePointFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    BindablePoint res = new BindablePoint();
+                    TranslateToBindablePoint(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
+                    bindPointList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return bindPoint;
+
+            return bindPointList;
         }
 
         protected int[] GetBindablePointFieldOrdinals(IDataReader dataReader)
