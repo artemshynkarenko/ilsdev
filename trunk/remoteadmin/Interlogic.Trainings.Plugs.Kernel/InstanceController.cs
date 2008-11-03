@@ -26,7 +26,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		{
             using (InstanceFactory factory = InstanceFactory.GetInstance())
             {
-                return factory.InternalLoadByPrimaryKey(systemName);
+                return factory.InternalLoadByPrimaryKey(instanceId);
             }
         }
 

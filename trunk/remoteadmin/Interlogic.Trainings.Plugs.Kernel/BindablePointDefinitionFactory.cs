@@ -185,6 +185,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return bindPointDef;
         }
 
+
         string _loadByNameCommandText = @"SELECT * FROM [BindablePointDefinition] WHERE [BindablePointName] = @BindablePointName";
 
         internal BindablePointDefinition InternalLoadByPrimaryKey(string bindPointName)
@@ -193,6 +194,52 @@ namespace Interlogic.Trainings.Plugs.Kernel
             readerAction.CommandText = _loadByNameCommandText;
 
             readerAction.AddParameter("@BindablePointName", bindPointName, DbType.String);
+
+            BindablePointDefinition bindPointDef = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                bindPointDef = TranslateToBindablePointDefinition(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return bindPointDef;
+        }
+
+
+        string _loadByClassDefCommandText = @"SELECT * FROM [BindablePointDefinition] WHERE [ClassDefinitionId] = @ClassDefinitionId";
+
+        internal BindablePointDefinition InternalLoadByClassDefinitionId(string classDefId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByClassDefCommandText;
+
+            readerAction.AddParameter("@ClassDefinitionId", classDefId, DbType.Int32);
+
+            BindablePointDefinition bindPointDef = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                bindPointDef = TranslateToBindablePointDefinition(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return bindPointDef;
+        }
+
+
+        string _loadByInterfaceCommandText = @"SELECT * FROM [BindablePointDefinition] WHERE [InterfaceId] = @InterfaceId";
+
+        internal BindablePointDefinition InternalLoadByInterfaceId(string interfaceId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByInterfaceCommandText;
+
+            readerAction.AddParameter("@InterfaceId", interfaceId, DbType.Int32);
 
             BindablePointDefinition bindPointDef = null;
             this.ExecuteCommand(readerAction);

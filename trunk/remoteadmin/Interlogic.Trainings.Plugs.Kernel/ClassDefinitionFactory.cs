@@ -190,6 +190,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             return classDef;
         }
 
+
         string _loadByNameCommandText = @"SELECT * FROM [ClassDefinition] WHERE [ClassName] = @ClassName";
 
         internal ClassDefinition InternalLoadByClassName(string className)
@@ -198,6 +199,52 @@ namespace Interlogic.Trainings.Plugs.Kernel
             readerAction.CommandText = _loadByNameCommandText;
 
             readerAction.AddParameter("@ClassName", className, DbType.String);
+
+            ClassDefinition classDef = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                classDef = TranslateToClassDefinition(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return classDef;
+        }
+
+
+        string _loadByFileIdCommandText = @"SELECT * FROM [ClassDefinition] WHERE [FileId] = @FileId";
+
+        internal ClassDefinition InternalLoadByFileIdName(int fileId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByFileIdCommandText;
+
+            readerAction.AddParameter("@FileId", fileId, DbType.Int32);
+
+            ClassDefinition classDef = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                classDef = TranslateToClassDefinition(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return classDef;
+        }
+
+
+        string _loadByPlugIdCommandText = @"SELECT * FROM [ClassDefinition] WHERE [PlugId] = @PlugId";
+
+        internal ClassDefinition InternalLoadByPlugIdName(int plugId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByPlugIdCommandText;
+
+            readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
 
             ClassDefinition classDef = null;
             this.ExecuteCommand(readerAction);
