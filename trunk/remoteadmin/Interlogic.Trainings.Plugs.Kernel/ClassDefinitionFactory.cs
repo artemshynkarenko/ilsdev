@@ -216,47 +216,59 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         string _loadByFileIdCommandText = @"SELECT * FROM [ClassDefinition] WHERE [FileId] = @FileId";
 
-        internal ClassDefinition InternalLoadByFileIdName(int fileId)
+        internal List<ClassDefinition> InternalLoadByFileId(int fileId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByFileIdCommandText;
-
             readerAction.AddParameter("@FileId", fileId, DbType.Int32);
-
-            ClassDefinition classDef = null;
             this.ExecuteCommand(readerAction);
+
+            List<ClassDefinition> classDefList = new List<ClassDefinition>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                classDef = TranslateToClassDefinition(readerAction.DataReader);
+                int[] ordinals = GetClassDefinitionFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    ClassDefinition res = new ClassDefinition();
+                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    classDefList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return classDef;
+            return classDefList;
         }
 
 
         string _loadByPlugIdCommandText = @"SELECT * FROM [ClassDefinition] WHERE [PlugId] = @PlugId";
 
-        internal ClassDefinition InternalLoadByPlugIdName(int plugId)
+        internal List<ClassDefinition> InternalLoadByPlugIdName(int plugId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByPlugIdCommandText;
-
             readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
-
-            ClassDefinition classDef = null;
             this.ExecuteCommand(readerAction);
+
+            List<ClassDefinition> classDefList = new List<ClassDefinition>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                classDef = TranslateToClassDefinition(readerAction.DataReader);
+                int[] ordinals = GetClassDefinitionFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    ClassDefinition res = new ClassDefinition();
+                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    classDefList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return classDef;
+            return classDefList;
         }
 
         protected int[] GetClassDefinitionFieldOrdinals(IDataReader dataReader)

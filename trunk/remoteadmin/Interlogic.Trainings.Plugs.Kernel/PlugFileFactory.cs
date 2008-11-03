@@ -188,47 +188,59 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         string _loadByPlugIdCommandText = @"SELECT * FROM [PlugFile] WHERE [PlugId] = @PlugId";
 
-        internal PlugFile InternalLoadByPlugId(int plugId)
+        internal List<PlugFile> InternalLoadByPlugId(int plugId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByPlugIdCommandText;
-
             readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
-
-            PlugFile plugFile = null;
             this.ExecuteCommand(readerAction);
+
+            List<PlugFile> plugFileList = new List<PlugFile>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                plugFile = TranslateToPlugFile(readerAction.DataReader);
+                int[] ordinals = GetPlugFileFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    PlugFile res = new PlugFile();
+                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+                    plugFileList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return plugFile;
+            return plugFileList;
         }
 
 
         string _loadByDestLocIdCommandText = @"SELECT * FROM [PlugFile] WHERE [DestinationLocationId] = @DestinationLocationId";
 
-        internal PlugFile InternalLoadByDestinationLocationId(int destLocId)
+        internal List<PlugFile> InternalLoadByDestinationLocationId(int destLocId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByDestLocIdCommandText;
-
             readerAction.AddParameter("@DestinationLocationId", destLocId, DbType.Int32);
-
-            PlugFile plugFile = null;
             this.ExecuteCommand(readerAction);
+
+            List<PlugFile> plugFileList = new List<PlugFile>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                plugFile = TranslateToPlugFile(readerAction.DataReader);
+                int[] ordinals = GetPlugFileFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    PlugFile res = new PlugFile();
+                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+                    plugFileList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return plugFile;
+            return plugFileList;
         }
 
         protected int[] GetPlugFileFieldOrdinals(IDataReader dataReader)

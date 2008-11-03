@@ -206,24 +206,30 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         string _loadByPlugIdCommandText = @"SELECT * FROM [PlugLocation] WHERE [PlugId] = @PlugId";
 
-        internal PlugLocation InternalLoadByPlugId(int plugId)
+        internal List<PlugLocation> InternalLoadByPlugId(int plugId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByPlugIdCommandText;
-
             readerAction.AddParameter("@PlugId", plugId, DbType.Int32);
-
-            PlugLocation plugLoc = null;
             this.ExecuteCommand(readerAction);
+
+            List<PlugLocation> plugLocList = new List<PlugLocation>();
+            IDataReader dataReader = readerAction.DataReader;
             try
             {
-                plugLoc = TranslateToPlugLocation(readerAction.DataReader);
+                int[] ordinals = GetPlugLocationFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    PlugLocation res = new PlugLocation();
+                    TranslateToPlugLocation(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
+                    plugLocList.Add(res);
+                }
             }
             finally
             {
-                readerAction.DataReader.Close();
+                dataReader.Close();
             }
-            return plugLoc;
+            return plugLocList;
         }
 
 
