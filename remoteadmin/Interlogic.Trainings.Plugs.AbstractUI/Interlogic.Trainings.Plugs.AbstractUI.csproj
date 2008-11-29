@@ -39,13 +39,18 @@
     <Compile Include="AbstractContainer.cs" />
     <Compile Include="AbstractContainerController.cs" />
     <Compile Include="AbstractContainerFactory.cs" />
-    <Compile Include="AbstractContext.cs" />
-    <Compile Include="AbstractContextController.cs" />
-    <Compile Include="AbstractContextFactory.cs" />
+    <Compile Include="AbstractNavigationComponent.cs" />
+    <Compile Include="AbstractNavigationComponentController.cs" />
+    <Compile Include="AbstractNavigationComponentFactory.cs" />
     <Compile Include="AbstractUiContstants.cs" />
+    <Compile Include="ComponentMeasurement.cs" />
+    <Compile Include="ComponentPositioning.cs" />
+    <Compile Include="ComponentMeasurementUnit.cs" />
     <Compile Include="IAbstractUiComponent.cs" />
     <Compile Include="IAbstractUiContainer.cs" />
-    <Compile Include="IAbstractUiContext.cs" />
+    <Compile Include="IAbstractContext.cs" />
+    <Compile Include="INavigationComponent.cs" />
+    <Compile Include="INavigationListenerComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
     <ProjectGuid>{882A6D05-CB4B-452A-B018-E7760A9317F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interlogic.Trainings.Plugs.AbstractUI.Panel</RootNamespace>
+    <RootNamespace>Interlogic.Trainings.Plugs.AbstractUI</RootNamespace>
     <AssemblyName>Interlogic.Trainings.Plugs.AbstractUI.Panel</AssemblyName>
     <StartupObject>
     </StartupObject>
@@ -35,12 +35,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractPanel.cs" />
+    <Compile Include="AbstractPanelContants.cs" />
+    <Compile Include="AbstractPanelController.cs" />
+    <Compile Include="AbstractPanelFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj">
       <Project>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</Project>
       <Name>Interlogic.Trainings.Plugs.AbstractUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.Kernel\Interlogic.Trainings.Plugs.Kernel.csproj">
+      <Project>{B115432D-1A1A-42B6-ACB3-1271DE6EAC98}</Project>
+      <Name>Interlogic.Trainings.Plugs.Kernel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

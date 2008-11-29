@@ -5,7 +5,7 @@ using Interlogic.Trainings.Plugs.Kernel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public class AbstractContainerController : InstanceController
+	public abstract class AbstractContainerController : InstanceController
 	{
 		public AbstractContainerController(ITransactionContext context)
 			: base(context)
@@ -21,7 +21,6 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			{
 				IAbstractUiComponent component = this.GetObjectByInstanceId(binding.ImplementationId) as IAbstractUiComponent;
 				component.ParentComponent = container;
-				component.Context = container.Context;
 				children.Add(component);
 			}
 

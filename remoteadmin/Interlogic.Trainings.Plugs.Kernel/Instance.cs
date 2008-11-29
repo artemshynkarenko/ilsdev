@@ -6,7 +6,12 @@ using System.Text;
 namespace Interlogic.Trainings.Plugs.Kernel
 {
 	using DomainModel;
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <remarks>
+	/// Note to inheritors: Override GetControllerInstance for correct work
+	/// </remarks>
 	public class Instance : DomainObject, IInstantiatable
 	{
 		private int _instanceId;
@@ -51,6 +56,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
 				}
 			}
 			throw new ArgumentOutOfRangeException("systemName");
+		}
+
+		protected virtual DomainController GetControllerInstance(ITransactionContext context)
+		{
+			return new InstanceController(context);
 		}
 
 

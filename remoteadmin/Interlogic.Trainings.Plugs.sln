@@ -2,12 +2,187 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.Kernel", "Interlogic.Trainings.Plugs.Kernel\Interlogic.Trainings.Plugs.Kernel.csproj", "{B115432D-1A1A-42B6-ACB3-1271DE6EAC98}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.AbstractUI", "Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj", "{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Tranings.Plugs.Kernel.Test.Console", "Interlogic.Tranings.Plugs.Kernel.Test.Console\Interlogic.Tranings.Plugs.Kernel.Test.Console.csproj", "{0D9EDFEB-C52B-483A-ADD2-035510D1A608}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.AbstractUI.Panel", "Interlogic.Trainings.Plugs.AbstractUI.Panel\Interlogic.Trainings.Plugs.AbstractUI.Panel.csproj", "{882A6D05-CB4B-452A-B018-E7760A9317F4}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.AbstractUI.Treeview", "Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.Treeview.csproj", "{FA19DD14-616A-47DD-83D7-2F6F800FA67B}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.WebSite", "Interlogic.Trainings.Plugs.WebSite\Interlogic.Trainings.Plugs.WebSite.csproj", "{8213A2D2-DA6B-487F-ACDB-0C4A0537B12D}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.WebUI.Context", "Interlogic.Trainings.Plugs.WebUI.Context\Interlogic.Trainings.Plugs.WebUI.Context.csproj", "{3CAFCBDD-68DF-45EE-AB67-F0B12658B84F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.WebUI.Panel", "Interlogic.Trainings.Plugs.WebUI.Panel\Interlogic.Trainings.Plugs.WebUI.Panel.csproj", "{3ACBAFE9-8851-46F5-9698-796D09A0D9D7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.AbstractUI.Context", "Interlogic.Trainings.Plugs.AbstractUI.Context\Interlogic.Trainings.Plugs.AbstractUI.Context.csproj", "{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.WebUI", "Interlogic.Trainings.Plugs.WebUI\Interlogic.Trainings.Plugs.WebUI.csproj", "{B3FA1201-05B4-4182-ABE9-F5BEB7B733E3}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.WebUI.TreeView", "Interlogic.Trainings.Plugs.WebUI.TreeView\Interlogic.Trainings.Plugs.WebUI.TreeView.csproj", "{38C83775-ABF6-439D-ABDD-F7AB3F86F9B8}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI Plugs", "UI Plugs", "{05F732CF-DE9C-4F12-A05D-4781EA6D0090}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abstract", "Abstract", "{050724A9-286D-4DA3-B525-8CBD4CD8A8D8}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{ECE019E1-7167-4B34-B575-F6AD74B89C7A}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{4A31D00E-53AC-4E03-9071-2A1B93EC3DF8}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		ASH.do.not.want.to.implement.it.now.txt = ASH.do.not.want.to.implement.it.now.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Remote Admin Plugs", "Remote Admin Plugs", "{55174B96-D604-4065-B47E-576A262ABD09}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		Remote.Admin.Read.Me.txt = Remote.Admin.Read.Me.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventViewer", "EventViewer", "{78DF8AC7-52E6-4B2E-902D-E37A2DA566B2}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F6D75D9C-57A5-4715-A879-C52506395021}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kernel", "Kernel", "{698555EB-0D09-4BDF-B94D-2980B610D00F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.WinApp", "Interlogic.Trainings.Plugs.WinApp\Interlogic.Trainings.Plugs.WinApp.csproj", "{AE25E1DC-FC63-448E-913F-19FEB51051F3}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IIS Manager", "IIS Manager", "{9194D8A9-1415-4A18-A1D9-02423FEDC678}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer Manager", "SqlServer Manager", "{0F676373-A595-4E64-AAE6-7DDD7FAE3CCD}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Local Users", "Local Users", "{A8F3DD77-D54B-4B6F-9068-940E1479DAB8}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "File Manager", "File Manager", "{8B6DACCF-20E9-46CD-BECD-FA3284E82C85}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Installed.WebSite", "Interlogic.Trainings.Installed.WebSite\Interlogic.Trainings.Installed.WebSite.csproj", "{BEF0168C-D50B-493F-B7FF-A52C7B1E63A5}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.InstallApp", "Interlogic.Trainings.Plugs.InstallApp\Interlogic.Trainings.Plugs.InstallApp.csproj", "{493EA88C-3447-413C-91C6-2DA19EE751C7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Installed.WinApp", "Interlogic.Trainings.Installed.WinApp\Interlogic.Trainings.Installed.WinApp.csproj", "{0652B5E5-1AC6-41CB-B1CA-71C3133745FF}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo Environment", "Demo Environment", "{06CBB755-8E74-44BF-9A21-0D5C6894B6C7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		Here.should.be.Db.backup.with.all.installed.txt = Here.should.be.Db.backup.with.all.installed.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interlogic.Trainings.Plugs.RootContent", "Interlogic.Trainings.Plugs.RootContent\Interlogic.Trainings.Plugs.RootContent.csproj", "{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,8 +206,84 @@ Global
 		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{882A6D05-CB4B-452A-B018-E7760A9317F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA19DD14-616A-47DD-83D7-2F6F800FA67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA19DD14-616A-47DD-83D7-2F6F800FA67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA19DD14-616A-47DD-83D7-2F6F800FA67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA19DD14-616A-47DD-83D7-2F6F800FA67B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8213A2D2-DA6B-487F-ACDB-0C4A0537B12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8213A2D2-DA6B-487F-ACDB-0C4A0537B12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8213A2D2-DA6B-487F-ACDB-0C4A0537B12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8213A2D2-DA6B-487F-ACDB-0C4A0537B12D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CAFCBDD-68DF-45EE-AB67-F0B12658B84F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAFCBDD-68DF-45EE-AB67-F0B12658B84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAFCBDD-68DF-45EE-AB67-F0B12658B84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAFCBDD-68DF-45EE-AB67-F0B12658B84F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ACBAFE9-8851-46F5-9698-796D09A0D9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ACBAFE9-8851-46F5-9698-796D09A0D9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ACBAFE9-8851-46F5-9698-796D09A0D9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ACBAFE9-8851-46F5-9698-796D09A0D9D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3FA1201-05B4-4182-ABE9-F5BEB7B733E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3FA1201-05B4-4182-ABE9-F5BEB7B733E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3FA1201-05B4-4182-ABE9-F5BEB7B733E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3FA1201-05B4-4182-ABE9-F5BEB7B733E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C83775-ABF6-439D-ABDD-F7AB3F86F9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C83775-ABF6-439D-ABDD-F7AB3F86F9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C83775-ABF6-439D-ABDD-F7AB3F86F9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C83775-ABF6-439D-ABDD-F7AB3F86F9B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE25E1DC-FC63-448E-913F-19FEB51051F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE25E1DC-FC63-448E-913F-19FEB51051F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE25E1DC-FC63-448E-913F-19FEB51051F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE25E1DC-FC63-448E-913F-19FEB51051F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF0168C-D50B-493F-B7FF-A52C7B1E63A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF0168C-D50B-493F-B7FF-A52C7B1E63A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF0168C-D50B-493F-B7FF-A52C7B1E63A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF0168C-D50B-493F-B7FF-A52C7B1E63A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493EA88C-3447-413C-91C6-2DA19EE751C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493EA88C-3447-413C-91C6-2DA19EE751C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493EA88C-3447-413C-91C6-2DA19EE751C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493EA88C-3447-413C-91C6-2DA19EE751C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0652B5E5-1AC6-41CB-B1CA-71C3133745FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0652B5E5-1AC6-41CB-B1CA-71C3133745FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0652B5E5-1AC6-41CB-B1CA-71C3133745FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0652B5E5-1AC6-41CB-B1CA-71C3133745FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{050724A9-286D-4DA3-B525-8CBD4CD8A8D8} = {05F732CF-DE9C-4F12-A05D-4781EA6D0090}
+		{ECE019E1-7167-4B34-B575-F6AD74B89C7A} = {05F732CF-DE9C-4F12-A05D-4781EA6D0090}
+		{4A31D00E-53AC-4E03-9071-2A1B93EC3DF8} = {05F732CF-DE9C-4F12-A05D-4781EA6D0090}
+		{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE} = {05F732CF-DE9C-4F12-A05D-4781EA6D0090}
+		{0F551CC4-EB55-45BB-8331-8EBDB1945C3D} = {050724A9-286D-4DA3-B525-8CBD4CD8A8D8}
+		{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB} = {050724A9-286D-4DA3-B525-8CBD4CD8A8D8}
+		{882A6D05-CB4B-452A-B018-E7760A9317F4} = {050724A9-286D-4DA3-B525-8CBD4CD8A8D8}
+		{FA19DD14-616A-47DD-83D7-2F6F800FA67B} = {050724A9-286D-4DA3-B525-8CBD4CD8A8D8}
+		{B3FA1201-05B4-4182-ABE9-F5BEB7B733E3} = {ECE019E1-7167-4B34-B575-F6AD74B89C7A}
+		{3CAFCBDD-68DF-45EE-AB67-F0B12658B84F} = {ECE019E1-7167-4B34-B575-F6AD74B89C7A}
+		{3ACBAFE9-8851-46F5-9698-796D09A0D9D7} = {ECE019E1-7167-4B34-B575-F6AD74B89C7A}
+		{38C83775-ABF6-439D-ABDD-F7AB3F86F9B8} = {ECE019E1-7167-4B34-B575-F6AD74B89C7A}
+		{8213A2D2-DA6B-487F-ACDB-0C4A0537B12D} = {ECE019E1-7167-4B34-B575-F6AD74B89C7A}
+		{AE25E1DC-FC63-448E-913F-19FEB51051F3} = {4A31D00E-53AC-4E03-9071-2A1B93EC3DF8}
+		{78DF8AC7-52E6-4B2E-902D-E37A2DA566B2} = {55174B96-D604-4065-B47E-576A262ABD09}
+		{9194D8A9-1415-4A18-A1D9-02423FEDC678} = {55174B96-D604-4065-B47E-576A262ABD09}
+		{0F676373-A595-4E64-AAE6-7DDD7FAE3CCD} = {55174B96-D604-4065-B47E-576A262ABD09}
+		{A8F3DD77-D54B-4B6F-9068-940E1479DAB8} = {55174B96-D604-4065-B47E-576A262ABD09}
+		{8B6DACCF-20E9-46CD-BECD-FA3284E82C85} = {55174B96-D604-4065-B47E-576A262ABD09}
+		{0D9EDFEB-C52B-483A-ADD2-035510D1A608} = {F6D75D9C-57A5-4715-A879-C52506395021}
+		{B115432D-1A1A-42B6-ACB3-1271DE6EAC98} = {698555EB-0D09-4BDF-B94D-2980B610D00F}
+		{F6D75D9C-57A5-4715-A879-C52506395021} = {698555EB-0D09-4BDF-B94D-2980B610D00F}
+		{493EA88C-3447-413C-91C6-2DA19EE751C7} = {698555EB-0D09-4BDF-B94D-2980B610D00F}
+		{05F732CF-DE9C-4F12-A05D-4781EA6D0090} = {698555EB-0D09-4BDF-B94D-2980B610D00F}
+		{BEF0168C-D50B-493F-B7FF-A52C7B1E63A5} = {06CBB755-8E74-44BF-9A21-0D5C6894B6C7}
+		{0652B5E5-1AC6-41CB-B1CA-71C3133745FF} = {06CBB755-8E74-44BF-9A21-0D5C6894B6C7}
 	EndGlobalSection
 EndGlobal

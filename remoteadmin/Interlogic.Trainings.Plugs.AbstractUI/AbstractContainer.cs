@@ -50,10 +50,8 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 
 		protected virtual void LoadChildControls(ITransactionContext context)
 		{
-			AbstractContainerController controller = new AbstractContainerController(context);
-			this._childControls = controller.LoadChildControls(this);
-			
-			
+			AbstractContainerController controller = this.GetControllerInstance(context) as AbstractContainerController;
+			this._childControls = controller.LoadChildControls(this);			
 		}
 	}
 }
