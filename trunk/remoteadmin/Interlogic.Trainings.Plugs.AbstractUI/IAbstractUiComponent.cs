@@ -11,7 +11,12 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 	public interface IAbstractUiComponent : IInstantiatable
 	{
 		IAbstractUiContainer ParentComponent { get;set;}
-		IAbstractUiContext Context { get;set;}
+		IAbstractContext Context { get;set;}
 		string Name { get; set; }
+		ComponentMeasurement Top { get;set;}
+		ComponentMeasurement Left { get;set;}
+		ComponentMeasurement Height { get;set;}
+		ComponentMeasurement Width { get;set;}
+		ComponentPositioning PositioningMethod { get;set;}
 	}
 }

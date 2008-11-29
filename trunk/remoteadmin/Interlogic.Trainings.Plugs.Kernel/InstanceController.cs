@@ -7,6 +7,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 	using DomainModel;
 	using System.IO;
 	using System.Reflection;
+using System.Collections;
 
 	public class InstanceController:DomainController
 	{
@@ -22,16 +23,43 @@ namespace Interlogic.Trainings.Plugs.Kernel
 				return factory.InternalLoadByName(systemName);
 			}
 		}
+		/// <summary>
+		/// This is incorrect method - do not call it
+		/// </summary>
+		/// <param name="instanceId"></param>
+		/// <returns></returns>
 		public DomainObject GetObjectByInstanceId(int instanceId)
 		{
             using (InstanceFactory factory = InstanceFactory.GetInstance())
             {
                 return factory.InternalLoadByPrimaryKey(instanceId);
             }
-        }
-
+		}
+		#region Caching
+		private static Hashtable _cachedInstances = Hashtable.Synchronized(new Hashtable());
+		protected virtual bool IsInCache(string key)
+		{
+			return _cachedInstances[key] == null;
+		}
+		protected virtual DomainObject GetFromCache(string key)
+		{
+			return _cachedInstances[key] as DomainObject;
+		}
+		protected virtual void SetToCache(string key, DomainObject instance)
+		{
+			_cachedInstances[key] = instance;
+		}
+		protected virtual bool NeedCaching(string key)
+		{
+			return true;
+		}
+		#endregion
 		public DomainObject GetObjectByInstanceName(string instanceName)
 		{
+			if (this.NeedCaching(instanceName) && this.IsInCache(instanceName))
+			{
+				return this.GetFromCache(instanceName);
+			}
 			Instance instance = GetBySystemName(instanceName);
 			string className = null;
 			int fileId = 0;
@@ -80,7 +108,15 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			if (requiredType == null)
 				throw new ArgumentException(string.Format("Type '{0}' was not found.", className));
 			DomainObject instanceObject = (DomainObject)Activator.CreateInstance(requiredType);
-			(instanceObject as IInstantiatable).Setup(instance, this.FactoryContext);
+			IInstantiatable instantinable = instanceObject as IInstantiatable;
+			if (instantinable != null)
+			{
+				instantinable.Setup(instance, this.FactoryContext);
+			}
+			if (NeedCaching(instanceName))
+			{
+				SetToCache(instanceName, instanceObject);
+			}
 			return instanceObject;
 		}
 	}
