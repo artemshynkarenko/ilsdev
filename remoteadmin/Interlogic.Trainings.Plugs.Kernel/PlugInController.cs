@@ -143,6 +143,16 @@ namespace Interlogic.Trainings.Plugs.Kernel
             }
         }
 
+		public void Delete(PlugIn plug)
+		{
+			using (PlugInFactory factory = PlugInFactory.GetInstance())
+			{
+				factory.Context = this.FactoryContext;
+				ValidateInstance(plug);
+				factory.InternalDelete(plug);
+			}
+		}
+
 		public virtual void ValidateInstance(PlugIn plug)
 		{
 			if (string.IsNullOrEmpty(plug.PlugFriendlyName))
