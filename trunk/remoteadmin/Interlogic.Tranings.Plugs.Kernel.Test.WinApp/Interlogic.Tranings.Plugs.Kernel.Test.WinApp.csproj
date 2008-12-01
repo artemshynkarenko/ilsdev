@@ -1,0 +1,120 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A742B27A-2547-48D4-8B25-040FF5F45E74}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Interlogic.Tranings.Plugs.Kernel.Test.WinApp</RootNamespace>
+    <AssemblyName>Interlogic.Tranings.Plugs.Kernel.Test.WinApp</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstactPanelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbstactPanelForm.Designer.cs">
+      <DependentUpon>AbstactPanelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlugForm.Designer.cs">
+      <DependentUpon>PlugForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AbstactPanelForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AbstactPanelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlugForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PlugForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Context\Interlogic.Trainings.Plugs.AbstractUI.Context.csproj">
+      <Project>{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Panel\Interlogic.Trainings.Plugs.AbstractUI.Panel.csproj">
+      <Project>{882A6D05-CB4B-452A-B018-E7760A9317F4}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.Panel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.Treeview.csproj">
+      <Project>{FA19DD14-616A-47DD-83D7-2F6F800FA67B}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.Treeview</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj">
+      <Project>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.Kernel\Interlogic.Trainings.Plugs.Kernel.csproj">
+      <Project>{B115432D-1A1A-42B6-ACB3-1271DE6EAC98}</Project>
+      <Name>Interlogic.Trainings.Plugs.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

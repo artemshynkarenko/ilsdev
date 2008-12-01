@@ -236,7 +236,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         internal List<BindablePoint> InternalLoadByInstanceId(int instanceId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-            readerAction.CommandText = _loadByPointDefIdCommandText;
+            readerAction.CommandText = _loadByInstanceIdCommandText;
             readerAction.AddParameter("@InstanceId", instanceId, DbType.Int32);
             this.ExecuteCommand(readerAction);
 
