@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "geometric", "geometric\geometric.vcproj", "{EBBEA0E0-60F3-46F9-84FF-03C26868A778}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBBEA0E0-60F3-46F9-84FF-03C26868A778}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EBBEA0E0-60F3-46F9-84FF-03C26868A778}.Debug|Win32.Build.0 = Debug|Win32
+		{EBBEA0E0-60F3-46F9-84FF-03C26868A778}.Release|Win32.ActiveCfg = Release|Win32
+		{EBBEA0E0-60F3-46F9-84FF-03C26868A778}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
