@@ -12,17 +12,15 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 		{
 		}
 
-
-
-		internal List<IAbstractUiComponent> LoadNavigationListeners(AbstractNavigationComponent navigationComponent)
+		internal List<IAbstractComponent> LoadNavigationListeners(AbstractNavigationComponent navigationComponent)
 		{
-			List<IAbstractUiComponent> listeners = new List<IAbstractUiComponent>();
+			List<IAbstractComponent> listeners = new List<IAbstractComponent>();
 			BindablePoint point = navigationComponent.GetBindablePointBySystemName(AbstractUiConstants.IAbstractUiNavigationControl_NavigationListeners_BindingPointName);
 			BindingController bindingController = new BindingController(this.FactoryContext);
 			List<Binding> bindings = bindingController.GetByBindablePointId(point.BindablePointId);
 			foreach (Binding binding in bindings)
 			{
-				IAbstractUiComponent component = this.GetObjectByInstanceId(binding.ImplementationId) as IAbstractUiComponent;
+				IAbstractComponent component = this.GetObjectByInstanceId(binding.ImplementationId) as IAbstractComponent;
 				listeners.Add(component);
 			}
 

@@ -14,7 +14,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public bool CheckTreeNodesExistion(AbstractTreeNode parentNode)
+		public bool CheckTreeNodesExists(AbstractTreeNode parentNode)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}

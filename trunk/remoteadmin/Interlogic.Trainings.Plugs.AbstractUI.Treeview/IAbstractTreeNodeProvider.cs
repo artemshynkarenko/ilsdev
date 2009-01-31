@@ -8,6 +8,6 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 	public interface IAbstractTreeNodeProvider : IInstantiatable
 	{
 		List<AbstractTreeNode> GetTreeNodes(AbstractTreeNode parentNode);
-		bool CheckTreeNodesExistion(AbstractTreeNode parentNode);
+		bool CheckTreeNodesExists(AbstractTreeNode parentNode);
 	}
 }

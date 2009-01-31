@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI.Context
 {
-	public sealed class AbstractContextContants
+	public sealed class AbstractContextConstants
 	{
-		private AbstractContextContants() { }
+		private AbstractContextConstants() { }
 	}
 }

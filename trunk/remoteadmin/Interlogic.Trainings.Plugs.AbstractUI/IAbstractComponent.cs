@@ -8,10 +8,10 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 	/// <summary>
 	/// Will be class inherited from Instance
 	/// </summary>
-	public interface IAbstractUiComponent : IInstantiatable
+	public interface IAbstractComponent : IInstantiatable
 	{
-		IAbstractUiContainer ParentComponent { get;set;}
-		IAbstractContext Context { get;set;}
+		IAbstractContainer ParentComponent { get;set;}
+		IAbstractUIContext Context { get;set;}
 		string Name { get; set; }
 		ComponentMeasurement Top { get;set;}
 		ComponentMeasurement Left { get;set;}

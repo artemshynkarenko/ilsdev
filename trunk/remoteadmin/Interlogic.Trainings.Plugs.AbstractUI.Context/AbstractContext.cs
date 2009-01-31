@@ -6,10 +6,11 @@ using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public class AbstractContext : AbstractContainer, IAbstractContext
+	public class AbstractContext : AbstractContainer, IAbstractUIContext
 	{
-		#region IAbstractUiContext Members
-		private ITransactionContext _transactionContext;
+		#region IAbstractUIContext Members
+
+        private ITransactionContext _transactionContext;
 		public ITransactionContext TransactionContext
 		{
 			get { return _transactionContext; }
@@ -17,7 +18,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 
 		#endregion
 
-		public override IAbstractUiContainer ParentComponent
+		public override IAbstractContainer ParentComponent
 		{
 			get
 			{
@@ -29,7 +30,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			}
 		}
 
-		public override IAbstractContext Context
+		public override IAbstractUIContext Context
 		{
 			get
 			{

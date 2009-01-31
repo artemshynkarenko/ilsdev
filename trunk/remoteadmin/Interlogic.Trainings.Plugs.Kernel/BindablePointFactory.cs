@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
-    class BindablePointFactory: DomainFactory
+    public class BindablePointFactory: DomainFactory
     {
         protected BindablePointFactory()
         {

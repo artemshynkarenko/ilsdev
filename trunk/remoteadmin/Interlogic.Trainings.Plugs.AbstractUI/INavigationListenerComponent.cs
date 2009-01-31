@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public interface INavigationListenerComponent:IAbstractUiComponent
+	public interface INavigationListenerComponent:IAbstractComponent
 	{
 		void OnNavigate(INavigationComponent navigator);
 	}

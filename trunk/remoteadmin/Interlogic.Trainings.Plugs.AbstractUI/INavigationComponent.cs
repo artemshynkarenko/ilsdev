@@ -5,9 +5,9 @@ using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public interface INavigationComponent:IAbstractUiComponent
+	public interface INavigationComponent:IAbstractComponent
 	{
-		List<IAbstractUiComponent> NavigationListeners { get;}
+		List<IAbstractComponent> NavigationListeners { get;}
 		DomainObject SelectedObject { get;}
 	}
 }
