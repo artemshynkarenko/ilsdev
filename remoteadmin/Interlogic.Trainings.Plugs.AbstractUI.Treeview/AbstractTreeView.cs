@@ -12,7 +12,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
-		public override IAbstractUiComponent SelectedComponent
+		public override IAbstractComponent SelectedComponent
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

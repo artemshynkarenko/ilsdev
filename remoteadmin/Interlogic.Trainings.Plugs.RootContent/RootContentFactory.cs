@@ -20,7 +20,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         #region Installation related
 
-        string _createTableCommandText =
+        private static readonly string _createTableCommandText =
             @"CREATE TABLE [dbo].[RootContent](
                 [InstanceId] [int] NOT NULL,
                 [ParentInstanceId] [int] NULL,
@@ -52,6 +52,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         public override void UpdateRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
         {
+            throw new Exception("The method or operation is not implemented.");
         }
 
         public override void UninstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
@@ -61,7 +62,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
         #endregion
 
         #region Insert
-        string _insertCommandText =
+        private static readonly string _insertCommandText =
             @"INSERT INTO [RootContent] ([InstanceId],[ParentInstanceId],[ContentFriendlyName],[ContentDescription],[ContentImageSrc])
               VALUES (@InstanceId,@ParentInstanceId,@ContentFriendlyName,@ContentDescription,@ContentImageSrc)";
 
@@ -89,7 +90,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
         #endregion
 
         #region Update
-        string _updateCommandText =
+        private static readonly string _updateCommandText =
             @"UPDATE [RootContent]
                SET [ParentInstanceId] = @ParentInstanceId,
                   ,[ContentFriendlyName] = @ContentFriendlyName,
@@ -120,7 +121,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
         #endregion
 
         #region Delete
-        string _deleteCommandText = @"DELETE [RootContent] WHERE [InstanceId] = @InstanceId";
+        private static readonly string _deleteCommandText = @"DELETE [RootContent] WHERE [InstanceId] = @InstanceId";
 
         internal void InternalDelete(RootContent rootCont)
         {
@@ -142,121 +143,173 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         #region Loads
 
-        //string _loadAllCommandText = @"SELECT * FROM [RootContent]";
+        private static readonly string _loadAllCommandText = @"SELECT * FROM [Instance] INNER JOIN [RootContent] ON [Instance].InstanceId = [RootContent].InstanceId";
 
-        //internal List<Instance> InternalLoadAll()
-        //{
-        //    RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-        //    readerAction.CommandText = _loadAllCommandText;
-        //    this.ExecuteCommand(readerAction);
+        internal List<RootContent> InternalLoadAll()
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadAllCommandText;
+            this.ExecuteCommand(readerAction);
 
-        //    List<Instance> rootContList = new List<Instance>();
-        //    IDataReader dataReader = readerAction.DataReader;
-        //    try
-        //    {
-        //        int[] ordinals = GetRootContFieldOrdinals(dataReader);
-        //        while (dataReader.Read())
-        //        {
-        //            RootCont p = new RootContent();
-        //            TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
-        //            rootContList.Add(p);
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        dataReader.Close();
-        //    }
-            
-        //    throw new Exception("Not Implemented Yet!");
-            
-        //    return rootContList;
-        //}
+            List<RootContent> rootContList = new List<RootContent>();
+            IDataReader dataReader = readerAction.DataReader;
+            try
+            {
+                int[] ordinals = GetRootContFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    RootContent p = new RootContent();
+                    TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
+                    rootContList.Add(p);
+                }
+            }
+            finally
+            {
+                dataReader.Close();
+            }
+
+            return rootContList;
+        }
 
 
-        //string _loadByIdCommandText = @"SELECT * FROM [RootContent] WHERE [InstanceId] = @InstanceId";
+        private static readonly string _loadByIdCommandText = _loadAllCommandText + @"WHERE [InstanceId] = @InstanceId";
 
-        //internal RootContent InternalLoadByPrimaryKey(int instanceId)
-        //{
-        //    RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-        //    readerAction.CommandText = _loadByIdCommandText;
+        internal RootContent InternalLoadByPrimaryKey(int instanceId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByIdCommandText;
 
-        //    readerAction.AddParameter("@InstanceId", instanceId, DbType.Int32);
+            readerAction.AddParameter("@InstanceId", instanceId, DbType.Int32);
 
-        //    RootContent rootCont = null;
-        //    this.ExecuteCommand(readerAction);
-        //    try
-        //    {
-        //        rootCont = TranslateToInstance(readerAction.DataReader);
-        //    }
-        //    finally
-        //    {
-        //        readerAction.DataReader.Close();
-        //    }
-        //    return rootCont;
-        //}
-
-
-        //string _loadByNameCommandText = @"SELECT * FROM [Instance] WHERE [InstanceName] = @InstanceName";
-
-        //internal Instance InternalLoadByName(string instanceName)
-        //{
-        //    RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-        //    readerAction.CommandText = _loadByNameCommandText;
-
-        //    readerAction.AddParameter("@InstanceName", instanceName, DbType.String);
-
-        //    RootContent rootCont = null;
-        //    this.ExecuteCommand(readerAction);
-        //    try
-        //    {
-        //        rootCont = TranslateToInstance(readerAction.DataReader);
-        //    }
-        //    finally
-        //    {
-        //        readerAction.DataReader.Close();
-        //    }
-
-        //    return rootCont;
-        //}
+            RootContent rootCont = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                rootCont = TranslateToRootCont(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+            return rootCont;
+        }
 
 
-        //string _loadByClassDefinitionIdCommandText = @"SELECT * FROM [Instance] WHERE [ClassDefinitionId] = @ClassDefinitionId";
+        private static readonly string _loadByInstanceNameCommandText = _loadAllCommandText + @" WHERE [InstanceName] = @InstanceName";
 
-        //internal List<Instance> InternalLoadByClassDefinitionId(int classDefId)
-        //{
-        //    RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
-        //    readerAction.CommandText = _loadByClassDefinitionIdCommandText;
-        //    readerAction.AddParameter("@ClassDefinitionId", classDefId, DbType.Int32);
-        //    this.ExecuteCommand(readerAction);
+        internal RootContent InternalLoadByInstanceName(string instanceName)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByInstanceNameCommandText;
 
-        //    List<Instance> instanceList = new List<Instance>();
-        //    IDataReader dataReader = readerAction.DataReader;
-        //    try
-        //    {
-        //        int[] ordinals = GetInstanceFieldOrdinals(dataReader);
-        //        while (dataReader.Read())
-        //        {
-        //            Instance p = new Instance();
-        //            TranslateToInstance(dataReader, p, ordinals[0], ordinals[1], ordinals[2]);
-        //            instanceList.Add(p);
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        dataReader.Close();
-        //    }
+            readerAction.AddParameter("@InstanceName", instanceName, DbType.String);
 
-        //    return instanceList;
-        //}
+            RootContent rootCont = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                rootCont = TranslateToRootCont(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+
+            return rootCont;
+        }
+
+
+        private static readonly string _loadByFriendlyNameCommandText = _loadAllCommandText + @" WHERE [ContentFriendlyName] = @ContentFriendlyName";
+
+        internal RootContent InternalLoadByFriendlyName(string instanceName)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByInstanceNameCommandText;
+
+            readerAction.AddParameter("@ContentFriendlyName", instanceName, DbType.String);
+
+            RootContent rootCont = null;
+            this.ExecuteCommand(readerAction);
+            try
+            {
+                rootCont = TranslateToRootCont(readerAction.DataReader);
+            }
+            finally
+            {
+                readerAction.DataReader.Close();
+            }
+
+            return rootCont;
+        }
+
+
+        private static readonly string _loadByClassDefinitionIdCommandText = _loadAllCommandText + @" WHERE [ClassDefinitionId] = @ClassDefinitionId";
+
+        internal List<RootContent> InternalLoadByClassDefinitionId(int classDefId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByClassDefinitionIdCommandText;
+            readerAction.AddParameter("@ClassDefinitionId", classDefId, DbType.Int32);
+            this.ExecuteCommand(readerAction);
+
+            List<RootContent> rootContList = new List<RootContent>();
+            IDataReader dataReader = readerAction.DataReader;
+            try
+            {
+                int[] ordinals = GetRootContFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    RootContent p = new RootContent();
+                    TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
+                    rootContList.Add(p);
+                }
+            }
+            finally
+            {
+                dataReader.Close();
+            }
+
+            return rootContList;
+        }
+
+
+        private static readonly string _loadByParentInstanceIdCommandText = _loadAllCommandText + @" WHERE [ParentInstanceId] = @ParentInstanceId";
+
+        internal List<RootContent> InternalLoadByParentInstanceId(int parentId)
+        {
+            RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
+            readerAction.CommandText = _loadByParentInstanceIdCommandText;
+            readerAction.AddParameter("@ParentInstanceId", parentId, DbType.Int32);
+            this.ExecuteCommand(readerAction);
+
+            List<RootContent> rootContList = new List<RootContent>();
+            IDataReader dataReader = readerAction.DataReader;
+            try
+            {
+                int[] ordinals = GetRootContFieldOrdinals(dataReader);
+                while (dataReader.Read())
+                {
+                    RootContent p = new RootContent();
+                    TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
+                    rootContList.Add(p);
+                }
+            }
+            finally
+            {
+                dataReader.Close();
+            }
+
+            return rootContList;
+        }
+
 
         protected int[] GetRootContFieldOrdinals(IDataReader dataReader)
         {
-            int[] indexes = new int[5];
-            indexes[0] = dataReader.GetOrdinal("InstanceId");
-            indexes[1] = dataReader.GetOrdinal("ParentInstanceId");
-            indexes[2] = dataReader.GetOrdinal("ContentFriendlyName");
-            indexes[3] = dataReader.GetOrdinal("ContentDescription");
-            indexes[4] = dataReader.GetOrdinal("ContentImageSrc");
+            int[] indexes = new int[4];
+            indexes[0] = dataReader.GetOrdinal("ParentInstanceId");
+            indexes[1] = dataReader.GetOrdinal("ContentFriendlyName");
+            indexes[2] = dataReader.GetOrdinal("ContentDescription");
+            indexes[3] = dataReader.GetOrdinal("ContentImageSrc");
             return indexes;
         }
 
@@ -269,12 +322,14 @@ namespace Interlogic.Trainings.Plugs.RootContent
         protected void TranslateToRootCont(IDataReader dataReader, RootContent rootCont)
         {
             int[] indexes = GetInstanceFieldOrdinals(dataReader);
-            TranslateToRootCont(dataReader, rootCont, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4]);
+            TranslateToRootCont(dataReader, rootCont, indexes[0], indexes[1], indexes[2], indexes[3]);
         }
-        protected void TranslateToRootCont(IDataReader dataReader, RootContent rootCont, int idIndex, int idParIndex, int contFriendlyName, int contDescr, int contImgSrc)
+        protected void TranslateToRootCont(IDataReader dataReader, RootContent rootCont, int idParIndex, int contFriendlyName, int contDescr, int contImgSrc)
         {
-            rootCont.InstanceId = dataReader.GetInt32(idIndex);
-            //if (!dataReader.IsDBNull(idParIndex)) rootCont.ParentContent = RootContentController.Load(idParIndex);
+            base.TranslateToInstance(dataReader, rootCont);
+            //if (!dataReader.IsDBNull(idParIndex)) rootCont.ParentContent = this.InternalLoadByPrimaryKey(dataReader.GetInt32(idParIndex));
+            //TODO: parentId ?
+            throw new NotImplementedException("Don't know what to do with parentId?");
             rootCont.ContentFriendlyName = dataReader.GetString(contFriendlyName);
             if (!dataReader.IsDBNull(contDescr)) rootCont.ContentDescription = dataReader.GetString(contDescr);
             if (!dataReader.IsDBNull(contImgSrc)) rootCont.ContentImageSrc = dataReader.GetString(contImgSrc);

@@ -46,8 +46,8 @@
     <Compile Include="ComponentMeasurement.cs" />
     <Compile Include="ComponentPositioning.cs" />
     <Compile Include="ComponentMeasurementUnit.cs" />
-    <Compile Include="IAbstractUiComponent.cs" />
-    <Compile Include="IAbstractUiContainer.cs" />
+    <Compile Include="IAbstractComponent.cs" />
+    <Compile Include="IAbstractContainer.cs" />
     <Compile Include="IAbstractContext.cs" />
     <Compile Include="INavigationComponent.cs" />
     <Compile Include="INavigationListenerComponent.cs" />

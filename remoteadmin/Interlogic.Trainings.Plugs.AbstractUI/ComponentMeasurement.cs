@@ -7,14 +7,14 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 	public class ComponentMeasurement
 	{
 		private bool _nothingSet = true;
-		private int _values;
+		private int _value;
 
 		public int Value
 		{
-			get { return _values; }
+			get { return _value; }
 			set
 			{
-				_values = value;
+				_value = value;
 				_nothingSet = false;
 			}
 		}
@@ -30,7 +30,8 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 				_nothingSet = false;
 			}
 		}
-		public ComponentMeasurement()
+
+        public ComponentMeasurement()
 		{
 		}
 

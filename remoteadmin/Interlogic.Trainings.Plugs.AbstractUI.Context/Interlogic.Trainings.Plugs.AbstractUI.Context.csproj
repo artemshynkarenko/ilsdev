@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractContext.cs" />
-    <Compile Include="AbstractContextContants.cs" />
+    <Compile Include="AbstractContextConstants.cs" />
     <Compile Include="AbstractContextController.cs" />
     <Compile Include="AbstractContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

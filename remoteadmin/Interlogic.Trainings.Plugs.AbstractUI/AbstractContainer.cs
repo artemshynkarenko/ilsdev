@@ -5,7 +5,8 @@ using Interlogic.Trainings.Plugs.Kernel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public abstract class AbstractContainer : AbstractComponent, IAbstractUiContainer
+    using Interlogic.Trainings.Plugs.Kernel.DomainModel;
+    public abstract class AbstractContainer : AbstractComponent, IAbstractContainer
 	{
 		protected AbstractContainer()
 			: base()
@@ -25,9 +26,9 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			get { return this._useLazyLoadingForChildren; }
 		}
 
-		private List<IAbstractUiComponent> _childControls = null;
+		private List<IAbstractComponent> _childControls = null;
 
-		public List<IAbstractUiComponent> Controls
+		public List<IAbstractComponent> Controls
 		{
 			get {
 				if (_childControls == null)

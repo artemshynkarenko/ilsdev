@@ -5,16 +5,19 @@ using System.Text;
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
 	using Kernel;
+    using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
-	public abstract class AbstractComponent : Instance, IAbstractUiComponent
+	public abstract class AbstractComponent : Instance, IAbstractComponent
 	{
 		protected AbstractComponent()
 		{
 		}
 		
-		#region IAbstractUiComponent Members
-		private IAbstractUiContainer _parentComponent;
-		public virtual IAbstractUiContainer ParentComponent
+		#region IAbstractComponent Members
+		
+        private IAbstractContainer _parentComponent;
+		
+        public virtual IAbstractContainer ParentComponent
 		{
 			get
 			{
@@ -26,8 +29,10 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 				_context = value.Context;
 			}
 		}
-		private IAbstractContext _context;
-		public virtual IAbstractContext Context
+		
+        private IAbstractUIContext _context;
+		
+        public virtual IAbstractUIContext Context
 		{
 			get
 			{
@@ -39,7 +44,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			}
 		}
 		
-		string IAbstractUiComponent.Name
+		string IAbstractComponent.Name
 		{
 			get
 			{
@@ -51,10 +56,6 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			}
 		}
 
-		#endregion
-
-		#region IAbstractUiComponent Members
-
 		private ComponentMeasurement _top;
 
 		public ComponentMeasurement Top
@@ -63,6 +64,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			set { _top = value; }
 		}
 
+
 		private ComponentMeasurement _left;
 
 		public ComponentMeasurement Left
@@ -70,14 +72,18 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			get { return _left; }
 			set { _left = value; }
 		}
-		private ComponentMeasurement _height;
+		
+        
+        private ComponentMeasurement _height;
 
 		public ComponentMeasurement Height
 		{
 			get { return _height; }
 			set { _height = value; }
 		}
-		private ComponentMeasurement _width;
+		
+        
+        private ComponentMeasurement _width;
 
 		public ComponentMeasurement Width
 		{
@@ -85,7 +91,8 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 			set { _width = value; }
 		}
 
-		private ComponentPositioning _positioningMethod;
+		
+        private ComponentPositioning _positioningMethod;
 
 		public ComponentPositioning PositioningMethod
 		{
@@ -94,5 +101,5 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 		}
 
 		#endregion
-	}
+    }
 }

@@ -8,10 +8,9 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 {
 	public abstract class AbstractNavigationComponent : AbstractComponent, INavigationComponent
 	{
-		
-		private List<IAbstractUiComponent> _navigationListeners = null;
+		private List<IAbstractComponent> _navigationListeners = null;
 
-		public List<IAbstractUiComponent> NavigationListeners
+		public List<IAbstractComponent> NavigationListeners
 		{
 			get
 			{
@@ -25,7 +24,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 		}
 
 		public abstract DomainObject SelectedObject { get;}
-		public abstract IAbstractUiComponent SelectedComponent { get;}
+		public abstract IAbstractComponent SelectedComponent { get;}
 
 		public override void Setup(Instance dbInstance, ITransactionContext context)
 		{

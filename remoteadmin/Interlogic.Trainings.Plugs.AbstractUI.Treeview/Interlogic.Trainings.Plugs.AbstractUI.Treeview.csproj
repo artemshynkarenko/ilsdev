@@ -35,7 +35,7 @@
   <ItemGroup>
     <Compile Include="AbstractTreeNodeProviderController.cs" />
     <Compile Include="AbstractTreeNodeProviderFactory.cs" />
-    <Compile Include="AbstractTreeViewContants.cs" />
+    <Compile Include="AbstractTreeViewConstants.cs" />
     <Compile Include="AbstractTreeViewController.cs" />
     <Compile Include="AbstractTreeViewFactory.cs" />
     <Compile Include="IAbstractStartupTreeNodeProvider.cs" />

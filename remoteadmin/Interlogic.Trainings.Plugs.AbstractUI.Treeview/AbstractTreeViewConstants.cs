@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public sealed class AbstractTreeViewContants
+	public sealed class AbstractTreeViewConstants
 	{
-		private AbstractTreeViewContants()
+		private AbstractTreeViewConstants()
 		{
 		}
 

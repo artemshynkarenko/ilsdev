@@ -7,8 +7,8 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 	/// <summary>
 	/// IAbstractUiContainer classDefinition contains one bindablePointDefinition - ChildControl
 	/// </summary>
-	public interface IAbstractUiContainer:IAbstractUiComponent
+	public interface IAbstractContainer:IAbstractComponent
 	{
-		List<IAbstractUiComponent> Controls { get;}
+		List<IAbstractComponent> Controls { get;}
 	}
 }
