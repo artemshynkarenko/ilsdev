@@ -10,7 +10,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 {
 	public class PlugInFactory : DomainFactory
 	{
-		static internal PlugInFactory GetInstance()
+		public static  PlugInFactory GetInstance()
 		{
 			return new PlugInFactory();
 		}
@@ -42,6 +42,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		public override void InstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
 		{
+            this.Context = context;
+            //Why we use context as parameter and context like a property?
 			if (this.Context == null)
 				throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
@@ -249,5 +251,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		}
 		#endregion
 
-	}
+
+       
+    }
 }

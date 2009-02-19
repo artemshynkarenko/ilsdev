@@ -14,5 +14,10 @@ namespace Interlogic.Trainings.Plugs.WinApp
 		{
 			InitializeComponent();
 		}
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
 	}
 }
