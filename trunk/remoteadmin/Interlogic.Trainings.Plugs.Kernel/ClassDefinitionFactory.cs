@@ -61,8 +61,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Insert
         string _insertCommandText =
-            @"INSERT INTO [ClassDefinition] ([ParentClassDefinitionId],[ClassName],[ClassDefinitionDescription],[Active],[FileId],[PlugId])
-                 VALUES (@ParentClassDefinitionId,@ClassName,@ClassDefinitionDescription,@Active,@FileId,@PlugId)";
+            @"INSERT INTO [ClassDefinition] ([ClassName],[ClassDefinitionDescription],[Active],[FileId],[PlugId],[FileName])
+                 VALUES (@ClassName,@ClassDefinitionDescription,@Active,@FileId,@PlugId,@FileName)";
         internal void InternalInsert(ClassDefinition classDef)
         {
             Insert(classDef);
@@ -73,12 +73,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
             RawSqlInsertAction insertAction = new RawSqlInsertAction();
             insertAction.CommandText = _insertCommandText;
 
-            insertAction.AddParameter("@ParentClassDefinitionId", classDef.ParentClassDefinitionId, DbType.Int32);
             insertAction.AddParameter("@ClassName", classDef.ClassName, DbType.String);
-            insertAction.AddParameter("@ClassDefinitionDescription", classDef.ClassDefinitionDescrition, DbType.String);
+            insertAction.AddParameter("@ClassDefinitionDescription", classDef.ClassDefinitionDescription, DbType.String);
             insertAction.AddParameter("@Active", classDef.Active, DbType.Boolean);
             insertAction.AddParameter("@FileId", classDef.FileId, DbType.Int32);
             insertAction.AddParameter("@PlugId", classDef.PlugId, DbType.Int32);
+            insertAction.AddParameter("@FileName", classDef.FileName, DbType.String);
             
             this.ExecuteCommand(insertAction);
             classDef.ClassDefinitionId = insertAction.InsertedIdentity;
@@ -89,12 +89,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
         #region Update
         string _updateCommandText =
             @"UPDATE [ClassDefinition]
-               SET [ParentClassDefinitionId] = @ParentClassDefinitionId,
-                   [ClassName] = @ClassName,
+               SET [ClassName] = @ClassName,
                    [ClassDefinitionDescription] = @ClassDefinitionDescription,
                    [Active] = @Active,
                    [FileId] = @FileId,
                    [PlugId] = @PlugId,
+                   [FileName] = @FileName 
              WHERE [ClassDefinitionId] = @ClassDefinitionId";
 
         internal void InternalUpdate(ClassDefinition classDef)
@@ -108,12 +108,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
             updateAction.CommandText = _updateCommandText;
 
             updateAction.AddParameter("@ClassDefinitionId", classDef.ClassDefinitionId, DbType.Int32);
-            updateAction.AddParameter("@ParentClassDefinitionId", classDef.ParentClassDefinitionId, DbType.Int32);
             updateAction.AddParameter("@ClassName", classDef.ClassName, DbType.String);
-            updateAction.AddParameter("@ClassDefinitionDescription", classDef.ClassDefinitionDescrition, DbType.String);
+            updateAction.AddParameter("@ClassDefinitionDescription", classDef.ClassDefinitionDescription, DbType.String);
             updateAction.AddParameter("@Active", classDef.Active, DbType.Boolean);
             updateAction.AddParameter("@FileId", classDef.FileId, DbType.Int32);
             updateAction.AddParameter("@PlugId", classDef.PlugId, DbType.Int32);
+            updateAction.AddParameter("@FileName", classDef.FileName, DbType.String);
 
             this.ExecuteCommand(updateAction);
         }
@@ -275,12 +275,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             int[] indexes = new int[7];
             indexes[0] = dataReader.GetOrdinal("ClassDefinitionId");
-            indexes[1] = dataReader.GetOrdinal("ParentClassDefinitionId");
-            indexes[2] = dataReader.GetOrdinal("ClassName");
-            indexes[3] = dataReader.GetOrdinal("ClassDefinitionDescription");
-            indexes[4] = dataReader.GetOrdinal("Active");
-            indexes[5] = dataReader.GetOrdinal("FileId");
-            indexes[6] = dataReader.GetOrdinal("PlugId");
+            indexes[1] = dataReader.GetOrdinal("ClassName");
+            indexes[2] = dataReader.GetOrdinal("ClassDefinitionDescription");
+            indexes[3] = dataReader.GetOrdinal("Active");
+            indexes[4] = dataReader.GetOrdinal("FileId");
+            indexes[5] = dataReader.GetOrdinal("PlugId");
+            indexes[6] = dataReader.GetOrdinal("FileName");
             return indexes;
         }
 
@@ -295,16 +295,15 @@ namespace Interlogic.Trainings.Plugs.Kernel
             int[] indexes = GetClassDefinitionFieldOrdinals(dataReader);
             TranslateToClassDefinition(dataReader, classDef, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5], indexes[6]);
         }
-        protected void TranslateToClassDefinition(IDataReader dataReader, ClassDefinition classDef, int idIndex, int parentIndex, int nameIndex, int descrIndex, int activeIndex, int fileIndex, int plugIndex)
+        protected void TranslateToClassDefinition(IDataReader dataReader, ClassDefinition classDef, int idIndex, int nameIndex, int descrIndex, int activeIndex, int fileIndex, int plugIndex, int fileNameIndex)
         {
             classDef.ClassDefinitionId = dataReader.GetInt32(idIndex);
-            if (!dataReader.IsDBNull(parentIndex))
-                classDef.ParentClassDefinitionId = dataReader.GetInt32(parentIndex);
             classDef.ClassName = dataReader.GetString(nameIndex);
-            classDef.ClassDefinitionDescrition = dataReader.GetString(descrIndex);
+            classDef.ClassDefinitionDescription = dataReader.GetString(descrIndex);
             classDef.Active = dataReader.GetBoolean(activeIndex);
             classDef.FileId = dataReader.GetInt32(fileIndex);
             classDef.PlugId = dataReader.GetInt32(plugIndex);
+            classDef.FileName = dataReader.GetString(fileNameIndex);
         }
         #endregion
     }

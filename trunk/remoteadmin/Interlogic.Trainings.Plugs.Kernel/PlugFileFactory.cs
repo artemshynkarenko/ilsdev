@@ -27,7 +27,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 	            [PlugFileName] [dbo].[name] NOT NULL,
 	            [RelativeIncomingPath] [dbo].[path] NOT NULL,
 	            [DestinationLocationId] [int] NOT NULL,
-	            [RelativeDestinationPath] [dbo].[path] NOT NULL,
+	            [DestinationPath] [dbo].[path] NOT NULL,
 	            [PlugId] [int] NOT NULL,
 	            CONSTRAINT [PK_PlugFile] PRIMARY KEY CLUSTERED 
 	            (
@@ -58,8 +58,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Insert
         string _insertCommandText =
-            @"INSERT INTO [PlugFile] ([PlugFileName],[RelativeIncomingPath],[DestinationLocationId],[RelativeDestinationPath],[PlugId])
-                 VALUES (@PlugFileName,@RelativeIncomingPath,@DestinationLocationId,@RelativeDestinationPath,@PlugId)";
+            @"INSERT INTO [PlugFile] ([PlugFileName],[RelativeIncomingPath],[DestinationLocationId],[DestinationPath],[PlugId])
+                 VALUES (@PlugFileName,@RelativeIncomingPath,@DestinationLocationId,@DestinationPath,@PlugId)";
 
         internal void InternalInsert(PlugFile plugFile)
         {
@@ -74,7 +74,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             insertAction.AddParameter("@PlugFileName", plugFile.PlugFileName, DbType.String);
             insertAction.AddParameter("@RelativeIncomingPath", plugFile.RelativeIncomingPath, DbType.String);
             insertAction.AddParameter("@DestinationLocationId", plugFile.DestinationLocationId, DbType.Int32);
-            insertAction.AddParameter("@RelativeDestinationPath", plugFile.RelativeDestinationPath, DbType.String);
+            insertAction.AddParameter("@DestinationPath", plugFile.DestinationPath, DbType.String);
             insertAction.AddParameter("@PlugId", plugFile.PlugId, DbType.Int32);
 
             this.ExecuteCommand(insertAction);
@@ -89,7 +89,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                SET [PlugFileName] = @PlugFileName,
                    [RelativeIncomingPath] = @RelativeIncomingPath,
                    [DestinationLocationId] = @DestinationLocationId,
-                   [RelativeDestinationPath] = @RelativeDestinationPath,
+                   [DestinationPath] = @DestinationPath,
                    [PlugId] = @PlugId,
              WHERE [PlugFileId] = @PlugFileId";
 
@@ -107,7 +107,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             updateAction.AddParameter("@PlugFileName", plugFile.PlugFileName, DbType.String);
             updateAction.AddParameter("@RelativeIncomingPath", plugFile.RelativeIncomingPath, DbType.String);
             updateAction.AddParameter("@DestinationLocationId", plugFile.DestinationLocationId, DbType.Int32);
-            updateAction.AddParameter("@RelativeDestinationPath", plugFile.RelativeDestinationPath, DbType.String);
+            updateAction.AddParameter("@DestinationPath", plugFile.DestinationPath, DbType.String);
             updateAction.AddParameter("@PlugId", plugFile.PlugId, DbType.Int32);
 
             this.ExecuteCommand(updateAction);
@@ -250,7 +250,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             indexes[1] = dataReader.GetOrdinal("PlugFileName");
             indexes[2] = dataReader.GetOrdinal("RelativeIncomingPath");
             indexes[3] = dataReader.GetOrdinal("DestinationLocationId");
-            indexes[4] = dataReader.GetOrdinal("RelativeDestinationPath");
+            indexes[4] = dataReader.GetOrdinal("DestinationPath");
             indexes[4] = dataReader.GetOrdinal("PlugId");
             return indexes;
         }
@@ -272,7 +272,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             plugFile.PlugFileName = dataReader.GetString(nameIndex);
             plugFile.RelativeIncomingPath = dataReader.GetString(relInPathIndex);
             plugFile.DestinationLocationId = dataReader.GetInt32(destLocIndex);
-            plugFile.RelativeDestinationPath = dataReader.GetString(destPathIndex);
+            plugFile.DestinationPath = dataReader.GetString(destPathIndex);
             plugFile.PlugId = dataReader.GetInt32(plugIndex);
         }
         #endregion

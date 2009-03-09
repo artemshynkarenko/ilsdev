@@ -329,7 +329,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
             base.TranslateToInstance(dataReader, rootCont);
             //if (!dataReader.IsDBNull(idParIndex)) rootCont.ParentContent = this.InternalLoadByPrimaryKey(dataReader.GetInt32(idParIndex));
             //TODO: parentId ?
-            throw new NotImplementedException("Don't know what to do with parentId?");
+            //throw new NotImplementedException("Don't know what to do with parentId?");
             rootCont.ContentFriendlyName = dataReader.GetString(contFriendlyName);
             if (!dataReader.IsDBNull(contDescr)) rootCont.ContentDescription = dataReader.GetString(contDescr);
             if (!dataReader.IsDBNull(contImgSrc)) rootCont.ContentImageSrc = dataReader.GetString(contImgSrc);

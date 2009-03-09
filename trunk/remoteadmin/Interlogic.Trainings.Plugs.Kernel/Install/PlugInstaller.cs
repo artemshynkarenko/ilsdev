@@ -11,8 +11,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		//public abstract List<IUpdatePlugAction> UpdateActions { get;}
 		//public abstract List<IUnregisterPlugAction> UnregisterActions { get;}
 
-		public abstract void RegisterPlug();
-		public abstract void UpdatePlug();
-		public abstract void UnregisterPlug();
+		public abstract void RegisterPlug(ITransactionContext context);
+        public abstract void UpdatePlug(ITransactionContext context);
+        public abstract void UnregisterPlug(ITransactionContext context);
 	}
 }
