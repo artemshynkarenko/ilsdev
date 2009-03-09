@@ -38,24 +38,24 @@ namespace Interlogic.Trainings.Plugs.RootContent
             + SqlAction.CommandDelimiter +
                 @"ALTER TABLE [dbo].[RootContent] CHECK CONSTRAINT [FK_RootContent_RootContent]";
 
-        public override void InstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            base.InstallRequiredEnvironment(context);
+            base.InstallRequiredEnvironment();
             
             RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
             createTableAction.CommandText = _createTableCommandText;
             this.ExecuteCommand(createTableAction);
         }
 
-        public override void UpdateRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+        public override void UpdateRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override void UninstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+        public override void UninstallRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }
@@ -172,7 +172,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
         }
 
 
-        private static readonly string _loadByIdCommandText = _loadAllCommandText + @"WHERE [InstanceId] = @InstanceId";
+        private static readonly string _loadByIdCommandText = _loadAllCommandText + @" WHERE [InstanceId] = @InstanceId";
 
         internal RootContent InternalLoadByPrimaryKey(int instanceId)
         {

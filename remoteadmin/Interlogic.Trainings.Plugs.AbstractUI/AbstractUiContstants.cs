@@ -10,7 +10,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 		{
 		}
 
-		public const string IAbstractUiContainer_Controls_BindingPointName = "Interlogic.Trainings.Plugs.AbstractUI.IAbstractUiContainer.Controls.BindingPointName";
+		public const string IAbstractUiContainer_Controls_BindingPointName = "Interlogic.Trainings.Plugs.AbstractUI.IAbstractUIContainer.Controls.BindingPointName";
 		public const string IAbstractUiNavigationControl_NavigationListeners_BindingPointName = "Interlogic.Trainings.Plugs.AbstractUI.IAbstractUiNavigationControl.NavigationListeners.BindingPointName";
 	}
 }

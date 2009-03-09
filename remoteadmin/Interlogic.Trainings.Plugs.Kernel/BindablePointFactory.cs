@@ -21,22 +21,27 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Installation related
         string _createTableCommandText =
-            @"CREATE TABLE [BindablePoint]
-            (
-	            [BindablePointId] [int] NOT NULL,
-	            [BindablePointDefinitonId] [int] NOT NULL,
-	            [InstanceId] [int] NOT NULL,
-	            [Active] [dbo].[active] NOT NULL,
-                CONSTRAINT [PK_BindablePoint] PRIMARY KEY CLUSTERED 
-                (
-	                [BindablePointId] ASC
-                )
-                WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-            ) ON [PRIMARY]" 
-            + SqlAction.CommandDelimiter + 
-            @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[BindablePoint].[Active]' , @futureonly='futureonly'";
+            @"CREATE TABLE [dbo].[BindablePoint](
+	[BindablePointId] [int] NOT NULL,
+	[BindablePointDefinitonId] [int] NOT NULL,
+	[InstanceId] [int] NOT NULL,
+	[Active] [dbo].[active] NOT NULL,
+ CONSTRAINT [PK_BindablePoint] PRIMARY KEY CLUSTERED 
+(
+	[BindablePointId] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
 
-        public override void InstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+GO
+EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[BindablePoint].[Active]' , @futureonly='futureonly'
+GO
+ALTER TABLE [dbo].[BindablePoint]  WITH CHECK ADD  CONSTRAINT [FK_BindablePoint_BindablePointDefinition1] FOREIGN KEY([BindablePointDefinitonId])
+REFERENCES [dbo].[BindablePointDefinition] ([BindablePointDefinitionId])
+GO
+ALTER TABLE [dbo].[BindablePoint]  WITH CHECK ADD  CONSTRAINT [FK_BindablePoint_Intance] FOREIGN KEY([InstanceId])
+REFERENCES [dbo].[Instance] ([InstanceId])";
+
+        public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
@@ -46,11 +51,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(createTableAction);
         }
 
-        public override void UpdateRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+        public override void UpdateRequiredEnvironment()
         {
         }
 
-        public override void UninstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+        public override void UninstallRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }

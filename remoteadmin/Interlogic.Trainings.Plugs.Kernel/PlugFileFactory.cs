@@ -21,22 +21,26 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Installation related
         string _createTableCommandText =
-            @"CREATE TABLE [PlugFile]
-            (
-	            [PlugFileId] [int] IDENTITY(1,1) NOT NULL,
-	            [PlugFileName] [dbo].[name] NOT NULL,
-	            [RelativeIncomingPath] [dbo].[path] NOT NULL,
-	            [DestinationLocationId] [int] NOT NULL,
-	            [DestinationPath] [dbo].[path] NOT NULL,
-	            [PlugId] [int] NOT NULL,
-	            CONSTRAINT [PK_PlugFile] PRIMARY KEY CLUSTERED 
-	            (
-		            [PlugFileId] ASC
-	            )
-	            WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-            ) ON [PRIMARY]";
+@"CREATE TABLE [dbo].[PlugFile](
+	[PlugFileId] [int] IDENTITY(1,1) NOT NULL,
+	[PlugFileName] [dbo].[name] NOT NULL,
+	[RelativeIncomingPath] [dbo].[path] NOT NULL,
+	[DestinationLocationId] [int] NOT NULL,
+	[DestinationPath] [dbo].[path] NOT NULL,
+	[PlugId] [int] NOT NULL,
+ CONSTRAINT [PK_PlugFile] PRIMARY KEY CLUSTERED 
+(
+	[PlugFileId] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[PlugFile]  WITH CHECK ADD  CONSTRAINT [FK_PlugFile_PlugIn] FOREIGN KEY([PlugId])
+REFERENCES [dbo].[PlugIn] ([PlugId])
+GO
+ALTER TABLE [dbo].[PlugFile]  WITH CHECK ADD  CONSTRAINT [FK_PlugFile_PlugLocation] FOREIGN KEY([DestinationLocationId])
+REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
 
-        public override void InstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
@@ -46,11 +50,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(createTableAction);
         }
 
-        public override void UpdateRequiredEnvironment(ISqlTransactionContext context)
+        public override void UpdateRequiredEnvironment()
         {
         }
 
-        public override void UninstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void UninstallRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }

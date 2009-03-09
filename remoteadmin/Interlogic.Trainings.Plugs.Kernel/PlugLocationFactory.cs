@@ -21,21 +21,22 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Installation related
         string _createTableCommandText =
-            @"CREATE TABLE [PlugLocation]
-            (
-	            [PlugLocationId] [int] NOT NULL,
-	            [PlugLocationName] [dbo].[systemName] NOT NULL,
-	            [PlugLocationDescription] [dbo].[description] NULL,
-	            [PlugLocationPath] [dbo].[path] NOT NULL,
-	            [PlugId] [int] NOT NULL,
-	            CONSTRAINT [PK_PlugLocation] PRIMARY KEY CLUSTERED 
-	            (
-		            [PlugLocationId] ASC
-	            )
-	            WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-            ) ON [PRIMARY]";
+            @"CREATE TABLE [dbo].[PlugLocation](
+	[PlugLocationId] [int] NOT NULL,
+	[PlugLocationName] [dbo].[systemName] NOT NULL,
+	[PlugLocationDescription] [dbo].[description] NULL,
+	[PlugLocationPath] [dbo].[path] NOT NULL,
+	[PlugId] [int] NOT NULL,
+ CONSTRAINT [PK_PlugLocation] PRIMARY KEY CLUSTERED 
+(
+	[PlugLocationId] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[PlugLocation]  WITH CHECK ADD  CONSTRAINT [FK_PlugLocation_PlugIn] FOREIGN KEY([PlugId])
+REFERENCES [dbo].[PlugIn] ([PlugId])";
 
-        public override void InstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
@@ -45,11 +46,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(createTableAction);
         }
 
-        public override void UpdateRequiredEnvironment(ISqlTransactionContext context)
+        public override void UpdateRequiredEnvironment()
         {
         }
 
-        public override void UninstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void UninstallRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }
