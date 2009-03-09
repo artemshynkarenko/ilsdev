@@ -35,11 +35,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
             set { _destinationLocationId = value; }
         }
 
-        private string _relativeDestinationPath;
-        public string RelativeDestinationPath
+        private string _destinationPath;
+        public string DestinationPath
         {
-            get { return _relativeDestinationPath; }
-            set { _relativeDestinationPath = value; }
+            get { return _destinationPath; }
+            set { _destinationPath = value; }
         }
 
         private int _plugId;

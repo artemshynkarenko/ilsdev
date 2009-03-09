@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B115432D-1A1A-42B6-ACB3-1271DE6EAC98}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -80,6 +80,7 @@
     <Compile Include="Instance.cs" />
     <Compile Include="InstanceController.cs" />
     <Compile Include="InstanceFactory.cs" />
+    <Compile Include="KernelPlugInstaller.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="PlugFileFactory.cs" />
     <Compile Include="PlugInController.cs" />

@@ -14,13 +14,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             set { _classDefinitionId = value; }
         }
 
-        private int? _parentClassDefinitionId;
-        public int? ParentClassDefinitionId
-        {
-            get { return _parentClassDefinitionId; }
-            set { _parentClassDefinitionId = value; }
-        }
-
         private string _className;
         public string ClassName
         {
@@ -28,11 +21,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
             set { _className = value; }
         }
 
-        private string _classDefinitionDescrition;
-        public string ClassDefinitionDescrition
+        private string _classDefinitionDescription;
+        public string ClassDefinitionDescription
         {
-            get { return _classDefinitionDescrition; }
-            set { _classDefinitionDescrition = value; }
+            get { return _classDefinitionDescription; }
+            set { _classDefinitionDescription = value; }
         }
 
         private bool _active;
@@ -55,5 +48,12 @@ namespace Interlogic.Trainings.Plugs.Kernel
             get { return _plugId; }
             set { _plugId = value; }
         }
-	}
+
+        private string _fileName;
+        public string FileName
+        {
+            get { return _fileName; }
+            set { _fileName = value; }
+        }
+    }
 }

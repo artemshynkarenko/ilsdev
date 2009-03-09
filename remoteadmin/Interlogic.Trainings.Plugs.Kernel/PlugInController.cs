@@ -39,15 +39,37 @@ namespace Interlogic.Trainings.Plugs.Kernel
                     locationFactory.Context = this.FactoryContext;
                     foreach (PlugLocation location in plug.Locations)
                     {
+                        location.PlugId = plug.PlugId;
                         locationFactory.InternalInsert(location);
                     }
-                }
-                using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
-                {
-                    fileFactory.Context = this.FactoryContext;
-                    foreach (PlugFile file in plug.Files)
+                    using (PlugFileFactory fileFactory = PlugFileFactory.GetInstance())
                     {
-                        fileFactory.InternalInsert(file);
+                        fileFactory.Context = this.FactoryContext;
+                        foreach (PlugFile file in plug.Files)
+                        {
+                            file.DestinationLocationId = locationFactory.InternalLoadByPrimaryKey(file.DestinationPath).PlugLocationId;
+                            file.PlugId = plug.PlugId;
+                            fileFactory.InternalInsert(file);
+                        }
+
+                        using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
+                        {
+                            classDefinitionFactory.Context = this.FactoryContext;
+                            foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
+                            {
+                                classDefinition.PlugId = plug.PlugId;
+                                int fileId = -1;
+                                foreach (PlugFile file in plug.Files)
+                                {
+                                    if (file.PlugFileName == classDefinition.FileName)
+                                        fileId = file.PlugFileId;
+                                }
+                                if (fileId == -1)
+                                    throw new Exception("Not found corresponding file for class definition!");
+                                classDefinition.FileId = fileId;
+                                classDefinitionFactory.InternalInsert(classDefinition);
+                            }
+                        }
                     }
                 }
 
@@ -56,16 +78,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 					bindablePointDefinitionFactory.Context = this.FactoryContext;
 					foreach (BindablePointDefinition bindablePointDefinition in plug.BindablePointDefinitions)
                     {
-
 						bindablePointDefinitionFactory.InternalInsert(bindablePointDefinition);
-                    }
-                }
-                using (ClassDefinitionFactory classDefinitionFactory = ClassDefinitionFactory.GetInstance())
-                {
-                    classDefinitionFactory.Context = this.FactoryContext;
-                    foreach (ClassDefinition classDefinition in plug.ClassDefinitions)
-                    {
-                        classDefinitionFactory.InternalInsert(classDefinition);
                     }
                 }
                 // TODO: something else?..

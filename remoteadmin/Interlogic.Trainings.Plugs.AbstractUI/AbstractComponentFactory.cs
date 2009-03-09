@@ -76,7 +76,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
             insertAction.CommandText = _insertCommandText;
 
             insertAction.AddParameter("@InstanceId", abstrComp.InstanceId, DbType.Int32);
-            throw new NotImplementedException("What to do with ParentComponentId?");
+            //throw new NotImplementedException("What to do with ParentComponentId?");
             //if (abstrComp.ParentComponent != null)
             //    insertAction.AddParameter("@ParentComponentId", abstrComp.ParentComponent.InstanceId, DbType.Int32);
             //else
@@ -123,7 +123,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
             updateAction.CommandText = _updateCommandText;
 
             updateAction.AddParameter("@InstanceId", abstrComp.InstanceId, DbType.Int32);
-            throw new NotImplementedException("What to do with InstanceId?");
+            //throw new NotImplementedException("What to do with InstanceId?");
             //if (abstrComp.ParentComponent != null)
             //    updateAction.AddParameter("@ParentComponentId", abstrComp.ParentComponent.InstanceId, DbType.Int32);
             //else
@@ -357,7 +357,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
             int widthValInd, int widthUnitInd, int posMethodInd)
         {
             base.TranslateToInstance(dataReader, abstrComp);
-            throw new NotImplementedException("What to do here with parent?");
+            //throw new NotImplementedException("What to do here with parent?");
             //if (!dataReader.IsDBNull(idParIndex)) abstrComp.ParentContent = AbstractComponentController.Load(idParIndex);
 
             int tVal;
