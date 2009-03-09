@@ -8,9 +8,9 @@ namespace Interlogic.Trainings.Plugs.Kernel.DomainModel
 {
 	public abstract class DomainFactory:IDisposable
 	{
-		public abstract void InstallRequiredEnvironment(ISqlTransactionContext context);
-		public abstract void UpdateRequiredEnvironment(ISqlTransactionContext context);
-		public abstract void UninstallRequiredEnvironment(ISqlTransactionContext context);
+		public abstract void InstallRequiredEnvironment();
+		public abstract void UpdateRequiredEnvironment();
+		public abstract void UninstallRequiredEnvironment();
 
 		
 		private ISqlTransactionContext _context;

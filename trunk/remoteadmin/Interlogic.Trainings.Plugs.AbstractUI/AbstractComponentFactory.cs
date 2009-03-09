@@ -35,24 +35,24 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
             GO
             ALTER TABLE [dbo].[AbstractComponent]  WITH CHECK ADD  CONSTRAINT [FK_AbstractComponent_Instance] FOREIGN KEY([InstanceId])
             REFERENCES [dbo].[Instance] ([InstanceId])";
-        public override void InstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            base.InstallRequiredEnvironment(context);
+            base.InstallRequiredEnvironment();
 
             RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
             createTableAction.CommandText = _createTableCommandText;
             this.ExecuteCommand(createTableAction);
         }
 
-        public override void UpdateRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+        public override void UpdateRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        public override void UninstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+        public override void UninstallRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }

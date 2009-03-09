@@ -40,9 +40,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
             + SqlAction.CommandDelimiter +
             @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Active]' , @futureonly='futureonly'";
 
-		public override void InstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+		public override void InstallRequiredEnvironment()
 		{
-            this.Context = context;
+            //this.Context = context;
             //Why we use context as parameter and context like a property?
 			if (this.Context == null)
 				throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
@@ -52,14 +52,15 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			this.ExecuteCommand(createTableAction);
 		}
 
-		public override void UpdateRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+		public override void UpdateRequiredEnvironment()
 		{
+            throw new Exception("The method or operation is not implemented.");
 		}
 
-		public override void UninstallRequiredEnvironment(Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext context)
+		public override void UninstallRequiredEnvironment()
 		{
-			throw new Exception("The method or operation is not implemented.");
-		}
+            throw new Exception("The method or operation is not implemented.");
+        }
 		#endregion
 
 		#region Insert

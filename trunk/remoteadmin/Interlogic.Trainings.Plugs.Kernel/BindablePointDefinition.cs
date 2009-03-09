@@ -21,6 +21,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
             set { _classDefinitionId = value; }
         }
 
+        private string _classDefinitionName;
+        public string ClassDefinitionName
+        {
+            get { return _classDefinitionName; }
+            set { _classDefinitionName = value; }
+        }
+
         private string _bindablePointName;
         public string BindablePointName
         {

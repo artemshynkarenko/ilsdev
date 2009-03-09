@@ -39,7 +39,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             + SqlAction.CommandDelimiter +
             @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[ClassDefinition].[Active]' , @futureonly='futureonly'";
 
-        public override void InstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
@@ -49,11 +49,11 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(createTableAction);
         }
 
-        public override void UpdateRequiredEnvironment(ISqlTransactionContext context)
+        public override void UpdateRequiredEnvironment()
         {
         }
 
-        public override void UninstallRequiredEnvironment(ISqlTransactionContext context)
+        public override void UninstallRequiredEnvironment()
         {
             throw new Exception("The method or operation is not implemented.");
         }

@@ -45,13 +45,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 			context.Connection = connection;
 			PlugInFactory factory = PlugInFactory.GetInstance();
 			factory.Context = context;
-			factory.InstallRequiredEnvironment(context);
-
-
-
-
-
-
+			factory.InstallRequiredEnvironment();
 		}
 
 		private void SQLServer_DropDown(object sender, EventArgs e)
