@@ -39,13 +39,24 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 			connectionString.Password = password;
 			connectionString.DataSource = serverName;
 			connectionString.InitialCatalog = dataBase;
-
 			connection.ConnectionString = connectionString.ToString();
 
-			context.Connection = connection;
-			PlugInFactory factory = PlugInFactory.GetInstance();
-			factory.Context = context;
-			factory.InstallRequiredEnvironment();
+			bool isNewIstallation = true;
+			if (isNewIstallation)
+			{
+				//TODO:remove
+				connection.ConnectionString = "Data Source=stranger;Initial Catalog=ASH_Trainings_RemoteAdmin2;User ID=sa;Password=1";
+
+				context.Connection = connection;
+				KernelPlugInstaller installer = new KernelPlugInstaller();
+				installer.InitialDir = @"c:\temp";
+				installer.RegisterPlug(context);
+				//Add ProgressForm here to see 
+			}
+
+			PlugInController controller = new PlugInController(context);
+			List<PlugIn> plugs = controller.LoadAll();
+			//Show plugs in property grid
 		}
 
 		private void SQLServer_DropDown(object sender, EventArgs e)
