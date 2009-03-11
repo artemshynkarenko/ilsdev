@@ -184,6 +184,24 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			}
 		}
 
+		public PlugIn LoadByPrimaryKey(int plugInId)
+		{
+			using (PlugInFactory factory = PlugInFactory.GetInstance())
+			{
+				factory.Context = this.FactoryContext;
+				return factory.InternalLoadByPrimaryKey(plugInId);
+			}
+		}
+
+		public PlugIn LoadByName(string plugName)
+		{
+			using (PlugInFactory factory = PlugInFactory.GetInstance())
+			{
+				factory.Context = this.FactoryContext;
+				return factory.InternalLoadByName(plugName);
+			}
+		}
+
 		void PlugFactory_FixChildren(object sender, DomainFactoryEventArgs e)
 		{
 			PlugIn plug = (PlugIn)e.Object;
