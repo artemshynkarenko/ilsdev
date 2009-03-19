@@ -11,30 +11,31 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
     {
         #region Installation related
 
-        private static readonly string _createTableCommandText =
-            @"CREATE TABLE [dbo].[AbstractComponent](
-                [InstanceId] [int] NOT NULL,
-                [ParentComponentId] [int] NULL,
-                [TopVal] [int] NOT NULL,
-                [TopUnit] [dbo].[measureUnit] NOT NULL,
-                [LeftVal] [int] NOT NULL,
-                [LeftUnit] [dbo].[measureUnit] NOT NULL,
-                [HeightVal] [int] NOT NULL,
-                [HeightUnit] [dbo].[measureUnit] NOT NULL,
-                [WidthVal] [int] NOT NULL,
-                [WidthUnit] [dbo].[measureUnit] NOT NULL,
-                [PositioningMethod] [dbo].[positioningType] NULL,
-             CONSTRAINT [PK_AbstractComponent] PRIMARY KEY CLUSTERED 
-            (
-                [InstanceId] ASC
-            )WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-            ) ON [PRIMARY]
-            GO
-            ALTER TABLE [dbo].[AbstractComponent]  WITH CHECK ADD  CONSTRAINT [FK_AbstractComponent_AbstractComponent] FOREIGN KEY([ParentComponentId])
-            REFERENCES [dbo].[AbstractComponent] ([InstanceId])
-            GO
-            ALTER TABLE [dbo].[AbstractComponent]  WITH CHECK ADD  CONSTRAINT [FK_AbstractComponent_Instance] FOREIGN KEY([InstanceId])
-            REFERENCES [dbo].[Instance] ([InstanceId])";
+//        private static readonly string _createTableCommandText =
+//            @"CREATE TABLE [dbo].[AbstractComponent](
+//                [InstanceId] [int] NOT NULL,
+//                [ParentComponentId] [int] NULL,
+//                [TopVal] [int] NOT NULL,
+//                [TopUnit] [dbo].[measureUnit] NOT NULL,
+//                [LeftVal] [int] NOT NULL,
+//                [LeftUnit] [dbo].[measureUnit] NOT NULL,
+//                [HeightVal] [int] NOT NULL,
+//                [HeightUnit] [dbo].[measureUnit] NOT NULL,
+//                [WidthVal] [int] NOT NULL,
+//                [WidthUnit] [dbo].[measureUnit] NOT NULL,
+//                [PositioningMethod] [dbo].[positioningType] NULL,
+//             CONSTRAINT [PK_AbstractComponent] PRIMARY KEY CLUSTERED 
+//            (
+//                [InstanceId] ASC
+//            )WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+//            ) ON [PRIMARY]
+//            GO
+//            ALTER TABLE [dbo].[AbstractComponent]  WITH CHECK ADD  CONSTRAINT [FK_AbstractComponent_AbstractComponent] FOREIGN KEY([ParentComponentId])
+//            REFERENCES [dbo].[AbstractComponent] ([InstanceId])
+//            GO
+//            ALTER TABLE [dbo].[AbstractComponent]  WITH CHECK ADD  CONSTRAINT [FK_AbstractComponent_Instance] FOREIGN KEY([InstanceId])
+//            REFERENCES [dbo].[Instance] ([InstanceId])";
+
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
@@ -42,9 +43,9 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 
             base.InstallRequiredEnvironment();
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+        //    RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+        //    createTableAction.CommandText = _createTableCommandText;
+        //    this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()

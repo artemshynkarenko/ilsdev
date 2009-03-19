@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.SqlServer.Management.Common;
 using Interlogic.Trainings.Plugs.Kernel;
-using Microsoft.SqlServer.Management.Smo;
 using Interlogic.Trainings.Plugs.Kernel.SqlActions;
-using System.Data.SqlClient;
+using Interlogic.Trainings.Plugs.AbstractUI;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
+
 namespace Interlogic.Trainings.Plugs.InstallApp
 {
 	public partial class Form1 : Form
@@ -17,11 +19,6 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 		public Form1()
 		{
 			InitializeComponent();
-
-		}
-
-		private void radioButton2_CheckedChanged(object sender, EventArgs e)
-		{
 
 		}
 
@@ -41,20 +38,26 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 			connectionString.InitialCatalog = dataBase;
 			connection.ConnectionString = connectionString.ToString();
 
-			bool isNewIstallation = true;
+			bool isNewIstallation = radioButton1.Checked;
 			if (isNewIstallation)
 			{
 				//TODO:remove
-				connection.ConnectionString = "Data Source=stranger;Initial Catalog=ASH_Trainings_RemoteAdmin2;User ID=sa;Password=1";
+				connection.ConnectionString = "Data Source=TORAX;Initial Catalog=ASH;User ID=sa;Password=1";
 
 				context.Connection = connection;
-				KernelPlugInstaller installer = new KernelPlugInstaller();
-				installer.InitialDir = @"c:\temp";
-				installer.RegisterPlug(context);
+				
+                KernelPlugInstaller kernelInstaller = new KernelPlugInstaller();
+				kernelInstaller.InitialDir = @"c:\temp";
+				kernelInstaller.RegisterPlug(context);
+
+                AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
+                abstractUIInstaller.RegisterPlug(context);
+
 				//Add ProgressForm here to see 
 			}
 
-			PlugInController controller = new PlugInController(context);
+            context.Connection = connection;
+            PlugInController controller = new PlugInController(context);
 			List<PlugIn> plugs = controller.LoadAll();
 			//Show plugs in property grid
 		}
@@ -115,11 +118,11 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (comboBox1.SelectedIndex != 0)
-			{
-				SQLServer.Text = "server" + comboBox1.SelectedIndex.ToString();
-			}
-			panel2.Visible = true;
+            //if (comboBox1.SelectedIndex != 0)
+            //{
+            //    SQLServer.Text = "server" + comboBox1.SelectedIndex.ToString();
+            //}
+            //panel2.Visible = true;
 
 		}
 
@@ -128,6 +131,5 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 			PlugListForm form = new PlugListForm();
 			form.Show();
 		}
-
 	}
 }

@@ -47,7 +47,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                         fileFactory.Context = this.FactoryContext;
                         foreach (PlugFile file in plug.Files)
                         {
-                            file.DestinationLocationId = locationFactory.InternalLoadByPrimaryKey(file.DestinationPath).PlugLocationId;
+                            file.DestinationLocationId = locationFactory.InternalLoadByName(file.DestinationPath).PlugLocationId;
                             file.PlugId = plug.PlugId;
                             fileFactory.InternalInsert(file);
                         }
@@ -62,7 +62,10 @@ namespace Interlogic.Trainings.Plugs.Kernel
                                 foreach (PlugFile file in plug.Files)
                                 {
                                     if (file.PlugFileName == classDefinition.FileName)
+                                    {
                                         fileId = file.PlugFileId;
+                                        break;
+                                    }
                                 }
                                 if (fileId == -1)
                                     throw new Exception("Not found corresponding file for class definition!");
@@ -84,7 +87,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 // TODO: something else?..
 				this.FactoryContext.Commit();
 			}
-			catch
+			catch (Exception e)
 			{
 				this.FactoryContext.RollBack();
 				throw;

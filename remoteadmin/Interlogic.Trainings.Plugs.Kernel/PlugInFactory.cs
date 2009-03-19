@@ -5,6 +5,7 @@ using System.Data;
 using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 using Interlogic.Trainings.Plugs.Kernel.SqlActions;
 using System.Globalization;
+using System.IO;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
@@ -22,33 +23,16 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 		#region Installation related
 
-        string _createTableCommandText =
-            @"CREATE TABLE [PlugIn]
-            (
-	            [PlugId] [int] IDENTITY(1,1) NOT NULL,
-	            [PlugName] [dbo].[systemName] NOT NULL,
-	            [PlugFriendlyName] [dbo].[name] NOT NULL,
-	            [PlugDescription] [dbo].[description] NULL,
-	            [PlugVersion] [dbo].[systemName] NULL,
-	            [Active] [dbo].[active] NOT NULL,
-                CONSTRAINT [PK_PlugIn] PRIMARY KEY CLUSTERED 
-                (
-	                [PlugId] ASC
-                )
-                WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-            ) ON [PRIMARY]" 
-            + SqlAction.CommandDelimiter +
-            @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[PlugIn].[Active]' , @futureonly='futureonly'";
-
+        private readonly string sqlFileName = @"..\..\..\Interlogic.Trainings.Plugs.Database\ash_database_v0.03.sql";
 		public override void InstallRequiredEnvironment()
 		{
-            //this.Context = context;
-            //Why we use context as parameter and context like a property?
 			if (this.Context == null)
 				throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
+            string command = new StreamReader(sqlFileName).ReadToEnd();
+          
 			RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-			createTableAction.CommandText = _createTableCommandText;
+			createTableAction.CommandText = command; //_createTableCommandText;
 			this.ExecuteCommand(createTableAction);
 		}
 
@@ -183,6 +167,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 plug = TranslateToPlug(readerAction.DataReader);
             }
             finally
@@ -206,6 +191,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 plug = TranslateToPlug(readerAction.DataReader);
             }
             finally

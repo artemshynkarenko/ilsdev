@@ -47,7 +47,7 @@
     <Compile Include="AbstractNavigationComponent.cs" />
     <Compile Include="AbstractNavigationComponentController.cs" />
     <Compile Include="AbstractNavigationComponentFactory.cs" />
-    <Compile Include="AbstractUiContstants.cs" />
+    <Compile Include="AbstractUIContstants.cs" />
     <Compile Include="AbstractUIPlugInstaller.cs" />
     <Compile Include="ComponentMeasurement.cs" />
     <Compile Include="ComponentPositioning.cs" />

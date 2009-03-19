@@ -5,7 +5,7 @@ using Interlogic.Trainings.Plugs.Kernel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-    class AbstractUIPlugInstaller: PlugInstaller
+    public class AbstractUIPlugInstaller: PlugInstaller
     {
         public override void RegisterPlug(ITransactionContext context)
         {
