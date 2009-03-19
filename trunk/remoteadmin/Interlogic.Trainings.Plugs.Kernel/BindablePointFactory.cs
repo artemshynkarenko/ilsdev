@@ -20,35 +20,35 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
         #region Installation related
-        string _createTableCommandText =
-            @"CREATE TABLE [dbo].[BindablePoint](
-	[BindablePointId] [int] NOT NULL,
-	[BindablePointDefinitonId] [int] NOT NULL,
-	[InstanceId] [int] NOT NULL,
-	[Active] [dbo].[active] NOT NULL,
- CONSTRAINT [PK_BindablePoint] PRIMARY KEY CLUSTERED 
-(
-	[BindablePointId] ASC
-)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[BindablePoint].[Active]' , @futureonly='futureonly'
-GO
-ALTER TABLE [dbo].[BindablePoint]  WITH CHECK ADD  CONSTRAINT [FK_BindablePoint_BindablePointDefinition1] FOREIGN KEY([BindablePointDefinitonId])
-REFERENCES [dbo].[BindablePointDefinition] ([BindablePointDefinitionId])
-GO
-ALTER TABLE [dbo].[BindablePoint]  WITH CHECK ADD  CONSTRAINT [FK_BindablePoint_Intance] FOREIGN KEY([InstanceId])
-REFERENCES [dbo].[Instance] ([InstanceId])";
+//        string _createTableCommandText =
+//            @"CREATE TABLE [dbo].[BindablePoint](
+//	[BindablePointId] [int] NOT NULL,
+//	[BindablePointDefinitonId] [int] NOT NULL,
+//	[InstanceId] [int] NOT NULL,
+//	[Active] [dbo].[active] NOT NULL,
+// CONSTRAINT [PK_BindablePoint] PRIMARY KEY CLUSTERED 
+//(
+//	[BindablePointId] ASC
+//)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+//) ON [PRIMARY]
+//
+//GO
+//EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[BindablePoint].[Active]' , @futureonly='futureonly'
+//GO
+//ALTER TABLE [dbo].[BindablePoint]  WITH CHECK ADD  CONSTRAINT [FK_BindablePoint_BindablePointDefinition1] FOREIGN KEY([BindablePointDefinitonId])
+//REFERENCES [dbo].[BindablePointDefinition] ([BindablePointDefinitionId])
+//GO
+//ALTER TABLE [dbo].[BindablePoint]  WITH CHECK ADD  CONSTRAINT [FK_BindablePoint_Intance] FOREIGN KEY([InstanceId])
+//REFERENCES [dbo].[Instance] ([InstanceId])";
 
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -176,6 +176,7 @@ REFERENCES [dbo].[Instance] ([InstanceId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 bindPoint = TranslateToBindablePoint(readerAction.DataReader);
             }
             finally
@@ -198,6 +199,7 @@ REFERENCES [dbo].[Instance] ([InstanceId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 bindPoint = TranslateToBindablePoint(readerAction.DataReader);
             }
             finally

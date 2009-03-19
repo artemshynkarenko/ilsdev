@@ -22,25 +22,25 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Installation related
 
-        string _createTableCommandText =
-            @"CREATE TABLE [dbo].[Instance](
-	            [InstanceId] [int] IDENTITY(1,1) NOT NULL,
-	            [ClassDefinitionId] [int] NOT NULL,
-	            [InstanceName] [dbo].[systemName] NOT NULL,
-             CONSTRAINT [PK_Intance] PRIMARY KEY CLUSTERED 
-            (
-	            [InstanceId] ASC
-            )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-            ) ON [PRIMARY]";
+//        string _createTableCommandText =
+//            @"CREATE TABLE [dbo].[Instance](
+//	            [InstanceId] [int] IDENTITY(1,1) NOT NULL,
+//	            [ClassDefinitionId] [int] NOT NULL,
+//	            [InstanceName] [dbo].[systemName] NOT NULL,
+//             CONSTRAINT [PK_Intance] PRIMARY KEY CLUSTERED 
+//            (
+//	            [InstanceId] ASC
+//            )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+//            ) ON [PRIMARY]";
 
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -165,6 +165,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 instance = TranslateToInstance(readerAction.DataReader);
             }
             finally
@@ -188,6 +189,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 instance = TranslateToInstance(readerAction.DataReader);
             }
             finally

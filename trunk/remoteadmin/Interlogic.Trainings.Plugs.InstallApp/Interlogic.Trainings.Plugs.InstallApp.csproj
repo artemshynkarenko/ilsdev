@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{493EA88C-3447-413C-91C6-2DA19EE751C7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -82,12 +82,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PlugListForm.resx">
       <DependentUpon>PlugListForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressForm.resx">
       <DependentUpon>ProgressForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -128,9 +131,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj">
+      <Project>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interlogic.Trainings.Plugs.Kernel\Interlogic.Trainings.Plugs.Kernel.csproj">
       <Project>{B115432D-1A1A-42B6-ACB3-1271DE6EAC98}</Project>
       <Name>Interlogic.Trainings.Plugs.Kernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.RootContent\Interlogic.Trainings.Plugs.RootContent.csproj">
+      <Project>{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}</Project>
+      <Name>Interlogic.Trainings.Plugs.RootContent</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

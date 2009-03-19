@@ -20,33 +20,33 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
         #region Installation related
-        string _createTableCommandText =
-            @"CREATE TABLE [ClassDefinition]
-            (
-	            [ClassDefinitionId] [int] IDENTITY(1,1) NOT NULL,
-	            [ParentClassDefinitionId] [int] NULL,
-	            [ClassName] [dbo].[name] NOT NULL,
-	            [ClassDefinitionDescrition] [dbo].[description] NOT NULL,
-	            [Active] [dbo].[active] NOT NULL,
-	            [FileId] [int] NOT NULL,
-	            [PlugId] [int] NOT NULL,
-	            CONSTRAINT [PK_ClassDefinition] PRIMARY KEY CLUSTERED 
-	            (
-		            [ClassDefinitionId] ASC
-	            )
-	            WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-            ) ON [PRIMARY]"
-            + SqlAction.CommandDelimiter +
-            @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[ClassDefinition].[Active]' , @futureonly='futureonly'";
+//        string _createTableCommandText =
+//            @"CREATE TABLE [ClassDefinition]
+//            (
+//	            [ClassDefinitionId] [int] IDENTITY(1,1) NOT NULL,
+//	            [ParentClassDefinitionId] [int] NULL,
+//	            [ClassName] [dbo].[name] NOT NULL,
+//	            [ClassDefinitionDescrition] [dbo].[description] NOT NULL,
+//	            [Active] [dbo].[active] NOT NULL,
+//	            [FileId] [int] NOT NULL,
+//	            [PlugId] [int] NOT NULL,
+//	            CONSTRAINT [PK_ClassDefinition] PRIMARY KEY CLUSTERED 
+//	            (
+//		            [ClassDefinitionId] ASC
+//	            )
+//	            WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+//            ) ON [PRIMARY]"
+//            + SqlAction.CommandDelimiter +
+//            @"EXEC sys.sp_bindefault @defname=N'[dbo].[TRUE]', @objname=N'[dbo].[ClassDefinition].[Active]' , @futureonly='futureonly'";
 
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -61,8 +61,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Insert
         string _insertCommandText =
-            @"INSERT INTO [ClassDefinition] ([ClassName],[ClassDefinitionDescription],[Active],[FileId],[PlugId],[FileName])
-                 VALUES (@ClassName,@ClassDefinitionDescription,@Active,@FileId,@PlugId,@FileName)";
+            @"INSERT INTO [ClassDefinition] ([ClassName],[ClassDefinitionDescription],[Active],[FileId],[PlugId])
+                 VALUES (@ClassName,@ClassDefinitionDescription,@Active,@FileId,@PlugId)";
         internal void InternalInsert(ClassDefinition classDef)
         {
             Insert(classDef);
@@ -78,7 +78,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             insertAction.AddParameter("@Active", classDef.Active, DbType.Boolean);
             insertAction.AddParameter("@FileId", classDef.FileId, DbType.Int32);
             insertAction.AddParameter("@PlugId", classDef.PlugId, DbType.Int32);
-            insertAction.AddParameter("@FileName", classDef.FileName, DbType.String);
             
             this.ExecuteCommand(insertAction);
             classDef.ClassDefinitionId = insertAction.InsertedIdentity;
@@ -93,8 +92,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                    [ClassDefinitionDescription] = @ClassDefinitionDescription,
                    [Active] = @Active,
                    [FileId] = @FileId,
-                   [PlugId] = @PlugId,
-                   [FileName] = @FileName 
+                   [PlugId] = @PlugId
              WHERE [ClassDefinitionId] = @ClassDefinitionId";
 
         internal void InternalUpdate(ClassDefinition classDef)
@@ -113,7 +111,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             updateAction.AddParameter("@Active", classDef.Active, DbType.Boolean);
             updateAction.AddParameter("@FileId", classDef.FileId, DbType.Int32);
             updateAction.AddParameter("@PlugId", classDef.PlugId, DbType.Int32);
-            updateAction.AddParameter("@FileName", classDef.FileName, DbType.String);
 
             this.ExecuteCommand(updateAction);
         }
@@ -156,7 +153,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     ClassDefinition res = new ClassDefinition();
-                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     classDefList.Add(res);
                 }
             }
@@ -181,6 +178,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 classDef = TranslateToClassDefinition(readerAction.DataReader);
             }
             finally
@@ -204,6 +202,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 classDef = TranslateToClassDefinition(readerAction.DataReader);
             }
             finally
@@ -231,7 +230,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     ClassDefinition res = new ClassDefinition();
-                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     classDefList.Add(res);
                 }
             }
@@ -260,7 +259,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     ClassDefinition res = new ClassDefinition();
-                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    TranslateToClassDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     classDefList.Add(res);
                 }
             }
@@ -273,14 +272,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         protected int[] GetClassDefinitionFieldOrdinals(IDataReader dataReader)
         {
-            int[] indexes = new int[7];
+            int[] indexes = new int[6];
             indexes[0] = dataReader.GetOrdinal("ClassDefinitionId");
             indexes[1] = dataReader.GetOrdinal("ClassName");
             indexes[2] = dataReader.GetOrdinal("ClassDefinitionDescription");
             indexes[3] = dataReader.GetOrdinal("Active");
             indexes[4] = dataReader.GetOrdinal("FileId");
             indexes[5] = dataReader.GetOrdinal("PlugId");
-            indexes[6] = dataReader.GetOrdinal("FileName");
             return indexes;
         }
 
@@ -293,9 +291,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
         protected void TranslateToClassDefinition(IDataReader dataReader, ClassDefinition classDef)
         {
             int[] indexes = GetClassDefinitionFieldOrdinals(dataReader);
-            TranslateToClassDefinition(dataReader, classDef, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5], indexes[6]);
+            TranslateToClassDefinition(dataReader, classDef, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5]);
         }
-        protected void TranslateToClassDefinition(IDataReader dataReader, ClassDefinition classDef, int idIndex, int nameIndex, int descrIndex, int activeIndex, int fileIndex, int plugIndex, int fileNameIndex)
+        protected void TranslateToClassDefinition(IDataReader dataReader, ClassDefinition classDef, int idIndex, int nameIndex, int descrIndex, int activeIndex, int fileIndex, int plugIndex)
         {
             classDef.ClassDefinitionId = dataReader.GetInt32(idIndex);
             classDef.ClassName = dataReader.GetString(nameIndex);
@@ -303,7 +301,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             classDef.Active = dataReader.GetBoolean(activeIndex);
             classDef.FileId = dataReader.GetInt32(fileIndex);
             classDef.PlugId = dataReader.GetInt32(plugIndex);
-            classDef.FileName = dataReader.GetString(fileNameIndex);
         }
         #endregion
     }

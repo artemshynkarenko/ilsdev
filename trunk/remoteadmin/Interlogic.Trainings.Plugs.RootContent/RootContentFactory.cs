@@ -20,23 +20,23 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         #region Installation related
 
-        private static readonly string _createTableCommandText =
-            @"CREATE TABLE [dbo].[RootContent](
-                [InstanceId] [int] NOT NULL,
-                [ParentInstanceId] [int] NULL,
-                [ContentFriendlyName] [dbo].[name] NOT NULL,
-                [ContentDescription] [dbo].[description] NULL,
-                [ContentImageSrc] [dbo].[name] NULL,
-                CONSTRAINT [PK_RootContent] PRIMARY KEY CLUSTERED 
-                (
-                [InstanceId] ASC
-                )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-                ) ON [PRIMARY]" 
-            + SqlAction.CommandDelimiter +
-                @"ALTER TABLE [dbo].[RootContent]  WITH CHECK ADD  CONSTRAINT [FK_RootContent_RootContent] FOREIGN KEY([ParentInstanceId])
-                REFERENCES [dbo].[RootContent] ([InstanceId])"
-            + SqlAction.CommandDelimiter +
-                @"ALTER TABLE [dbo].[RootContent] CHECK CONSTRAINT [FK_RootContent_RootContent]";
+//        private static readonly string _createTableCommandText =
+//            @"CREATE TABLE [dbo].[RootContent](
+//                [InstanceId] [int] NOT NULL,
+//                [ParentInstanceId] [int] NULL,
+//                [ContentFriendlyName] [dbo].[name] NOT NULL,
+//                [ContentDescription] [dbo].[description] NULL,
+//                [ContentImageSrc] [dbo].[name] NULL,
+//                CONSTRAINT [PK_RootContent] PRIMARY KEY CLUSTERED 
+//                (
+//                [InstanceId] ASC
+//                )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+//                ) ON [PRIMARY]" 
+//            + SqlAction.CommandDelimiter +
+//                @"ALTER TABLE [dbo].[RootContent]  WITH CHECK ADD  CONSTRAINT [FK_RootContent_RootContent] FOREIGN KEY([ParentInstanceId])
+//                REFERENCES [dbo].[RootContent] ([InstanceId])"
+//            + SqlAction.CommandDelimiter +
+//                @"ALTER TABLE [dbo].[RootContent] CHECK CONSTRAINT [FK_RootContent_RootContent]";
 
         public override void InstallRequiredEnvironment()
         {
@@ -45,9 +45,9 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
             base.InstallRequiredEnvironment();
             
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -185,6 +185,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 rootCont = TranslateToRootCont(readerAction.DataReader);
             }
             finally
@@ -208,6 +209,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 rootCont = TranslateToRootCont(readerAction.DataReader);
             }
             finally
@@ -232,6 +234,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 rootCont = TranslateToRootCont(readerAction.DataReader);
             }
             finally

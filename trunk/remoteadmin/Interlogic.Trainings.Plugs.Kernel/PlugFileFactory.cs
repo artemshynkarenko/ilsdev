@@ -20,34 +20,34 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
         #region Installation related
-        string _createTableCommandText =
-@"CREATE TABLE [dbo].[PlugFile](
-	[PlugFileId] [int] IDENTITY(1,1) NOT NULL,
-	[PlugFileName] [dbo].[name] NOT NULL,
-	[RelativeIncomingPath] [dbo].[path] NOT NULL,
-	[DestinationLocationId] [int] NOT NULL,
-	[DestinationPath] [dbo].[path] NOT NULL,
-	[PlugId] [int] NOT NULL,
- CONSTRAINT [PK_PlugFile] PRIMARY KEY CLUSTERED 
-(
-	[PlugFileId] ASC
-)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[PlugFile]  WITH CHECK ADD  CONSTRAINT [FK_PlugFile_PlugIn] FOREIGN KEY([PlugId])
-REFERENCES [dbo].[PlugIn] ([PlugId])
-GO
-ALTER TABLE [dbo].[PlugFile]  WITH CHECK ADD  CONSTRAINT [FK_PlugFile_PlugLocation] FOREIGN KEY([DestinationLocationId])
-REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
+//        string _createTableCommandText =
+//@"CREATE TABLE [dbo].[PlugFile](
+//	[PlugFileId] [int] IDENTITY(1,1) NOT NULL,
+//	[PlugFileName] [dbo].[name] NOT NULL,
+//	[RelativeIncomingPath] [dbo].[path] NOT NULL,
+//	[DestinationLocationId] [int] NOT NULL,
+//	[DestinationPath] [dbo].[path] NOT NULL,
+//	[PlugId] [int] NOT NULL,
+// CONSTRAINT [PK_PlugFile] PRIMARY KEY CLUSTERED 
+//(
+//	[PlugFileId] ASC
+//)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+//) ON [PRIMARY]
+//GO
+//ALTER TABLE [dbo].[PlugFile]  WITH CHECK ADD  CONSTRAINT [FK_PlugFile_PlugIn] FOREIGN KEY([PlugId])
+//REFERENCES [dbo].[PlugIn] ([PlugId])
+//GO
+//ALTER TABLE [dbo].[PlugFile]  WITH CHECK ADD  CONSTRAINT [FK_PlugFile_PlugLocation] FOREIGN KEY([DestinationLocationId])
+//REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
 
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -62,8 +62,8 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
 
         #region Insert
         string _insertCommandText =
-            @"INSERT INTO [PlugFile] ([PlugFileName],[RelativeIncomingPath],[DestinationLocationId],[DestinationPath],[PlugId])
-                 VALUES (@PlugFileName,@RelativeIncomingPath,@DestinationLocationId,@DestinationPath,@PlugId)";
+            @"INSERT INTO [PlugFile] ([PlugFileName],[RelativeIncomingPath],[DestinationLocationId],[PlugId])
+                 VALUES (@PlugFileName,@RelativeIncomingPath,@DestinationLocationId,@PlugId)";
 
         internal void InternalInsert(PlugFile plugFile)
         {
@@ -78,7 +78,6 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
             insertAction.AddParameter("@PlugFileName", plugFile.PlugFileName, DbType.String);
             insertAction.AddParameter("@RelativeIncomingPath", plugFile.RelativeIncomingPath, DbType.String);
             insertAction.AddParameter("@DestinationLocationId", plugFile.DestinationLocationId, DbType.Int32);
-            insertAction.AddParameter("@DestinationPath", plugFile.DestinationPath, DbType.String);
             insertAction.AddParameter("@PlugId", plugFile.PlugId, DbType.Int32);
 
             this.ExecuteCommand(insertAction);
@@ -93,7 +92,6 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
                SET [PlugFileName] = @PlugFileName,
                    [RelativeIncomingPath] = @RelativeIncomingPath,
                    [DestinationLocationId] = @DestinationLocationId,
-                   [DestinationPath] = @DestinationPath,
                    [PlugId] = @PlugId,
              WHERE [PlugFileId] = @PlugFileId";
 
@@ -111,7 +109,6 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
             updateAction.AddParameter("@PlugFileName", plugFile.PlugFileName, DbType.String);
             updateAction.AddParameter("@RelativeIncomingPath", plugFile.RelativeIncomingPath, DbType.String);
             updateAction.AddParameter("@DestinationLocationId", plugFile.DestinationLocationId, DbType.Int32);
-            updateAction.AddParameter("@DestinationPath", plugFile.DestinationPath, DbType.String);
             updateAction.AddParameter("@PlugId", plugFile.PlugId, DbType.Int32);
 
             this.ExecuteCommand(updateAction);
@@ -155,7 +152,7 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
                 while (dataReader.Read())
                 {
                     PlugFile res = new PlugFile();
-                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
                     plugFileList.Add(res);
                 }
             }
@@ -180,6 +177,7 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 plugFile = TranslateToPlugFile(readerAction.DataReader);
             }
             finally
@@ -207,7 +205,7 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
                 while (dataReader.Read())
                 {
                     PlugFile res = new PlugFile();
-                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
                     plugFileList.Add(res);
                 }
             }
@@ -236,7 +234,7 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
                 while (dataReader.Read())
                 {
                     PlugFile res = new PlugFile();
-                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
+                    TranslateToPlugFile(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4]);
                     plugFileList.Add(res);
                 }
             }
@@ -249,12 +247,11 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
 
         protected int[] GetPlugFileFieldOrdinals(IDataReader dataReader)
         {
-            int[] indexes = new int[6];
+            int[] indexes = new int[5];
             indexes[0] = dataReader.GetOrdinal("PlugFileId");
             indexes[1] = dataReader.GetOrdinal("PlugFileName");
             indexes[2] = dataReader.GetOrdinal("RelativeIncomingPath");
             indexes[3] = dataReader.GetOrdinal("DestinationLocationId");
-            indexes[4] = dataReader.GetOrdinal("DestinationPath");
             indexes[4] = dataReader.GetOrdinal("PlugId");
             return indexes;
         }
@@ -268,15 +265,14 @@ REFERENCES [dbo].[PlugLocation] ([PlugLocationId])";
         protected void TranslateToPlugFile(IDataReader dataReader, PlugFile plugFile)
         {
             int[] indexes = GetPlugFileFieldOrdinals(dataReader);
-            TranslateToPlugFile(dataReader, plugFile, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5]);
+            TranslateToPlugFile(dataReader, plugFile, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4]);
         }
-        protected void TranslateToPlugFile(IDataReader dataReader, PlugFile plugFile, int idIndex, int nameIndex, int relInPathIndex, int destLocIndex, int destPathIndex, int plugIndex)
+        protected void TranslateToPlugFile(IDataReader dataReader, PlugFile plugFile, int idIndex, int nameIndex, int relInPathIndex, int destLocIndex, int plugIndex)
         {
             plugFile.PlugFileId = dataReader.GetInt32(idIndex);
             plugFile.PlugFileName = dataReader.GetString(nameIndex);
             plugFile.RelativeIncomingPath = dataReader.GetString(relInPathIndex);
             plugFile.DestinationLocationId = dataReader.GetInt32(destLocIndex);
-            plugFile.DestinationPath = dataReader.GetString(destPathIndex);
             plugFile.PlugId = dataReader.GetInt32(plugIndex);
         }
         #endregion

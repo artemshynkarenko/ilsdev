@@ -20,30 +20,30 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
         #region Installation related
-        string _createTableCommandText =
-            @"CREATE TABLE [dbo].[PlugLocation](
-	[PlugLocationId] [int] NOT NULL,
-	[PlugLocationName] [dbo].[systemName] NOT NULL,
-	[PlugLocationDescription] [dbo].[description] NULL,
-	[PlugLocationPath] [dbo].[path] NOT NULL,
-	[PlugId] [int] NOT NULL,
- CONSTRAINT [PK_PlugLocation] PRIMARY KEY CLUSTERED 
-(
-	[PlugLocationId] ASC
-)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[PlugLocation]  WITH CHECK ADD  CONSTRAINT [FK_PlugLocation_PlugIn] FOREIGN KEY([PlugId])
-REFERENCES [dbo].[PlugIn] ([PlugId])";
+//        string _createTableCommandText =
+//            @"CREATE TABLE [dbo].[PlugLocation](
+//	[PlugLocationId] [int] NOT NULL,
+//	[PlugLocationName] [dbo].[systemName] NOT NULL,
+//	[PlugLocationDescription] [dbo].[description] NULL,
+//	[PlugLocationPath] [dbo].[path] NOT NULL,
+//	[PlugId] [int] NOT NULL,
+// CONSTRAINT [PK_PlugLocation] PRIMARY KEY CLUSTERED 
+//(
+//	[PlugLocationId] ASC
+//)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+//) ON [PRIMARY]
+//GO
+//ALTER TABLE [dbo].[PlugLocation]  WITH CHECK ADD  CONSTRAINT [FK_PlugLocation_PlugIn] FOREIGN KEY([PlugId])
+//REFERENCES [dbo].[PlugIn] ([PlugId])";
 
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -173,6 +173,7 @@ REFERENCES [dbo].[PlugIn] ([PlugId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 plugLoc = TranslateToPlugLocation(readerAction.DataReader);
             }
             finally
@@ -184,7 +185,7 @@ REFERENCES [dbo].[PlugIn] ([PlugId])";
 
         string _loadByNameCommandText = @"SELECT * FROM [PlugLocation] WHERE [PlugLocationName] = @PlugLocationName";
 
-        internal PlugLocation InternalLoadByPrimaryKey(string plugLocName)
+        internal PlugLocation InternalLoadByName(string plugLocName)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByNameCommandText;
@@ -195,6 +196,7 @@ REFERENCES [dbo].[PlugIn] ([PlugId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 plugLoc = TranslateToPlugLocation(readerAction.DataReader);
             }
             finally

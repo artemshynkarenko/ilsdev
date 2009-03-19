@@ -20,35 +20,35 @@ namespace Interlogic.Trainings.Plugs.Kernel
         }
 
         #region Installation related
-        string _createTableCommandText =
-@"CREATE TABLE [dbo].[BindablePointDefinition](
-	[BindablePointDefinitionId] [int] IDENTITY(1,1) NOT NULL,
-	[ClassDefinitionId] [int] NOT NULL,
-	[BindablePointName] [dbo].[systemName] NOT NULL,
-	[BindablePointFriendlyName] [dbo].[name] NOT NULL,
-	[BindablePointDescription] [dbo].[description] NULL,
-	[InterfaceId] [int] NULL,
-	[ClassDefinitionName] [dbo].[systemName] NOT NULL,
- CONSTRAINT [PK_BindablePointDefinition] PRIMARY KEY CLUSTERED 
-(
-	[BindablePointDefinitionId] ASC
-)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[BindablePointDefinition]  WITH CHECK ADD  CONSTRAINT [FK_BindablePointDefinition_ClassDefinition] FOREIGN KEY([ClassDefinitionId])
-REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])
-GO
-ALTER TABLE [dbo].[BindablePointDefinition]  WITH CHECK ADD  CONSTRAINT [FK_BindablePointDefinition_ClassDefinition1] FOREIGN KEY([InterfaceId])
-REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])";
+//        string _createTableCommandText =
+//@"CREATE TABLE [dbo].[BindablePointDefinition](
+//	[BindablePointDefinitionId] [int] IDENTITY(1,1) NOT NULL,
+//	[ClassDefinitionId] [int] NOT NULL,
+//	[BindablePointName] [dbo].[systemName] NOT NULL,
+//	[BindablePointFriendlyName] [dbo].[name] NOT NULL,
+//	[BindablePointDescription] [dbo].[description] NULL,
+//	[InterfaceId] [int] NULL,
+//	[ClassDefinitionName] [dbo].[systemName] NOT NULL,
+// CONSTRAINT [PK_BindablePointDefinition] PRIMARY KEY CLUSTERED 
+//(
+//	[BindablePointDefinitionId] ASC
+//)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+//) ON [PRIMARY]
+//GO
+//ALTER TABLE [dbo].[BindablePointDefinition]  WITH CHECK ADD  CONSTRAINT [FK_BindablePointDefinition_ClassDefinition] FOREIGN KEY([ClassDefinitionId])
+//REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])
+//GO
+//ALTER TABLE [dbo].[BindablePointDefinition]  WITH CHECK ADD  CONSTRAINT [FK_BindablePointDefinition_ClassDefinition1] FOREIGN KEY([InterfaceId])
+//REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])";
 
         public override void InstallRequiredEnvironment()
         {
             if (this.Context == null)
                 throw new InvalidOperationException("You should set Context property before calling InstallRequiredEnvironment method");
 
-            RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
-            createTableAction.CommandText = _createTableCommandText;
-            this.ExecuteCommand(createTableAction);
+            //RawSqlExecuteNonQueryAction createTableAction = new RawSqlExecuteNonQueryAction();
+            //createTableAction.CommandText = _createTableCommandText;
+            //this.ExecuteCommand(createTableAction);
         }
 
         public override void UpdateRequiredEnvironment()
@@ -185,6 +185,7 @@ REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 bindPointDef = TranslateToBindablePointDefinition(readerAction.DataReader);
             }
             finally
@@ -197,7 +198,7 @@ REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])";
 
         string _loadByNameCommandText = @"SELECT * FROM [BindablePointDefinition] WHERE [BindablePointName] = @BindablePointName";
 
-        internal BindablePointDefinition InternalLoadByPrimaryKey(string bindPointName)
+        internal BindablePointDefinition InternalLoadByName(string bindPointName)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByNameCommandText;
@@ -208,6 +209,7 @@ REFERENCES [dbo].[ClassDefinition] ([ClassDefinitionId])";
             this.ExecuteCommand(readerAction);
             try
             {
+                readerAction.DataReader.Read();
                 bindPointDef = TranslateToBindablePointDefinition(readerAction.DataReader);
             }
             finally
