@@ -72,18 +72,20 @@ namespace Interlogic.Trainings.Plugs.Kernel
                                 classDefinition.FileId = fileId;
                                 classDefinitionFactory.InternalInsert(classDefinition);
                             }
+
+				            using (BindablePointDefinitionFactory bindablePointDefinitionFactory = BindablePointDefinitionFactory.GetInstance())
+                            {
+					            bindablePointDefinitionFactory.Context = this.FactoryContext;
+					            foreach (BindablePointDefinition bindPointDef in plug.BindablePointDefinitions)
+                                {
+                                    bindPointDef.ClassDefinitionId = classDefinitionFactory.InternalLoadByClassName(bindPointDef.ClassDefinitionName).ClassDefinitionId;
+						            bindablePointDefinitionFactory.InternalInsert(bindPointDef);
+                                }
+                            }
                         }
                     }
                 }
 
-				using (BindablePointDefinitionFactory bindablePointDefinitionFactory = BindablePointDefinitionFactory.GetInstance())
-                {
-					bindablePointDefinitionFactory.Context = this.FactoryContext;
-					foreach (BindablePointDefinition bindablePointDefinition in plug.BindablePointDefinitions)
-                    {
-						bindablePointDefinitionFactory.InternalInsert(bindablePointDefinition);
-                    }
-                }
                 // TODO: something else?..
 				this.FactoryContext.Commit();
 			}

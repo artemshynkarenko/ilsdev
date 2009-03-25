@@ -60,12 +60,14 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
             bpd.BindablePointName = AbstractUiConstants.IAbstractUiContainer_Controls_BindingPointName;
             bpd.BindablePointFriendlyName = AbstractUiConstants.IAbstractUiContainer_Controls_BindingPointName;
             bpd.ClassDefinitionName = "Interlogic.Trainings.Plugs.Kernel.IAbstractContainer";
+            //bpd.BindablePointDescription = "damn description";
             plug.BindablePointDefinitions.Add(bpd);
 
             bpd = new BindablePointDefinition();
             bpd.BindablePointName = AbstractUiConstants.IAbstractUiNavigationControl_NavigationListeners_BindingPointName;
             bpd.BindablePointFriendlyName = AbstractUiConstants.IAbstractUiNavigationControl_NavigationListeners_BindingPointName;
             bpd.ClassDefinitionName = "Interlogic.Trainings.Plugs.Kernel.INavigationComponent";
+            //bpd.BindablePointDescription = "damn description";
             plug.BindablePointDefinitions.Add(bpd);
 
             PlugInController plugController = new PlugInController(context);

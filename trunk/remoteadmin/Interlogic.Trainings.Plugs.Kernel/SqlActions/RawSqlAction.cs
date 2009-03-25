@@ -17,7 +17,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
         public void AddParameter(string paramName, object paramValue, DbType paramType)
         {
             _paramNames.Add(paramName);
-            _paramValues.Add(paramValue);
+            _paramValues.Add(paramValue != null ? paramValue : DBNull.Value);
             _paramTypes.Add(paramType);
             _paramDirections.Add(ParameterDirection.Input);
         }

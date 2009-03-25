@@ -63,8 +63,8 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         #region Insert
         string _insertCommandText =
-            @"INSERT INTO [BindablePointDefinition] ([ClassDefinitionId],[BindablePointName],[BindablePointFriendlyName],[BindablePointDescription],[InterfaceId],[ClassDefinitionName])
-            VALUES (@ClassDefinitionId,@BindablePointName,@BindablePointFriendlyName,@BindablePointDescription,@InterfaceId,@ClassDefinitionName)";
+            @"INSERT INTO [BindablePointDefinition] ([ClassDefinitionId],[BindablePointName],[BindablePointFriendlyName],[BindablePointDescription],[InterfaceId])
+            VALUES (@ClassDefinitionId,@BindablePointName,@BindablePointFriendlyName,@BindablePointDescription,@InterfaceId)";
 
         internal void InternalInsert(BindablePointDefinition bindPointDef)
         {
@@ -81,7 +81,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             insertAction.AddParameter("@BindablePointFriendlyName", bindPointDef.BindablePointFriendlyName, DbType.String);
             insertAction.AddParameter("@BindablePointDescription", bindPointDef.BindablePointDescription, DbType.String);
             insertAction.AddParameter("@InterfaceId", bindPointDef.InterfaceId, DbType.Int32);
-            insertAction.AddParameter("@ClassDefinitionName", bindPointDef.ClassDefinitionName, DbType.String);
 
             this.ExecuteCommand(insertAction);
             bindPointDef.BindablePointDefinitionId = insertAction.InsertedIdentity;
@@ -96,8 +95,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                    [BindablePointName] = @BindablePointName,
                    [BindablePointFriendlyName] = @BindablePointFriendlyName,
                    [BindablePointDescription] = @BindablePointDescription,
-                   [InterfaceId] = @InterfaceId,
-                   [ClassDefinitionName] = @ClassDefinitionName
+                   [InterfaceId] = @InterfaceId
              WHERE [BindablePointDefinitionId] = @BindablePointDefinitionId";
 
         internal void InternalUpdate(BindablePointDefinition bindPointDef)
@@ -116,7 +114,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
             updateAction.AddParameter("@BindablePointFriendlyName", bindPointDef.BindablePointFriendlyName, DbType.String);
             updateAction.AddParameter("@BindablePointDescription", bindPointDef.BindablePointDescription, DbType.String);
             updateAction.AddParameter("@InterfaceId", bindPointDef.InterfaceId, DbType.Int32);
-            updateAction.AddParameter("@ClassDefinitionName", bindPointDef.ClassDefinitionName, DbType.String);
 
             this.ExecuteCommand(updateAction);
         }
@@ -159,7 +156,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     BindablePointDefinition res = new BindablePointDefinition();
-                    TranslateToBindablePointDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    TranslateToBindablePointDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     bindPointDefList.Add(res);
                 }
             }
@@ -237,7 +234,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     BindablePointDefinition res = new BindablePointDefinition();
-                    TranslateToBindablePointDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    TranslateToBindablePointDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     bindPointDefList.Add(res);
                 }
             }
@@ -267,7 +264,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 while (dataReader.Read())
                 {
                     BindablePointDefinition res = new BindablePointDefinition();
-                    TranslateToBindablePointDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5], ordinals[6]);
+                    TranslateToBindablePointDefinition(dataReader, res, ordinals[0], ordinals[1], ordinals[2], ordinals[3], ordinals[4], ordinals[5]);
                     bindPointDefList.Add(res);
                 }
             }
@@ -281,14 +278,13 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         protected int[] GetBindablePointDefinitionFieldOrdinals(IDataReader dataReader)
         {
-            int[] indexes = new int[7];
+            int[] indexes = new int[6];
             indexes[0] = dataReader.GetOrdinal("BindablePointDefinitionId");
             indexes[1] = dataReader.GetOrdinal("ClassDefinitionId");
             indexes[2] = dataReader.GetOrdinal("BindablePointName");
             indexes[3] = dataReader.GetOrdinal("BindablePointFriendlyName");
             indexes[4] = dataReader.GetOrdinal("BindablePointDescription");
             indexes[5] = dataReader.GetOrdinal("InterfaceId");
-            indexes[6] = dataReader.GetOrdinal("ClassDefinitionName");
             return indexes;
         }
 
@@ -301,9 +297,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
         protected void TranslateToBindablePointDefinition(IDataReader dataReader, BindablePointDefinition bindPointDef)
         {
             int[] indexes = GetBindablePointDefinitionFieldOrdinals(dataReader);
-            TranslateToBindablePointDefinition(dataReader, bindPointDef, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5], indexes[6]);
+            TranslateToBindablePointDefinition(dataReader, bindPointDef, indexes[0], indexes[1], indexes[2], indexes[3], indexes[4], indexes[5]);
         }
-        protected void TranslateToBindablePointDefinition(IDataReader dataReader, BindablePointDefinition bindPointDef, int idIndex, int classDefIdIndex, int nameIndex, int friendlyNameIndex, int descrIndex, int interfIndex, int classDefNameIndex)
+        protected void TranslateToBindablePointDefinition(IDataReader dataReader, BindablePointDefinition bindPointDef, int idIndex, int classDefIdIndex, int nameIndex, int friendlyNameIndex, int descrIndex, int interfIndex)
         {
             bindPointDef.BindablePointDefinitionId = dataReader.GetInt32(idIndex);
             bindPointDef.ClassDefinitionId = dataReader.GetInt32(classDefIdIndex);
@@ -313,7 +309,6 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 bindPointDef.BindablePointDescription = dataReader.GetString(descrIndex);
             if (!dataReader.IsDBNull(interfIndex))
                 bindPointDef.InterfaceId = dataReader.GetInt32(interfIndex);
-            bindPointDef.ClassDefinitionName = dataReader.GetString(classDefNameIndex);
         }
         #endregion
     }
