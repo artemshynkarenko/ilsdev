@@ -28,118 +28,73 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.DBName = new System.Windows.Forms.ComboBox();
-            this.SQLServer = new System.Windows.Forms.ComboBox();
+            this.SQLServerText = new System.Windows.Forms.ComboBox();
             this.Password = new System.Windows.Forms.TextBox();
-            this.Username = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.OK = new System.Windows.Forms.Button();
-            this.Cancel = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.OKButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AuthtenticationTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.Username = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Location = new System.Drawing.Point(6, 10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(285, 47);
-            this.panel1.TabIndex = 0;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 26);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(136, 17);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Open existing database";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 3);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(126, 17);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Create new database";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.DBName);
-            this.panel2.Controls.Add(this.SQLServer);
-            this.panel2.Controls.Add(this.Password);
-            this.panel2.Controls.Add(this.Username);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(6, 60);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(285, 120);
-            this.panel2.TabIndex = 1;
             // 
             // DBName
             // 
+            this.DBName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DBName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DBName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DBName.FormattingEnabled = true;
-            this.DBName.Items.AddRange(new object[] {
-            "ash"});
-            this.DBName.Location = new System.Drawing.Point(77, 40);
+            this.DBName.Location = new System.Drawing.Point(108, 163);
             this.DBName.Name = "DBName";
-            this.DBName.Size = new System.Drawing.Size(197, 21);
-            this.DBName.TabIndex = 1;
-            this.DBName.Text = "ash";
+            this.DBName.Size = new System.Drawing.Size(345, 21);
+            this.DBName.TabIndex = 3;
             this.DBName.DropDown += new System.EventHandler(this.DBName_DropDown);
             // 
-            // SQLServer
+            // SQLServerText
             // 
-            this.SQLServer.FormattingEnabled = true;
-            this.SQLServer.Items.AddRange(new object[] {
-            "torax"});
-            this.SQLServer.Location = new System.Drawing.Point(77, 18);
-            this.SQLServer.Name = "SQLServer";
-            this.SQLServer.Size = new System.Drawing.Size(197, 21);
-            this.SQLServer.TabIndex = 0;
-            this.SQLServer.Text = "torax";
-            this.SQLServer.SelectedIndexChanged += new System.EventHandler(this.SQLServer_DropDown);
-            this.SQLServer.DropDown += new System.EventHandler(this.SQLServer_DropDown);
+            this.SQLServerText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SQLServerText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.SQLServerText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.SQLServerText.FormattingEnabled = true;
+            this.SQLServerText.Location = new System.Drawing.Point(108, 49);
+            this.SQLServerText.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.SQLServerText.Name = "SQLServerText";
+            this.SQLServerText.Size = new System.Drawing.Size(347, 21);
+            this.SQLServerText.TabIndex = 0;
+            this.SQLServerText.SelectedIndexChanged += new System.EventHandler(this.SQLServer_DropDown);
+            this.SQLServerText.DropDown += new System.EventHandler(this.SQLServer_DropDown);
             // 
             // Password
             // 
-            this.Password.Location = new System.Drawing.Point(77, 86);
+            this.Password.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Password.Location = new System.Drawing.Point(132, 130);
             this.Password.Name = "Password";
             this.Password.PasswordChar = '*';
-            this.Password.Size = new System.Drawing.Size(197, 20);
-            this.Password.TabIndex = 3;
-            this.Password.Text = "1";
-            // 
-            // Username
-            // 
-            this.Username.Location = new System.Drawing.Point(77, 63);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(197, 20);
-            this.Username.TabIndex = 2;
-            this.Username.Text = "sa";
+            this.Password.Size = new System.Drawing.Size(321, 20);
+            this.Password.TabIndex = 2;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(7, 86);
+            this.label4.Location = new System.Drawing.Point(34, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 3;
@@ -148,99 +103,195 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 63);
+            this.label3.Location = new System.Drawing.Point(34, 105);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
+            this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Username:";
+            this.label3.Text = "Login:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 40);
+            this.label2.Location = new System.Drawing.Point(14, 166);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "DB name:";
+            this.label2.Text = "Database:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 18);
+            this.label1.Location = new System.Drawing.Point(14, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "SQL server:";
+            this.label1.Text = "Server name:";
             // 
-            // OK
+            // panel3
             // 
-            this.OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK.Location = new System.Drawing.Point(146, 186);
-            this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(68, 25);
-            this.OK.TabIndex = 2;
-            this.OK.Text = "OK";
-            this.OK.UseVisualStyleBackColor = true;
-            this.OK.Click += new System.EventHandler(this.OK_Click);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 222);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(465, 32);
+            this.panel3.TabIndex = 4;
             // 
-            // Cancel
+            // panel4
             // 
-            this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel.Location = new System.Drawing.Point(220, 186);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(68, 25);
-            this.Cancel.TabIndex = 3;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseVisualStyleBackColor = true;
+            this.panel4.Controls.Add(this.OKButton);
+            this.panel4.Controls.Add(this.CancelButton);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(311, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(154, 32);
+            this.panel4.TabIndex = 5;
             // 
-            // button1
+            // OKButton
             // 
-            this.button1.Location = new System.Drawing.Point(510, 374);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "buttonViewPlugs";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.OKButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OKButton.Location = new System.Drawing.Point(3, 7);
+            this.OKButton.Name = "OKButton";
+            this.OKButton.Size = new System.Drawing.Size(68, 25);
+            this.OKButton.TabIndex = 6;
+            this.OKButton.Text = "Connect";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OK_Click);
+            // 
+            // CancelButton
+            // 
+            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelButton.Location = new System.Drawing.Point(77, 7);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(68, 25);
+            this.CancelButton.TabIndex = 5;
+            this.CancelButton.Text = "Close";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.AuthtenticationTypeComboBox);
+            this.panel5.Controls.Add(this.radioButton1);
+            this.panel5.Controls.Add(this.radioButton2);
+            this.panel5.Controls.Add(this.DBName);
+            this.panel5.Controls.Add(this.Username);
+            this.panel5.Controls.Add(this.Password);
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.SQLServerText);
+            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(465, 195);
+            this.panel5.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 76);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Authtentication:";
+            // 
+            // AuthtenticationTypeComboBox
+            // 
+            this.AuthtenticationTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.AuthtenticationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AuthtenticationTypeComboBox.FormattingEnabled = true;
+            this.AuthtenticationTypeComboBox.Items.AddRange(new object[] {
+            "SQL Server Authentication",
+            "Windows Authentication"});
+            this.AuthtenticationTypeComboBox.Location = new System.Drawing.Point(108, 76);
+            this.AuthtenticationTypeComboBox.Name = "AuthtenticationTypeComboBox";
+            this.AuthtenticationTypeComboBox.Size = new System.Drawing.Size(345, 21);
+            this.AuthtenticationTypeComboBox.TabIndex = 6;
+            this.AuthtenticationTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.AuthtenticationTypeComboBox_SelectedIndexChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(12, 3);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(126, 17);
+            this.radioButton1.TabIndex = 5;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Create new database";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(12, 26);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(136, 17);
+            this.radioButton2.TabIndex = 4;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Open existing database";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // Username
+            // 
+            this.Username.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Username.Location = new System.Drawing.Point(132, 105);
+            this.Username.Name = "Username";
+            this.Username.Size = new System.Drawing.Size(321, 20);
+            this.Username.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.panel5);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(465, 254);
+            this.panel6.TabIndex = 7;
             // 
             // Form1
             // 
-            this.AcceptButton = this.OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 494);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.Cancel);
-            this.Controls.Add(this.OK);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(465, 254);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel6);
             this.Name = "Form1";
-            this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.Text = "Plugin";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button OK;
-        private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.TextBox Password;
-        private System.Windows.Forms.TextBox Username;
-        private System.Windows.Forms.ComboBox SQLServer;
+        private System.Windows.Forms.ComboBox SQLServerText;
         private System.Windows.Forms.ComboBox DBName;
-		private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button OKButton;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox Username;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.ComboBox AuthtenticationTypeComboBox;
+        private System.Windows.Forms.Label label5;
 	}
 }
 
