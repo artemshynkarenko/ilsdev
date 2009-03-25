@@ -54,6 +54,7 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 			if (!this.ExecutingInTransaction)
 				throw new InvalidOperationException("You should start transaction before commiting it");
 			this.Transaction.Commit();
+            this.Transaction = null;
 			if (!this._connectionWasOpened)
 				this.Connection.Close();
 		}
@@ -63,7 +64,8 @@ namespace Interlogic.Trainings.Plugs.Kernel.SqlActions
 			if (!this.ExecutingInTransaction)
                 throw new InvalidOperationException("You should start transaction before rolling it back");
 			this.Transaction.Rollback();
-			if (!this._connectionWasOpened)
+            this.Transaction = null;
+            if (!this._connectionWasOpened)
 				this.Connection.Close();
 		}
 
