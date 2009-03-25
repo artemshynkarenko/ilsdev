@@ -28,124 +28,132 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.listView1 = new System.Windows.Forms.ListView();
-			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.groupBoxInstallNew = new System.Windows.Forms.GroupBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.panel1.SuspendLayout();
-			this.panel2.SuspendLayout();
-			this.groupBoxInstallNew.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.listView1);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(734, 554);
-			this.panel1.TabIndex = 0;
-			// 
-			// panel2
-			// 
-			this.panel2.Controls.Add(this.groupBoxInstallNew);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(0, 554);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(734, 100);
-			this.panel2.TabIndex = 1;
-			// 
-			// listView1
-			// 
-			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.listView1.Location = new System.Drawing.Point(0, 0);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(734, 554);
-			this.listView1.TabIndex = 0;
-			this.listView1.UseCompatibleStateImageBehavior = false;
-			this.listView1.View = System.Windows.Forms.View.List;
-			// 
-			// columnHeader1
-			// 
-			this.columnHeader1.Text = "PlugIn Name";
-			// 
-			// columnHeader2
-			// 
-			this.columnHeader2.Text = "PlugIn Alias";
-			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(24, 19);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(284, 20);
-			this.textBox1.TabIndex = 0;
-			// 
-			// groupBoxInstallNew
-			// 
-			this.groupBoxInstallNew.Controls.Add(this.button2);
-			this.groupBoxInstallNew.Controls.Add(this.button1);
-			this.groupBoxInstallNew.Controls.Add(this.textBox1);
-			this.groupBoxInstallNew.Location = new System.Drawing.Point(125, 0);
-			this.groupBoxInstallNew.Name = "groupBoxInstallNew";
-			this.groupBoxInstallNew.Size = new System.Drawing.Size(436, 100);
-			this.groupBoxInstallNew.TabIndex = 1;
-			this.groupBoxInstallNew.TabStop = false;
-			this.groupBoxInstallNew.Text = "Install New";
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(24, 45);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 1;
-			this.button1.Text = "Install";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(325, 16);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 2;
-			this.button2.Text = "Browse";
-			this.button2.UseVisualStyleBackColor = true;
-			// 
-			// PlugListForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(734, 654);
-			this.Controls.Add(this.panel1);
-			this.Controls.Add(this.panel2);
-			this.Name = "PlugListForm";
-			this.Text = "PlugListForm";
-			this.panel1.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
-			this.groupBoxInstallNew.ResumeLayout(false);
-			this.groupBoxInstallNew.PerformLayout();
-			this.ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.PluginListView = new System.Windows.Forms.ListView();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.menuPlugin = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.installNewPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uninstallPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.panel1.SuspendLayout();
+            this.menuPlugin.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.PluginListView);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(734, 654);
+            this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // PluginListView
+            // 
+            this.PluginListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader1});
+            this.PluginListView.ContextMenuStrip = this.menuPlugin;
+            this.PluginListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PluginListView.FullRowSelect = true;
+            this.PluginListView.Location = new System.Drawing.Point(0, 0);
+            this.PluginListView.Name = "PluginListView";
+            this.PluginListView.Size = new System.Drawing.Size(734, 654);
+            this.PluginListView.TabIndex = 0;
+            this.PluginListView.UseCompatibleStateImageBehavior = false;
+            this.PluginListView.View = System.Windows.Forms.View.Details;
+            this.PluginListView.SelectedIndexChanged += new System.EventHandler(this.PluginListView_SelectedIndexChanged);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Name";
+            this.columnHeader3.Width = 200;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Version";
+            this.columnHeader4.Width = 100;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Description";
+            this.columnHeader5.Width = 500;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Path";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // menuPlugin
+            // 
+            this.menuPlugin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.installNewPluginToolStripMenuItem,
+            this.uninstallPluginToolStripMenuItem,
+            this.updateToolStripMenuItem});
+            this.menuPlugin.Name = "menuPlugin";
+            this.menuPlugin.Size = new System.Drawing.Size(135, 70);
+            this.menuPlugin.Opening += new System.ComponentModel.CancelEventHandler(this.menuPlugin_Opening);
+            // 
+            // installNewPluginToolStripMenuItem
+            // 
+            this.installNewPluginToolStripMenuItem.Name = "installNewPluginToolStripMenuItem";
+            this.installNewPluginToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.installNewPluginToolStripMenuItem.Text = "Install ";
+            this.installNewPluginToolStripMenuItem.Click += new System.EventHandler(this.installNewPluginToolStripMenuItem_Click);
+            // 
+            // uninstallPluginToolStripMenuItem
+            // 
+            this.uninstallPluginToolStripMenuItem.Enabled = false;
+            this.uninstallPluginToolStripMenuItem.Name = "uninstallPluginToolStripMenuItem";
+            this.uninstallPluginToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.uninstallPluginToolStripMenuItem.Text = "Uninstall ";
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Enabled = false;
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.updateToolStripMenuItem.Text = "Update ";
+            // 
+            // PlugListForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(734, 654);
+            this.Controls.Add(this.panel1);
+            this.Name = "PlugListForm";
+            this.Text = "PlugListForm";
+            this.panel1.ResumeLayout(false);
+            this.menuPlugin.ResumeLayout(false);
+            this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.ListView listView1;
-		private System.Windows.Forms.ColumnHeader columnHeader1;
-		private System.Windows.Forms.ColumnHeader columnHeader2;
-		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.GroupBox groupBoxInstallNew;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListView PluginListView;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ContextMenuStrip menuPlugin;
+        private System.Windows.Forms.ToolStripMenuItem installNewPluginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uninstallPluginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
 	}
 }
