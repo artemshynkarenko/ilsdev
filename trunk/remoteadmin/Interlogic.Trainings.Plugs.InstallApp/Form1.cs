@@ -15,25 +15,25 @@ using System.Threading;
 
 namespace Interlogic.Trainings.Plugs.InstallApp
 {
-	public partial class Form1 : Form
-	{
-		public Form1()
-		{
-			InitializeComponent();
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
             AuthtenticationTypeComboBox.SelectedIndex = 0;
 
-		}
+        }
         private SqlConnection CreateSQLConnection()
         {
             string serverName = SQLServerText.Text,
                    userName = Username.Text,
                    password = Password.Text,
                    dataBase = DBName.Text;
-            
+
             bool isIntegratedSecurity = AuthtenticationTypeComboBox.SelectedIndex != 0;
             SqlConnection connection = new SqlConnection();
             SqlConnectionStringBuilder connectionString = new SqlConnectionStringBuilder();
-     
+
             if (isIntegratedSecurity)
             {
                 connectionString.Add("Integrated Security", "SSPI");
@@ -43,49 +43,49 @@ namespace Interlogic.Trainings.Plugs.InstallApp
                 connectionString.UserID = userName;
                 connectionString.Password = password;
             }
-            if(!String.IsNullOrEmpty( dataBase))
+            if (!String.IsNullOrEmpty(dataBase))
                 connectionString.InitialCatalog = dataBase;
             connectionString.DataSource = serverName;
-            
+
             connection.ConnectionString = connectionString.ToString();
             return connection;
         }
-		private void OK_Click(object sender, EventArgs e)
-		{
-		
-			SqlTransactionContext context = new SqlTransactionContext();
+        private void OK_Click(object sender, EventArgs e)
+        {
+
+            SqlTransactionContext context = new SqlTransactionContext();
             context.Connection = CreateSQLConnection();
-			bool isNewIstallation = radioButton1.Checked;
+            bool isNewIstallation = radioButton1.Checked;
             if (isNewIstallation)
             {
                 //TODO:remove
                 //connection.ConnectionString = "Data Source=TORAX;Initial Catalog=ASH;User ID=sa;Password=1";
 
-                
+
                 ProgressForm progressForm = new ProgressForm();
-                 progressForm.Show();
-                 SaveConnectionInfo();
+                progressForm.Show();
+                SaveConnectionInfo();
                 try
-                {                    
+                {
                     KernelPlugInstaller kernelInstaller = new KernelPlugInstaller();
                     kernelInstaller.InitialDir = @"c:\temp";
                     kernelInstaller.RegisterPlug(context);
-                  
-                 
-               AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
-               abstractUIInstaller.RegisterPlug(context);
+
+
+                    AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
+                    abstractUIInstaller.RegisterPlug(context);
 
                     //Add ProgressForm here to see 
                 }
                 catch (Exception ex)
-                { 
+                {
                     Console.WriteLine(ex.ToString());
 
                 }
                 progressForm.TopMost = true;
                 progressForm.Hide();
                 progressForm.ShowDialog();
-                
+
             }
             //context.Connection = connection;
             try
@@ -99,20 +99,20 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(),"Error",MessageBoxButtons.OK  ,MessageBoxIcon.Error );
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-		}
+        }
 
         private void SaveConnectionInfo()
         {
-         
-            
+
+
         }
 
-		private void SQLServer_DropDown(object sender, EventArgs e)
-		{
-			FillListOfSQLServer();
-		}
+        private void SQLServer_DropDown(object sender, EventArgs e)
+        {
+            FillListOfSQLServer();
+        }
 
         private void FillListOfSQLServer()
         {
@@ -142,16 +142,16 @@ namespace Interlogic.Trainings.Plugs.InstallApp
         }
 
 
-		private void DBName_DropDown(object sender, EventArgs e)
-		{
+        private void DBName_DropDown(object sender, EventArgs e)
+        {
 
-			if (!String.IsNullOrEmpty(SQLServerText.Name))
-			{
-				FillDatabaseList();
+            if (!String.IsNullOrEmpty(SQLServerText.Name))
+            {
+                FillDatabaseList();
 
-			}
+            }
 
-		}
+        }
         private void FillDatabaseList()
         {
             try
@@ -162,7 +162,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
                 DatabaseCollection databaseCollection = server.Databases;
                 DBName.Items.Clear();
                 List<string> dbList = new List<string>();
-                    foreach (Database db in databaseCollection)
+                foreach (Database db in databaseCollection)
                     dbList.Add(db.Name);
                 dbList.Sort();
                 foreach (string dbName in dbList)
@@ -170,36 +170,36 @@ namespace Interlogic.Trainings.Plugs.InstallApp
                     DBName.Items.Add(DBName);
                 }
             }
-             catch (Exception ex)
-             {
+            catch (Exception ex)
+            {
 
-             }
+            }
         }
 
 
-	
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             //if (comboBox1.SelectedIndex != 0)
             //{
             //    SQLServer.Text = "server" + comboBox1.SelectedIndex.ToString();
             //}
             //panel2.Visible = true;
 
-		}
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			PlugListForm form = new PlugListForm();
-			form.Show();
-		}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PlugListForm form = new PlugListForm();
+            form.Show();
+        }
 
-    
+
 
         private void AuthtenticationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool isIntegratedSecurity = AuthtenticationTypeComboBox.SelectedIndex !=0;
+            bool isIntegratedSecurity = AuthtenticationTypeComboBox.SelectedIndex != 0;
             Username.Enabled = !isIntegratedSecurity;
             Password.Enabled = !isIntegratedSecurity;
         }
@@ -214,5 +214,5 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             this.Close();
         }
 
-	}
+    }
 }

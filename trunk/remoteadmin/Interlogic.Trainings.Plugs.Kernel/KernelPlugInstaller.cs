@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Interlogic.Trainings.Plugs.Kernel.SqlActions;
 using System.IO;
+using Interlogic.Trainings.Plugs.Kernel.FileActions;
 
 namespace Interlogic.Trainings.Plugs.Kernel
 {
@@ -46,6 +47,9 @@ namespace Interlogic.Trainings.Plugs.Kernel
             factoryInstance.InstallRequiredEnvironment();
             #endregion
 
+            FileTransaction trans = new FileTransaction();
+            trans.BeginTransaction();
+
             PlugIn plug = new PlugIn();
 			plug.PlugName = "Interlogic.Trainings.Plugs.Kernel";
 			plug.PlugVersion = "0.0.0.1";
@@ -59,17 +63,21 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			loc.PlugLocationDescription = "Main executable directory";
 			plug.Locations.Add(loc);
 
+            string EXEC_DIR = loc.PlugLocationPath;
+
 			PlugFile file = new PlugFile();
 			file.PlugFileName = "Interlogic.Trainings.Plugs.Kernel.dll";
-			file.RelativeIncomingPath = @"Interlogic.Trainings.Plugs.Kernel\bin\Debug";
+            file.RelativeIncomingPath = @"..\..\..\Interlogic.Trainings.Plugs.Kernel\bin\Debug";
 			file.DestinationPath = "EXECUTABLE_DIR";
 			plug.Files.Add(file);
+            trans.AddAction(new CopyFileAction(Path.Combine(file.RelativeIncomingPath, file.PlugFileName), Path.Combine(EXEC_DIR, file.PlugFileName), true));
 
 			file = new PlugFile();
 			file.PlugFileName = "Interlogic.Trainings.Plugs.Kernel.pdb";
-			file.RelativeIncomingPath = @"Interlogic.Trainings.Plugs.Kernel\bin\Debug";
-			file.DestinationPath = "EXECUTABLE_DIR";
+            file.RelativeIncomingPath = @"..\..\..\Interlogic.Trainings.Plugs.Kernel\bin\Debug";
+            file.DestinationPath = "EXECUTABLE_DIR";
 			plug.Files.Add(file);
+            trans.AddAction(new CopyFileAction(Path.Combine(file.RelativeIncomingPath,file.PlugFileName), Path.Combine(EXEC_DIR,file.PlugFileName), true));
 
 			ClassDefinition classDef = new ClassDefinition();
 			classDef.Active = true;
@@ -78,8 +86,18 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			classDef.FileName = "Interlogic.Trainings.Plugs.Kernel.dll";
 			plug.ClassDefinitions.Add(classDef);
 
-			PlugInController plugController = new PlugInController(context);
-			plugController.InsertAll(plug);
+            try
+            {
+                trans.Execute();
+                trans.Commit();
+                PlugInController plugController = new PlugInController(context);
+                plugController.InsertAll(plug);
+            }
+            catch (Exception e)
+            {
+                trans.RollBack();
+                throw new Exception("Kernel Installation Process Failed!", e);
+            }
 		}
 
 		public override void UpdatePlug(ITransactionContext context)
