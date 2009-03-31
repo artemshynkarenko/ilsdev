@@ -680,26 +680,16 @@ namespace Interlogic.Trainings.Plugs.Kernel.FileActions
             }
         }
 
-   
-
-      
-        
-        
         public virtual void RollBack()
         {
-
-
-           
-                _fileActionInfo.UnlockOnRollback(Locker);
-                if(_isExecuted) RollbackAction(_fileActionInfo );
-           
-        }
+            _fileActionInfo.UnlockOnRollback(Locker);
+            if(_isExecuted) RollbackAction(_fileActionInfo );
+    	}
 
         public virtual void Commit()
         {
                 _fileActionInfo.UnlockOnCommit(Locker);
                 CommitAction(_fileActionInfo);
-           
         }
         protected virtual void RollbackAction(IFileActionInfo fileActionInfo)
         {
@@ -752,8 +742,6 @@ namespace Interlogic.Trainings.Plugs.Kernel.FileActions
         public abstract void BeginTransaction();
         
         #endregion
-
-
 
         #region IFileAction Members
 

@@ -59,7 +59,7 @@
     <Compile Include="Exceptions\FileAlreadyExistException.cs" />
     <Compile Include="Exceptions\FileIsLockedException.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
-    <Compile Include="FileActions\CompressFilesActin.cs" />
+    <Compile Include="FileActions\CompressFilesAction.cs" />
     <Compile Include="FileActions\CopyFileAction.cs" />
     <Compile Include="FileActions\CreateDirectoryAction.cs" />
     <Compile Include="FileActions\ExtractFilesAction.cs" />

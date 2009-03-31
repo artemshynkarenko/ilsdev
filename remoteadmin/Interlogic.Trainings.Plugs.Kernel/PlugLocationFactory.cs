@@ -14,7 +14,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
         }
 
-        static internal PlugLocationFactory GetInstance()
+        static public PlugLocationFactory GetInstance()
         {
             return new PlugLocationFactory();
         }
@@ -185,7 +185,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         string _loadByNameCommandText = @"SELECT * FROM [PlugLocation] WHERE [PlugLocationName] = @PlugLocationName";
 
-        internal PlugLocation InternalLoadByName(string plugLocName)
+        public PlugLocation InternalLoadByName(string plugLocName)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByNameCommandText;

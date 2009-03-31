@@ -149,7 +149,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             // OKButton
             // 
             this.OKButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKButton.Location = new System.Drawing.Point(3, 7);
+            this.OKButton.Location = new System.Drawing.Point(3, 3);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(68, 25);
             this.OKButton.TabIndex = 6;
@@ -160,7 +160,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             // CancelButton
             // 
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(77, 7);
+            this.CancelButton.Location = new System.Drawing.Point(83, 3);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(68, 25);
             this.CancelButton.TabIndex = 5;
@@ -255,6 +255,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             // 
             // Form1
             // 
+            this.AcceptButton = this.OKButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 254);
