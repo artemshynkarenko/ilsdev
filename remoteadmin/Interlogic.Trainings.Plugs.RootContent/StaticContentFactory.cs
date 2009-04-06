@@ -7,14 +7,14 @@ using System.Data;
 
 namespace Interlogic.Trainings.Plugs.RootContent
 {
-	class RootContentFactory: InstanceFactory
+	class StaticContentFactory: InstanceFactory
 	{
-        static internal RootContentFactory GetInstance()
+        static internal StaticContentFactory GetInstance()
         {
-            return new RootContentFactory();
+            return new StaticContentFactory();
         }
 
-        protected RootContentFactory()
+        protected StaticContentFactory()
         {
         }
 
@@ -66,12 +66,12 @@ namespace Interlogic.Trainings.Plugs.RootContent
             @"INSERT INTO [RootContent] ([InstanceId],[ParentInstanceId],[ContentFriendlyName],[ContentDescription],[ContentImageSrc])
               VALUES (@InstanceId,@ParentInstanceId,@ContentFriendlyName,@ContentDescription,@ContentImageSrc)";
 
-        internal void InternalInsert(RootContent rootCont)
+        internal void InternalInsert(StaticContent rootCont)
         {
             Insert(rootCont);
         }
 
-        protected void Insert(RootContent rootCont)
+        protected void Insert(StaticContent rootCont)
         {
             base.Insert(rootCont);
 
@@ -98,12 +98,12 @@ namespace Interlogic.Trainings.Plugs.RootContent
                   ,[ContentImageSrc] = @ContentImageSrc
              WHERE [InstanceID] = @InstanceId";
 
-        internal void InternalUpdate(RootContent rootCont)
+        internal void InternalUpdate(StaticContent rootCont)
         {
             this.Update(rootCont);
         }
 
-        protected void Update(RootContent rootCont)
+        protected void Update(StaticContent rootCont)
         {
             base.Update(rootCont);
 
@@ -123,12 +123,12 @@ namespace Interlogic.Trainings.Plugs.RootContent
         #region Delete
         private static readonly string _deleteCommandText = @"DELETE [RootContent] WHERE [InstanceId] = @InstanceId";
 
-        internal void InternalDelete(RootContent rootCont)
+        internal void InternalDelete(StaticContent rootCont)
         {
             this.Delete(rootCont);
         }
 
-        protected void Delete(RootContent rootCont)
+        protected void Delete(StaticContent rootCont)
         {
             RawSqlExecuteNonQueryAction deleteAction = new RawSqlExecuteNonQueryAction();
             deleteAction.CommandText = _deleteCommandText;
@@ -145,20 +145,20 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         private static readonly string _loadAllCommandText = @"SELECT * FROM [Instance] INNER JOIN [RootContent] ON [Instance].InstanceId = [RootContent].InstanceId";
 
-        internal List<RootContent> InternalLoadAll()
+        internal List<StaticContent> InternalLoadAll()
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadAllCommandText;
             this.ExecuteCommand(readerAction);
 
-            List<RootContent> rootContList = new List<RootContent>();
+            List<StaticContent> rootContList = new List<StaticContent>();
             IDataReader dataReader = readerAction.DataReader;
             try
             {
                 int[] ordinals = GetRootContFieldOrdinals(dataReader);
                 while (dataReader.Read())
                 {
-                    RootContent p = new RootContent();
+                    StaticContent p = new StaticContent();
                     TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
                     rootContList.Add(p);
                 }
@@ -174,14 +174,14 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         private static readonly string _loadByIdCommandText = _loadAllCommandText + @" WHERE [InstanceId] = @InstanceId";
 
-        internal RootContent InternalLoadByPrimaryKey(int instanceId)
+        internal StaticContent InternalLoadByPrimaryKey(int instanceId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByIdCommandText;
 
             readerAction.AddParameter("@InstanceId", instanceId, DbType.Int32);
 
-            RootContent rootCont = null;
+            StaticContent rootCont = null;
             this.ExecuteCommand(readerAction);
             try
             {
@@ -198,14 +198,14 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         private static readonly string _loadByInstanceNameCommandText = _loadAllCommandText + @" WHERE [InstanceName] = @InstanceName";
 
-        internal RootContent InternalLoadByInstanceName(string instanceName)
+        internal StaticContent InternalLoadByInstanceName(string instanceName)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByInstanceNameCommandText;
 
             readerAction.AddParameter("@InstanceName", instanceName, DbType.String);
 
-            RootContent rootCont = null;
+            StaticContent rootCont = null;
             this.ExecuteCommand(readerAction);
             try
             {
@@ -223,14 +223,14 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         private static readonly string _loadByFriendlyNameCommandText = _loadAllCommandText + @" WHERE [ContentFriendlyName] = @ContentFriendlyName";
 
-        internal RootContent InternalLoadByFriendlyName(string instanceName)
+        internal StaticContent InternalLoadByFriendlyName(string instanceName)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByInstanceNameCommandText;
 
             readerAction.AddParameter("@ContentFriendlyName", instanceName, DbType.String);
 
-            RootContent rootCont = null;
+            StaticContent rootCont = null;
             this.ExecuteCommand(readerAction);
             try
             {
@@ -248,21 +248,21 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         private static readonly string _loadByClassDefinitionIdCommandText = _loadAllCommandText + @" WHERE [ClassDefinitionId] = @ClassDefinitionId";
 
-        internal List<RootContent> InternalLoadByClassDefinitionId(int classDefId)
+        internal List<StaticContent> InternalLoadByClassDefinitionId(int classDefId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByClassDefinitionIdCommandText;
             readerAction.AddParameter("@ClassDefinitionId", classDefId, DbType.Int32);
             this.ExecuteCommand(readerAction);
 
-            List<RootContent> rootContList = new List<RootContent>();
+            List<StaticContent> rootContList = new List<StaticContent>();
             IDataReader dataReader = readerAction.DataReader;
             try
             {
                 int[] ordinals = GetRootContFieldOrdinals(dataReader);
                 while (dataReader.Read())
                 {
-                    RootContent p = new RootContent();
+                    StaticContent p = new StaticContent();
                     TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
                     rootContList.Add(p);
                 }
@@ -278,21 +278,21 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
         private static readonly string _loadByParentInstanceIdCommandText = _loadAllCommandText + @" WHERE [ParentInstanceId] = @ParentInstanceId";
 
-        internal List<RootContent> InternalLoadByParentInstanceId(int parentId)
+        internal List<StaticContent> InternalLoadByParentInstanceId(int parentId)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByParentInstanceIdCommandText;
             readerAction.AddParameter("@ParentInstanceId", parentId, DbType.Int32);
             this.ExecuteCommand(readerAction);
 
-            List<RootContent> rootContList = new List<RootContent>();
+            List<StaticContent> rootContList = new List<StaticContent>();
             IDataReader dataReader = readerAction.DataReader;
             try
             {
                 int[] ordinals = GetRootContFieldOrdinals(dataReader);
                 while (dataReader.Read())
                 {
-                    RootContent p = new RootContent();
+                    StaticContent p = new StaticContent();
                     TranslateToRootCont(dataReader, p, ordinals[0], ordinals[1], ordinals[2], ordinals[3]);
                     rootContList.Add(p);
                 }
@@ -316,18 +316,18 @@ namespace Interlogic.Trainings.Plugs.RootContent
             return indexes;
         }
 
-        private RootContent TranslateToRootCont(IDataReader dataReader)
+        private StaticContent TranslateToRootCont(IDataReader dataReader)
         {
-            RootContent rootCont = new RootContent();
+            StaticContent rootCont = new StaticContent();
             TranslateToRootCont(dataReader, rootCont);
             return rootCont;
         }
-        protected void TranslateToRootCont(IDataReader dataReader, RootContent rootCont)
+        protected void TranslateToRootCont(IDataReader dataReader, StaticContent rootCont)
         {
             int[] indexes = GetInstanceFieldOrdinals(dataReader);
             TranslateToRootCont(dataReader, rootCont, indexes[0], indexes[1], indexes[2], indexes[3]);
         }
-        protected void TranslateToRootCont(IDataReader dataReader, RootContent rootCont, int idParIndex, int contFriendlyName, int contDescr, int contImgSrc)
+        protected void TranslateToRootCont(IDataReader dataReader, StaticContent rootCont, int idParIndex, int contFriendlyName, int contDescr, int contImgSrc)
         {
             base.TranslateToInstance(dataReader, rootCont);
             //if (!dataReader.IsDBNull(idParIndex)) rootCont.ParentContent = this.InternalLoadByPrimaryKey(dataReader.GetInt32(idParIndex));

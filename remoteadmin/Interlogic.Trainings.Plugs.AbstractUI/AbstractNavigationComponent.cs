@@ -8,9 +8,9 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 {
 	public abstract class AbstractNavigationComponent : AbstractComponent, INavigationComponent
 	{
-		private List<IAbstractComponent> _navigationListeners = null;
+		private List<INavigationListenerComponent> _navigationListeners = null;
 
-		public List<IAbstractComponent> NavigationListeners
+		public List<INavigationListenerComponent> NavigationListeners
 		{
 			get
 			{

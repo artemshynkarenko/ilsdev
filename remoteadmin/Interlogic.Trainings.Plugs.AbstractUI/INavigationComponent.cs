@@ -7,7 +7,7 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 {
 	public interface INavigationComponent:IAbstractComponent
 	{
-		List<IAbstractComponent> NavigationListeners { get;}
+		List<INavigationListenerComponent> NavigationListeners { get; }
 		DomainObject SelectedObject { get;}
 	}
 }

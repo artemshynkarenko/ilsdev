@@ -72,8 +72,8 @@ namespace Interlogic.Trainings.Plugs.InstallApp
                     kernelInstaller.RegisterPlug(context);
 
 
-                    AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
-                    abstractUIInstaller.RegisterPlug(context);
+					//AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
+					//abstractUIInstaller.RegisterPlug(context);
 
                     //Add ProgressForm here to see 
                 }
