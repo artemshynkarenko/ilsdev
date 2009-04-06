@@ -6,7 +6,7 @@ using Interlogic.Trainings.Plugs.Kernel.DomainModel;
 
 namespace Interlogic.Trainings.Plugs.RootContent
 {
-	public class RootContent:Instance
+	public class StaticContent:Instance
 	{
 		private string _contentName;
 
@@ -32,17 +32,17 @@ namespace Interlogic.Trainings.Plugs.RootContent
 			set { _contentImageSrc = value; }
 		}
 
-		private List<RootContent> _childContent;
+		private List<StaticContent> _childContent;
 
-		public List<RootContent> ChildContent
+		public List<StaticContent> ChildContent
 		{
 			get { return _childContent; }
 			set { _childContent = value; }
 		}
 
-		private RootContent _parentContent;
+		private StaticContent _parentContent;
 
-		public RootContent ParentContent
+		public StaticContent ParentContent
 		{
 			get { return _parentContent; }
 			set { _parentContent = value; }
@@ -50,7 +50,7 @@ namespace Interlogic.Trainings.Plugs.RootContent
 
 		protected override DomainController GetControllerInstance(ITransactionContext context)
 		{
-			return new RootContentController(context);
+			return new StaticContentController(context);
 		}
 
 		public override void Setup(Instance dbInstance, ITransactionContext context)

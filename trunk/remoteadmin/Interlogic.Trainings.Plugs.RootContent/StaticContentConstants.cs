@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.RootContent
 {
-	class RootContentConstants
+	class StaticContentConstants
 	{
 	}
 }

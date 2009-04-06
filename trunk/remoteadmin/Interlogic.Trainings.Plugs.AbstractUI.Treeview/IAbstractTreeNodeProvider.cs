@@ -5,7 +5,7 @@ using Interlogic.Trainings.Plugs.Kernel;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public interface IAbstractTreeNodeProvider : IInstantiatable
+	public interface IAbstractTreeNodeProvider : INavigationListenerComponent
 	{
 		List<AbstractTreeNode> GetTreeNodes(AbstractTreeNode parentNode);
 		bool CheckTreeNodesExists(AbstractTreeNode parentNode);

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
-	public interface IAbstractStartupTreeNodeProvider
+	public interface IAbstractStartupTreeNodeProvider:INavigationListenerComponent
 	{
+		List<AbstractTreeNode> GetStartTreeNodes();
 	}
 }
