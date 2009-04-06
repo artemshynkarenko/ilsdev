@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.UniqueConstraintFieldAttribute">
+    <Position X="8.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\UniqueConstraintFieldAttribute.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlAction">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\RawSqlAction.cs</FileName>
+      <HashCode>AAAAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlDeleteByPrimaryKeyAction">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\RawSqlDeleteByPrimaryKeyAction.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlUpdateAction">
+    <Position X="5.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\RawSqlUpdateAction.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlAction">
+    <Position X="3" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\SqlAction.cs</FileName>
+      <HashCode>AIAAAACAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAIAAAE=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TransactionContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlDescriptiveAttribute">
+    <Position X="11" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\SqlDescriptiveAttribute.cs</FileName>
+      <HashCode>AAAAAAQAABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlPrimaryKeyFieldAttribute">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\SqlPrimaryKeyFieldAttribute.cs</FileName>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlTableDependancyAttribute" Collapsed="true">
+    <Position X="9" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\SqlTableDependancyAttribute.cs</FileName>
+      <HashCode>AAAIAAAAAAAAACAAAAAAAAAQAAAAAAAAAACAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlTableFieldAttribute">
+    <Position X="13.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\SqlTableFieldAttribute.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.SqlTransactionContext" BaseTypeListCollapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\SqlTransactionContext.cs</FileName>
+      <HashCode>AACAAEABAACAAQUAAAAAAAAAAAAAAAQAAAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.RawSqlInsertAction">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\RawSqlInsertAction.cs</FileName>
+      <NewMemberFileName>SqlActions\RawSqlExecuteNonQueryAction.cs</NewMemberFileName>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlAction" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\ISqlAction.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Interlogic.Trainings.Plugs.Kernel.SqlActions.ISqlTransactionContext" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SqlActions\ISqlTransactionContext.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+</ClassDiagram>

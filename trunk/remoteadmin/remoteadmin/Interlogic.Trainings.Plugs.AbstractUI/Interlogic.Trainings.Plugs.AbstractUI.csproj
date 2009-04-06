@@ -1,0 +1,76 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Interlogic.Trainings.Plugs.AbstractUI</RootNamespace>
+    <AssemblyName>Interlogic.Trainings.Plugs.AbstractUI</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractComponentController.cs" />
+    <Compile Include="AbstractComponent.cs" />
+    <Compile Include="AbstractComponentFactory.cs" />
+    <Compile Include="AbstractContainer.cs" />
+    <Compile Include="AbstractContainerController.cs" />
+    <Compile Include="AbstractContainerFactory.cs" />
+    <Compile Include="AbstractNavigationComponent.cs" />
+    <Compile Include="AbstractNavigationComponentController.cs" />
+    <Compile Include="AbstractNavigationComponentFactory.cs" />
+    <Compile Include="AbstractUIContstants.cs" />
+    <Compile Include="AbstractUIPlugInstaller.cs" />
+    <Compile Include="ComponentMeasurement.cs" />
+    <Compile Include="ComponentPositioning.cs" />
+    <Compile Include="ComponentMeasurementUnit.cs" />
+    <Compile Include="IAbstractComponent.cs" />
+    <Compile Include="IAbstractContainer.cs" />
+    <Compile Include="IAbstractContext.cs" />
+    <Compile Include="INavigationComponent.cs" />
+    <Compile Include="INavigationListenerComponent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.Kernel\Interlogic.Trainings.Plugs.Kernel.csproj">
+      <Project>{B115432D-1A1A-42B6-ACB3-1271DE6EAC98}</Project>
+      <Name>Interlogic.Trainings.Plugs.Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
