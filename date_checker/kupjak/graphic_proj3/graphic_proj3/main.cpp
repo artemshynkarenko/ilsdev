@@ -106,6 +106,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 //
 
 int old_x=0, old_y=0;
+bool lb_pressed = false;
+bool rb_pressed = false;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -129,6 +131,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case VK_UP:
 			gr.move_up();
 			//gr.mouse_vertical(1);
+
 			break;
 		case VK_DOWN:
 			//gr.mouse_vertical(-1);
@@ -147,10 +150,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEMOVE: 
 		x = LOWORD(lParam); 
 		y = HIWORD(lParam);
-		gr.mouse_horizontal(x-old_x);
-		gr.mouse_vertical(y-old_y);
+		if (lb_pressed){
+			gr.mouse_horizontal(x-old_x);
+			gr.mouse_vertical(y-old_y);
+		}
+		if (rb_pressed){
+			/*if (abs(x-old_x) > abs(y-old_y))
+				gr.scaled(x-old_x);
+			else
+				gr.scaled(y-old_y);
+				*/
+			gr.scaled(y-old_y);
+		}
 		old_x = x;
 		old_y = y;
+		break;
+	case WM_LBUTTONDOWN:
+		lb_pressed = true;
+		break;
+	case WM_LBUTTONUP:
+		lb_pressed = false;
+		break;
+	case WM_RBUTTONDOWN:
+		rb_pressed = true;
+		break;
+	case WM_RBUTTONUP:
+		rb_pressed = false;
 		break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

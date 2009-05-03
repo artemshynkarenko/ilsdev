@@ -6,6 +6,7 @@ void Grmanager::display_frame(){
 	//objects.perspective(screen.cam.from, screen.cam.to);
 	objects.rotate_z(p);
 	objects.rotate_y(t);
+	objects.scale(scale);
 	objects.calc_all();
 	objects.matrix_simple();
 	screen.display_frame(objects);
@@ -21,12 +22,13 @@ void Grmanager::display_frame(){
 void Grmanager::init(){
 	h_count = 10;
 	l_count = 20;
+	scale = 1;
 	Object axis(RGB(90, 90, 90));
 	Point O(0, 0, 0), X(500, 0, 0), Y(0, 500, 0), Z(0, 0, 500);
 	axis.add_line(Line(O, X));
 	axis.add_line(Line(O, Y));
 	axis.add_line(Line(O, Z));
-	objects.add(axis);
+	//objects.add(axis);
 
 
 
@@ -44,7 +46,7 @@ void Grmanager::add_horizontal_surface(Func2d f, const  int col){
 	double scale = 35;
 
 
-	Object o(col);
+	Object o(0, col, false, true);
 	for (int i = 0; i<x_count_of_point_surface;  ++i)
 		for (int j = 1; j<y_count_of_point_surface;  ++j){
 			double x = (-x_range + dx*i);
@@ -153,6 +155,7 @@ void Grmanager::move_down(){
 
 void Grmanager::move_left(){
 	t += 0.02;
+	
 }
 
 void Grmanager::move_right(){
@@ -187,4 +190,8 @@ void Grmanager::mouse_horizontal(const int a){
 	p*=m;
 	screen.cam.to  = screen.cam.from + p;
 	*/
+}
+
+void Grmanager::scaled(const int a){
+	scale += scale*a/1000.0;
 }

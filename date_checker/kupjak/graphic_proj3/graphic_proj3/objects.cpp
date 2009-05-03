@@ -9,7 +9,7 @@ void Object::add_line(Line & l){
 	dest.push_back(Vector4d());
 	dest.push_back(Vector4d());
 }
-Object::Object(const Poligon & p, const int gray):color(gray){
+Object::Object(const Poligon & p, const int cp, const int cl ,const bool pp, const bool pl):color_point(cp), color_line(cl), drawed_point(pp), drawed_line(pl){
 	int n = 2*p.vertex.size();
 	source.resize(n);
 	dest.resize(n);
@@ -132,6 +132,15 @@ void Matrix44d::position(const Point & p){
 	mult(res);
 }
 
+void Matrix44d::scale(double a){
+	Matrix44d res;
+	res[0] = Vector4d(a , 0, 0, 0);
+	res[1] = Vector4d(0 , a, 0, 0);
+	res[2] = Vector4d(0 , 0, a, 0);
+	res[3] = Vector4d(0 , 0, 0, 1);
+	mult(res);
+}
+
 void Matrix44d::rotate_vector_z(const Point & p){
 	//rotate_vector_abc(point_to_rotation_point(p));
 	Sphere_point sp = point_to_sphere_point(p);
@@ -167,6 +176,8 @@ void Matrix44d::perspective(const Point & from, const Point & to){
 	//rotate_z(sp.phi);
 	//position(to);
 }
+
+
 
 void Matrix44d::mult(const Matrix44d & a){
 	Matrix44d b(*this);
