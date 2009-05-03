@@ -33,6 +33,7 @@ public:
 	void rotate_x(double a);
 	void rotate_y(double b);
 	void rotate_z(double c);
+	void scale(double a);
 	void position(const Point & p);
 	void rotate_vector_z(const Point & p);
 	void rotate_vector_abc(const Rotation_point & rp);
@@ -58,17 +59,26 @@ public:
 class Object{
 	vector<Vector4d> source;
 	vector<Vector4d> dest;
-	int color;
+	int color_point;
+	int color_line;
+	bool drawed_point;
+	bool drawed_line;
 	friend class Objects;
 	friend class Grmanager;
 public:
-	Object(const int c=RGB(180, 180, 180)):color(c){}
-	Object(const Poligon & p, const int gray=200);
+	Object(const int cp=RGB(180, 180, 180), const int cl=RGB(80, 80, 80) ,const bool pp=true, const bool pl=true):color_point(cp), color_line(cl), drawed_point(pp), drawed_line(pl){}
+	Object(const Poligon & p, const int cp=RGB(180, 180, 180), const int cl=RGB(80, 80, 80) ,const bool pp=true, const bool pl=true);
 	const Vector4d& operator[] (const int i)const{return dest[i];}
 	Vector4d& operator[] (const int i){return dest[i];} 
 	int size()const{return source.size();}
 	void marge(const Object & o);
-	int get_color()const{return color;}
+	vector<vector<int>> polylines;
+	vector<vector<int>> solids;
+
+	int get_color_line()const{return color_line;}
+	int get_color_point()const{return color_point;}
+	bool get_drawed_point()const{return drawed_point;}
+	bool get_drawed_line()const{return drawed_line;}
 	void add_line(Line & l);
 	void calc(const Matrix44d & matrix);
 };
@@ -96,6 +106,7 @@ public:
 	void rotate_z(double c){matrix.rotate_z(c);};
 	void rotate_y(double b){matrix.rotate_y(b);};
 	void rotate_x(double a){matrix.rotate_y(a);};
+	void scale(double a){matrix.scale(a);}
 	void rorate_vector_z(const Point & p){matrix.rotate_vector_z(p);}
 	void position(const Point & p){matrix.position(p);}
 	void perspective(const Point & from, const Point & to){matrix.perspective(from, to);};

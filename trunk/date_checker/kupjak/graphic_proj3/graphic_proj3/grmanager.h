@@ -11,6 +11,7 @@ class Grmanager{
 	Objects objects;
 	Screen screen;
 	double p, t;
+	double scale;
 	void connect_two_objects(const Object & o1, const Object & o2, Object & res);
 	void add_curve(const Poligon & p1, const Poligon & p2);
 	int h_count;
@@ -29,4 +30,5 @@ public:
 	void move_right();
 	void mouse_vertical(const int a);
 	void mouse_horizontal(const int a);
+	void scaled(const int a);
 };
