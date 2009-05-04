@@ -7,36 +7,16 @@ bool steep;
 int deltax, deltay, error, ystep, x, y;
 
 inline void Screen::draw_line(Point2i from, Point2i to, int c){
-
-//    MoveToEx(hdc_mem, from.x+(width>>1), (height>>1)-from.y, NULL);
-//	LineTo(hdc_mem, to.x+(width>>1), (height>>1)-to.y);
-	
-	/*if (from.x == to.x && from.y == to.y)
-		return;
-*/
 	from.x += (width>>1);
 	to.x += (width>>1);
 	from.y = (height>>1)-from.y;
 	to.y = (height>>1)-to.y;
-	/*
-	if (from.x>to.x)
-		swap(from, to);
-     int deltax = abs(to.x - from.x);
-     int deltay = abs(to.y - from.y);
-     int error = 0;
-     int deltaerr = deltay;
-     int y = from.y, x;
-	 for (x = from.x; x<=to.x; ++x){
-		 //SetPixel(hdc_mem, x,y, RGB(255, 255, 255));
-		 if (x>=0 && x<800 && y>=0 && y<600)
-			a[x][y] = RGB(255, 255, 255);
-         error += deltaerr;
-		 if ((error<<1) >= deltax){
-			 ++y;
-             error -= deltax;
-		 }
-	 }
-	 */
+	if (line_api || !light){
+		MoveToEx(hdc_mem, from.x, from.y, NULL);
+		LineTo(hdc_mem, to.x, to.y);
+	}
+	else{
+	
 	
 	steep = abs(to.y - from.y) > abs(to.x - from.x);
 	if (steep){
@@ -74,6 +54,7 @@ inline void Screen::draw_line(Point2i from, Point2i to, int c){
 			error = error + deltax;
 		}
 	}
+	}
 }
 
 inline void Screen::draw_point(Point2i p){
@@ -89,26 +70,52 @@ void Screen::display_frame(const Objects & objects){
 
 void Screen::draw_to_DC(HDC dc, const Objects & objects){
 	int n = objects.size();
+	HPEN p;
+
 	//memset(a, 0, sizeof(a));
 	for(int i=0; i<n; ++i){
 		if (objects[i].get_drawed_line()){
-			//HPEN p = CreatePen(PS_SOLID, 1, objects[i].get_color_line());
-			//SelectObject(hdc_mem, p);
-			
 			double d;
+			int color;
 			int c = objects[i].get_color_line();
+
+			if (line_api || !light){
+					p = CreatePen(PS_SOLID, 1, c);
+					SelectObject(hdc_mem, p);
+			}
+
 			for(int j=0; j<(objects[i].size()>>1); ++j){
-				d = 0.3 + 2*(pi/2+ atan(objects[i][2*j][2]/60.0))/pi;
+				if (light){
+					//d = 0.3 + 2*(pi/2+ atan(objects[i][2*j][2]/60.0))/pi;
+					d = 3000.5*(0.0005 + objects[i][2*j][2]/600000.0);
+					if (d<0)
+						d = 0;
+					color = RGB(GetRValue(c)*d, GetGValue(c)*d, GetBValue(c)*d);
+				}
+				else
+					color = c;
+				if (line_api && light){
+					p = CreatePen(PS_SOLID, 1, color);
+					SelectObject(hdc_mem, p);
+				}
+				//d = 0.3 + 2*(pi/2+ atan(objects[i][2*j][2]/60.0))/pi;
 				draw_line(Point2i((int)objects[i][2*j][0], (int)objects[i][2*j][1]),
 					Point2i((int)objects[i][2*j+1][0], (int)objects[i][2*j+1][1]), 
-					RGB(GetRValue(c)*d, GetGValue(c)*d, GetBValue(c)*d));
+					color);
+				if (line_api || !light){
+					SelectObject(hdc_mem, old_pen);
+					DeleteObject(p);
+				}
 			}
-			
-			//SelectObject(hdc_mem, old_pen);
-			//DeleteObject(p);
-			
+
+			if (line_api && !light){
+					SelectObject(hdc_mem, old_pen);
+					DeleteObject(p);
+			}
+
 		}
 	}
+	if (!line_api && light)
 	for (int i=0; i<width; ++i)
 		for (int j=0; j<height; ++j)
 			if (a[i][j]!=0){
@@ -160,6 +167,8 @@ void Screen::display_frame_wm_paint(const Objects & objects){
 
 
 void Screen::init(){
+	line_api = false;
+	light = true;
 	/*for(int i=0; i<256; ++i)
 		pen_gray[i] = CreatePen(PS_SOLID, 1, RGB(i, i, i));
 	*/
