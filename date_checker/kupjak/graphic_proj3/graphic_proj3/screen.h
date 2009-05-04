@@ -25,7 +25,8 @@ class Screen{
 	HPEN old_pen;
 	HBITMAP memoryBitmap;
 	HBITMAP memoryBitmapOld;
-
+	bool line_api;
+	bool light;
 	Cam cam;
 	void draw_to_DC(HDC dc, const Objects & objects);
 	void draw_to_buffer(const Objects & objects);

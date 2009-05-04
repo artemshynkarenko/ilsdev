@@ -1,8 +1,24 @@
 #include "grmanager.h"
 
 
+double f_xy(double x, double y, double t){
+		double r = 2*x*x + y*y;
+		return 7*cos(0.3*r + t)/(r+1);
+	};
+
 //Grmanager
+
+void Grmanager::clear(){
+	objects.all.clear();
+}
+
 void Grmanager::display_frame(){
+	if (! function_pause)
+	{
+		time -= 0.1;
+		clear();
+		add_horizontal_surface(f_xy, RGB(10, 80, 10));
+	}
 	//objects.perspective(screen.cam.from, screen.cam.to);
 	objects.rotate_z(p);
 	objects.rotate_y(t);
@@ -12,16 +28,20 @@ void Grmanager::display_frame(){
 	screen.display_frame(objects);
 	//Beep(1000, 1);
 }
-
-	double f_xy(double x, double y){
-		double r = 2*x*x + y*y;
-		return 7*cos(1.2*r)/(r+1);
-	};
+void Grmanager::inc_function(double d){
+	time += d;
+	if (function_pause){
+		clear();
+		add_horizontal_surface(f_xy, RGB(10, 80, 10));
+	}
+}
 
 
 void Grmanager::init(){
 	h_count = 10;
 	l_count = 20;
+	time = 0;
+	function_pause = false;
 	scale = 1;
 	Object axis(RGB(90, 90, 90));
 	Point O(0, 0, 0), X(500, 0, 0), Y(0, 500, 0), Z(0, 0, 500);
@@ -52,8 +72,8 @@ void Grmanager::add_horizontal_surface(Func2d f, const  int col){
 			double x = (-x_range + dx*i);
 			double y = (-y_range + dy*j);
 			double y_ = (-y_range + dy*(j-1));
-			Point A(scale*x, scale*y_, scale*(f)(x, y_));
-			Point B(scale*x, scale*y, scale*(f)(x, y));
+			Point A(scale*x, scale*y_, scale*(f)(x, y_, time));
+			Point B(scale*x, scale*y, scale*(f)(x, y, time));
 			o.add_line(Line(A, B));
 		}
 
@@ -62,8 +82,8 @@ void Grmanager::add_horizontal_surface(Func2d f, const  int col){
 			double x = (-x_range + dx*i);
 			double y = (-y_range + dy*j);
 			double x_ = (-x_range + dx*(i-1));
-			Point A(scale*x_, scale*y, scale*(f)(x_, y));
-			Point B(scale*x, scale*y, scale*(f)(x, y));
+			Point A(scale*x_, scale*y, scale*(f)(x_, y, time));
+			Point B(scale*x, scale*y, scale*(f)(x, y, time));
 			o.add_line(Line(A, B));
 		}
 

@@ -89,7 +89,7 @@ class Objects{
 	vector<Object> all;
 	Matrix44d matrix;
 	void calc_obj(int ind); 
-
+	friend class Grmanager;
 public:
 	Point pos;
 	double theta;
