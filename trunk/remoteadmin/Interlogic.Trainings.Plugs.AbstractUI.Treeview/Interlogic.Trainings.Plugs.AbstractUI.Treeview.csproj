@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FA19DD14-616A-47DD-83D7-2F6F800FA67B}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -43,6 +43,7 @@
     <Compile Include="AbstractTreeViewConstants.cs" />
     <Compile Include="AbstractTreeViewController.cs" />
     <Compile Include="AbstractTreeViewFactory.cs" />
+    <Compile Include="AbstractUITreeViewInstaller.cs" />
     <Compile Include="IAbstractStartupTreeNodeProvider.cs" />
     <Compile Include="IAbstractTreeNodeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

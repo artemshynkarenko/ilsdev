@@ -43,6 +43,7 @@
     <Compile Include="AbstractPanel.cs" />
     <Compile Include="AbstractPanelController.cs" />
     <Compile Include="AbstractPanelFactory.cs" />
+    <Compile Include="AbstractUIPanelInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

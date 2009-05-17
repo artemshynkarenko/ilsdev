@@ -14,7 +14,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 		public override void RegisterPlug(ITransactionContext context)
 		{
 			#region Installing Required Environments
-			Console.WriteLine("Installeing Kernel required environment");
+			Console.WriteLine("Installing Kernel required environment");
 			PlugInFactory factoryPlug = PlugInFactory.GetInstance();
 			factoryPlug.Context = context as SqlTransactionContext;
 			factoryPlug.InstallRequiredEnvironment();
@@ -23,22 +23,27 @@ namespace Interlogic.Trainings.Plugs.Kernel
 			PlugLocationFactory factoryPlugLocation = PlugLocationFactory.GetInstance();
 			factoryPlugLocation.Context = context as SqlTransactionContext;
 			factoryPlugLocation.InstallRequiredEnvironment();
+            Console.WriteLine("Installed PlugLocationFactory");
 
 			PlugFileFactory factoryPlugFile = PlugFileFactory.GetInstance();
 			factoryPlugFile.Context = context as SqlTransactionContext;
 			factoryPlugFile.InstallRequiredEnvironment();
+            Console.WriteLine("Installed PlugFileFactory");
 
 			ClassDefinitionFactory factoryClassDefinition = ClassDefinitionFactory.GetInstance();
 			factoryClassDefinition.Context = context as SqlTransactionContext;
 			factoryClassDefinition.InstallRequiredEnvironment();
+            Console.WriteLine("Installed ClassDefinitionFactory");
 
 			BindablePointDefinitionFactory factoryBindablePointDefinition = BindablePointDefinitionFactory.GetInstance();
 			factoryBindablePointDefinition.Context = context as SqlTransactionContext;
 			factoryBindablePointDefinition.InstallRequiredEnvironment();
+            Console.WriteLine("Installed BindablePointDefinitionFactory");
 
 			BindablePointFactory factoryBindablePoint = BindablePointFactory.GetInstance();
 			factoryBindablePoint.Context = context as SqlTransactionContext;
 			factoryBindablePoint.InstallRequiredEnvironment();
+            Console.WriteLine("Installed BindablePointFactory");
 
 			BindingFactory factoryBinding = BindingFactory.GetInstance();
 			factoryBinding.Context = context as SqlTransactionContext;
@@ -90,17 +95,22 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
 			try
 			{
-				trans.Execute();
+                Console.WriteLine("Trying to execute file transactions");
+                trans.Execute();
 				trans.Commit();
-				PlugInController plugController = new PlugInController(context);
+                Console.WriteLine("File transactions completed");
+                Console.WriteLine("KernelPlug database insertion");
+                PlugInController plugController = new PlugInController(context);
 				plugController.InsertAll(plug);
 			}
 			catch (Exception e)
 			{
+                Console.WriteLine("Kernel installation failed! Rolling back");
 				trans.RollBack();
 				throw new Exception("Kernel Installation Process Failed!", e);
 			}
-		}
+            Console.WriteLine("KernelPlug succesfully installed!");
+        }
 
 		public override void UpdatePlug(ITransactionContext context)
 		{

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Interlogic.Trainings.Plugs.Kernel;
+using Interlogic.Trainings.Plugs.AbstractUI.TreeView;
 
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
