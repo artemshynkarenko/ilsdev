@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{ACA3EDC5-0523-45FF-84CA-95BE22A9E7FE}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -46,9 +46,9 @@
     <Compile Include="StaticContentTreeNodeProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.Treeview.csproj">
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.TreeView.csproj">
       <Project>{FA19DD14-616A-47DD-83D7-2F6F800FA67B}</Project>
-      <Name>Interlogic.Trainings.Plugs.AbstractUI.Treeview</Name>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.TreeView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj">
       <Project>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</Project>

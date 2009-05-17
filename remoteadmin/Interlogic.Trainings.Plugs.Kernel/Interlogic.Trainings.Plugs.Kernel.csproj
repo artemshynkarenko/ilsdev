@@ -85,6 +85,7 @@
     <Compile Include="PlugFileFactory.cs" />
     <Compile Include="PlugInController.cs" />
     <Compile Include="PlugInFactory.cs" />
+    <Compile Include="PlugLocationController.cs" />
     <Compile Include="PlugLocationFactory.cs" />
     <Compile Include="SqlActions\ISqlAction.cs" />
     <Compile Include="ITransactionAction.cs" />

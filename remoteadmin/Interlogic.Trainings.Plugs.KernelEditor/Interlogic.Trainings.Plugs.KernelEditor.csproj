@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{269E1BFE-01AE-4598-AC83-215082B33E2E}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -57,9 +57,9 @@
       <Project>{882A6D05-CB4B-452A-B018-E7760A9317F4}</Project>
       <Name>Interlogic.Trainings.Plugs.AbstractUI.Panel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.Treeview.csproj">
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.TreeView.csproj">
       <Project>{FA19DD14-616A-47DD-83D7-2F6F800FA67B}</Project>
-      <Name>Interlogic.Trainings.Plugs.AbstractUI.Treeview</Name>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.TreeView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj">
       <Project>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</Project>

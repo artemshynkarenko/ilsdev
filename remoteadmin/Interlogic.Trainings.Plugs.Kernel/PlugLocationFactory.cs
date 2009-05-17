@@ -185,7 +185,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
 
         string _loadByNameCommandText = @"SELECT * FROM [PlugLocation] WHERE [PlugLocationName] = @PlugLocationName";
 
-        public PlugLocation InternalLoadByName(string plugLocName)
+        internal PlugLocation InternalLoadByName(string plugLocName)
         {
             RawSqlExecuteReaderAction readerAction = new RawSqlExecuteReaderAction();
             readerAction.CommandText = _loadByNameCommandText;

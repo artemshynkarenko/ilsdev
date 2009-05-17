@@ -5,12 +5,12 @@ using System.Text;
 namespace Interlogic.Trainings.Plugs.AbstractUI
 {
 	/// <summary>
-	/// Need some logic on that - but i do not knoew why i have done that
+	/// Need some logic on that - but i do not know why i have done that
 	/// </summary>
 	public enum ComponentPositioning
 	{
 		/// <summary>
-		/// Flow position - components are just drawing one by one - coordinated are ignored?
+		/// Flow position - components are just drawing one by one - coordinates are ignored?
 		/// </summary>
 		Flow,
 		/// <summary>
@@ -20,6 +20,6 @@ namespace Interlogic.Trainings.Plugs.AbstractUI
 		/// <summary>
 		/// Absolute position - coordinates are calculated according to context - that's for sure
 		/// </summary>
-		Abslolute
+		Absolute
 	}
 }

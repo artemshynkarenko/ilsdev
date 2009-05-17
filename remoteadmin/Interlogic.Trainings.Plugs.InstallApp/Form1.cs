@@ -20,7 +20,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
         public Form1()
         {
             InitializeComponent();
-            AuthtenticationTypeComboBox.SelectedIndex = 0;
+            AuthenticationTypeComboBox.SelectedIndex = 0;
 
         }
         private SqlConnection CreateSQLConnection()
@@ -30,7 +30,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
                    password = Password.Text,
                    dataBase = DBName.Text;
 
-            bool isIntegratedSecurity = AuthtenticationTypeComboBox.SelectedIndex != 0;
+            bool isIntegratedSecurity = AuthenticationTypeComboBox.SelectedIndex != 0;
             SqlConnection connection = new SqlConnection();
             SqlConnectionStringBuilder connectionString = new SqlConnectionStringBuilder();
 
@@ -199,7 +199,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
 
         private void AuthtenticationTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool isIntegratedSecurity = AuthtenticationTypeComboBox.SelectedIndex != 0;
+            bool isIntegratedSecurity = AuthenticationTypeComboBox.SelectedIndex != 0;
             Username.Enabled = !isIntegratedSecurity;
             Password.Enabled = !isIntegratedSecurity;
         }

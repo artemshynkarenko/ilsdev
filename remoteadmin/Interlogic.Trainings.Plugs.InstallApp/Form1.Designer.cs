@@ -41,7 +41,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             this.CancelButton = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.AuthtenticationTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.AuthenticationTypeComboBox = new System.Windows.Forms.ComboBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.Username = new System.Windows.Forms.TextBox();
@@ -171,7 +171,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             // panel5
             // 
             this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.AuthtenticationTypeComboBox);
+            this.panel5.Controls.Add(this.AuthenticationTypeComboBox);
             this.panel5.Controls.Add(this.radioButton1);
             this.panel5.Controls.Add(this.radioButton2);
             this.panel5.Controls.Add(this.DBName);
@@ -199,18 +199,18 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             // 
             // AuthtenticationTypeComboBox
             // 
-            this.AuthtenticationTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.AuthenticationTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.AuthtenticationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AuthtenticationTypeComboBox.FormattingEnabled = true;
-            this.AuthtenticationTypeComboBox.Items.AddRange(new object[] {
+            this.AuthenticationTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AuthenticationTypeComboBox.FormattingEnabled = true;
+            this.AuthenticationTypeComboBox.Items.AddRange(new object[] {
             "SQL Server Authentication",
             "Windows Authentication"});
-            this.AuthtenticationTypeComboBox.Location = new System.Drawing.Point(108, 76);
-            this.AuthtenticationTypeComboBox.Name = "AuthtenticationTypeComboBox";
-            this.AuthtenticationTypeComboBox.Size = new System.Drawing.Size(345, 21);
-            this.AuthtenticationTypeComboBox.TabIndex = 6;
-            this.AuthtenticationTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.AuthtenticationTypeComboBox_SelectedIndexChanged);
+            this.AuthenticationTypeComboBox.Location = new System.Drawing.Point(108, 76);
+            this.AuthenticationTypeComboBox.Name = "AuthtenticationTypeComboBox";
+            this.AuthenticationTypeComboBox.Size = new System.Drawing.Size(345, 21);
+            this.AuthenticationTypeComboBox.TabIndex = 6;
+            this.AuthenticationTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.AuthtenticationTypeComboBox_SelectedIndexChanged);
             // 
             // radioButton1
             // 
@@ -291,7 +291,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.ComboBox AuthtenticationTypeComboBox;
+        private System.Windows.Forms.ComboBox AuthenticationTypeComboBox;
         private System.Windows.Forms.Label label5;
 	}
 }

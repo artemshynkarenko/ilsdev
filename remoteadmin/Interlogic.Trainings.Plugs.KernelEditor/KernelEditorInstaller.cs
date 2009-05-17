@@ -23,7 +23,7 @@ namespace Interlogic.Trainings.Plugs.KernelEditor
 			context.Top = new ComponentMeasurement(0, ComponentMeasurementUnit.Percentage);
 			context.Height = new ComponentMeasurement(100, ComponentMeasurementUnit.Percentage);
 			context.Width = new ComponentMeasurement(100, ComponentMeasurementUnit.Percentage);
-			context.PositioningMethod = ComponentPositioning.Abslolute;
+			context.PositioningMethod = ComponentPositioning.Absolute;
 
 			#region Top panel components
 
@@ -123,5 +123,20 @@ namespace Interlogic.Trainings.Plugs.KernelEditor
 
 			return root;
 		}
-	}
+
+        public override void RegisterPlug(ITransactionContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdatePlug(ITransactionContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UnregisterPlug(ITransactionContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
