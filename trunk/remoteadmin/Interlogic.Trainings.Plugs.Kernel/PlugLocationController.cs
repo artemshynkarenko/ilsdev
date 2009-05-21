@@ -19,6 +19,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 factory.InternalInsert(plugLoc);
             }
         }
@@ -27,6 +28,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 factory.InternalUpdate(plugLoc);
             }
         }
@@ -35,6 +37,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 factory.InternalDelete(plugLoc);
             }
         }
@@ -44,6 +47,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 return factory.InternalLoadAll();
             }
         }
@@ -52,6 +56,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 return factory.InternalLoadByPrimaryKey(id);
             }
         }
@@ -60,6 +65,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 return factory.InternalLoadByName(name);
             }
         }
@@ -68,6 +74,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
         {
             using (PlugLocationFactory factory = PlugLocationFactory.GetInstance())
             {
+                factory.Context = this.FactoryContext;
                 return factory.InternalLoadByPlugId(plugId);
             }
         }

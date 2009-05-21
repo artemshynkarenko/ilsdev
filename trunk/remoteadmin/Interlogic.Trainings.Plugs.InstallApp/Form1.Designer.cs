@@ -63,6 +63,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             this.DBName.Name = "DBName";
             this.DBName.Size = new System.Drawing.Size(345, 21);
             this.DBName.TabIndex = 3;
+            this.DBName.Text = "ASH_Trainings_RemoteAdmin_1";
             this.DBName.DropDown += new System.EventHandler(this.DBName_DropDown);
             // 
             // SQLServerText
@@ -197,7 +198,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             this.label5.TabIndex = 7;
             this.label5.Text = "Authtentication:";
             // 
-            // AuthtenticationTypeComboBox
+            // AuthenticationTypeComboBox
             // 
             this.AuthenticationTypeComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -207,7 +208,7 @@ namespace Interlogic.Trainings.Plugs.InstallApp
             "SQL Server Authentication",
             "Windows Authentication"});
             this.AuthenticationTypeComboBox.Location = new System.Drawing.Point(108, 76);
-            this.AuthenticationTypeComboBox.Name = "AuthtenticationTypeComboBox";
+            this.AuthenticationTypeComboBox.Name = "AuthenticationTypeComboBox";
             this.AuthenticationTypeComboBox.Size = new System.Drawing.Size(345, 21);
             this.AuthenticationTypeComboBox.TabIndex = 6;
             this.AuthenticationTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.AuthtenticationTypeComboBox_SelectedIndexChanged);

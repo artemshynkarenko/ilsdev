@@ -131,6 +131,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Context\Interlogic.Trainings.Plugs.AbstractUI.Context.csproj">
+      <Project>{FE135A50-DFF9-47A4-A8FD-99EDA87DAEEB}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Panel\Interlogic.Trainings.Plugs.AbstractUI.Panel.csproj">
+      <Project>{882A6D05-CB4B-452A-B018-E7760A9317F4}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.Panel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI.Treeview\Interlogic.Trainings.Plugs.AbstractUI.TreeView.csproj">
+      <Project>{FA19DD14-616A-47DD-83D7-2F6F800FA67B}</Project>
+      <Name>Interlogic.Trainings.Plugs.AbstractUI.TreeView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interlogic.Trainings.Plugs.AbstractUI\Interlogic.Trainings.Plugs.AbstractUI.csproj">
       <Project>{0F551CC4-EB55-45BB-8331-8EBDB1945C3D}</Project>
       <Name>Interlogic.Trainings.Plugs.AbstractUI</Name>
