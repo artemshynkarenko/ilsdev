@@ -89,7 +89,7 @@ namespace Interlogic.Trainings.Plugs.Kernel
                 // TODO: something else?..
 				this.FactoryContext.Commit();
 			}
-			catch
+			catch (Exception ex)
 			{
 				this.FactoryContext.RollBack();
 				throw;

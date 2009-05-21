@@ -9,9 +9,12 @@ using System.Windows.Forms;
 using Interlogic.Trainings.Plugs.Kernel;
 using Interlogic.Trainings.Plugs.Kernel.SqlActions;
 using Interlogic.Trainings.Plugs.AbstractUI;
+using Interlogic.Trainings.Plugs.AbstractUI.Context;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 using System.Threading;
+using Interlogic.Trainings.Plugs.AbstractUI.TreeView;
+using Interlogic.Trainings.Plugs.AbstractUI.Panel;
 
 namespace Interlogic.Trainings.Plugs.InstallApp
 {
@@ -72,8 +75,17 @@ namespace Interlogic.Trainings.Plugs.InstallApp
                     kernelInstaller.RegisterPlug(context);
 
 
-					//AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
-					//abstractUIInstaller.RegisterPlug(context);
+					AbstractUIPlugInstaller abstractUIInstaller = new AbstractUIPlugInstaller();
+					abstractUIInstaller.RegisterPlug(context);
+
+                    AbstractUIContextInstaller abstrContextInstaller = new AbstractUIContextInstaller();
+                    abstrContextInstaller.RegisterPlug(context);
+
+                    AbstractUIPanelInstaller abstrPanelInstaller = new AbstractUIPanelInstaller();
+                    abstrPanelInstaller.RegisterPlug(context);
+
+                    AbstractUITreeViewInstaller abstrTreeViewInstaller = new AbstractUITreeViewInstaller();
+                    abstrTreeViewInstaller.RegisterPlug(context);
 
                     //Add ProgressForm here to see 
                 }
