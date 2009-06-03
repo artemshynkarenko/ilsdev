@@ -1,0 +1,5 @@
+D:\slavko\slavko\programming\C#\chats\chat\Chat\Common\bin\Debug\Common.dll
+D:\slavko\slavko\programming\C#\chats\chat\Chat\Common\bin\Debug\Common.pdb
+D:\slavko\slavko\programming\C#\chats\chat\Chat\Common\obj\Debug\ResolveAssemblyReference.cache
+D:\slavko\slavko\programming\C#\chats\chat\Chat\Common\obj\Debug\Common.dll
+D:\slavko\slavko\programming\C#\chats\chat\Chat\Common\obj\Debug\Common.pdb
