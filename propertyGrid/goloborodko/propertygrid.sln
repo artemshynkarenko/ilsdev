@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "propertygrid", "G:\Projects\com\Interlogic\propertyGrid\goloborodko\", "{6A6EF3EA-611C-4E91-9E9D-9686511085D9}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/propertygrid"
+		Debug.AspNetCompiler.PhysicalPath = "G:\Projects\com\Interlogic\propertyGrid\goloborodko\"
+		Debug.AspNetCompiler.TargetPath = "g:\i\interlogic\properygrid\PrecompiledWeb\propertygrid\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/propertygrid"
+		Release.AspNetCompiler.PhysicalPath = "G:\Projects\com\Interlogic\propertyGrid\goloborodko\"
+		Release.AspNetCompiler.TargetPath = "G:\Projects\com\Interlogic\properygrid\PrecompiledWeb\propertygrid\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1948"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A6EF3EA-611C-4E91-9E9D-9686511085D9}.Debug|.NET.ActiveCfg = Debug|.NET
+		{6A6EF3EA-611C-4E91-9E9D-9686511085D9}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
